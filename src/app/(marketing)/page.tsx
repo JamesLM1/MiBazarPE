@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center px-5 py-12">
+    <main id="inicio" className="flex min-h-screen scroll-mt-20 items-center justify-center px-5 py-12">
       <section
         aria-labelledby="visual-check-title"
         className="w-full max-w-xl rounded-xl border bg-card p-6 text-card-foreground sm:p-10"
