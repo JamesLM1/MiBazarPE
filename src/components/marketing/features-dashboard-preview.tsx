@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransform } from "motion/react";
 import { ArrowUpRight, ChevronDown, CreditCard, LayoutDashboard, Package, Plus, Search, Settings2, ShoppingBag, Store, Users, Wallet } from "lucide-react";
 import sharedStyles from "./hero.module.css";
 import variant from "./features-dashboard.module.css";
@@ -30,7 +34,27 @@ function chartPath(points: number[]) {
 }
 const line = chartPath(chartPoints);
 
+function DemoMetricValue({ value, index }: { value: string; index: number }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const reducedMotion = useReducedMotion();
+  const finalValue = Number(value.replace(/[^\d]/g, ""));
+  const count = useMotionValue(finalValue);
+  const formatted = useTransform(count, (latest) => `${value.startsWith("S/") ? "S/ " : ""}${Math.round(latest).toLocaleString("en-US")}`);
+
+  useEffect(() => {
+    if (ref.current) ref.current.dataset.demoCounter = reducedMotion ? "static" : inView ? "playing" : "waiting";
+    if (!inView || reducedMotion) return;
+    count.set(0);
+    const animation = animate(count, finalValue, { duration: 0.9, delay: index * 0.08, ease: [0.23, 1, 0.32, 1], onComplete: () => { if (ref.current) ref.current.dataset.demoCounter = "complete"; } });
+    return () => { animation.stop(); count.set(finalValue); };
+  }, [count, finalValue, inView, index, reducedMotion]);
+
+  return <motion.p ref={ref} className={styles.metricValue}>{formatted}</motion.p>;
+}
+
 export function ShowcaseDashboardPreview() {
+  const reducedMotion = useReducedMotion();
   return (
     <figure className={styles.preview} aria-labelledby="showcase-preview-caption">
       <div role="img" aria-label="Panel ilustrativo de MiBazarPE: Ventas, Inventario, Clientes, Créditos, Pagos, Caja y Reportes. DEMO, DATOS FICTICIOS: ventas del mes S/ 12,450; clientes activos 124; por cobrar S/ 2,180; caja disponible S/ 3,640." className={styles.dashboard}>
@@ -51,12 +75,12 @@ export function ShowcaseDashboardPreview() {
             </div>
             <div className={styles.content}>
               <div className={styles.metrics}>
-                {metrics.map(({ label, value, detail, note }) => <div key={label} className={styles.metric}>
+                {metrics.map(({ label, value, detail, note }, index) => <motion.div key={label} className={styles.metric} initial={reducedMotion ? false : { opacity: 0, transform: "translateY(12px)" }} whileInView={{ opacity: 1, transform: "translateY(0px)" }} viewport={{ once: true }} transition={{ duration: reducedMotion ? 0 : 0.5, delay: reducedMotion ? 0 : index * 0.08, ease: [0.23, 1, 0.32, 1] }}>
                   <p className={styles.metricLabel}>{label}<ArrowUpRight className="size-3 shrink-0" /></p>
-                  <p className={styles.metricValue}>{value}</p>
+                  <DemoMetricValue value={value} index={index} />
                   <p className={styles.metricDetail}>{detail}</p>
                   <p className={styles.metricNote}>{note}</p>
-                </div>)}
+                </motion.div>)}
               </div>
               <div className={styles.chart}>
                 <div className={styles.chartHeader}>
@@ -67,7 +91,7 @@ export function ShowcaseDashboardPreview() {
                   <defs><linearGradient id="showcase-chart-fill" x1="0" y1="0" x2="0" y2="1"><stop stopColor="currentColor" stopOpacity=".35" /><stop offset="1" stopColor="currentColor" stopOpacity=".02" /></linearGradient></defs>
                   {[30, 70, 110, 150].map(y => <path key={y} d={`M0 ${y}H1000`} stroke="currentColor" strokeOpacity=".06" />)}
                   <path d={`${line} L1000 180 L0 180 Z`} fill="url(#showcase-chart-fill)" />
-                  <path d={line} stroke="currentColor" strokeWidth="1.5" strokeOpacity=".6" />
+                  <motion.path initial={reducedMotion ? false : { pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: reducedMotion ? 0 : 1.2, ease: [0.23, 1, 0.32, 1] }} d={line} stroke="currentColor" strokeWidth="1.5" strokeOpacity=".6" />
                   <path d={chartPath(chartPoints.map(y => Math.min(178, y * 0.6 + 75)))} stroke="currentColor" strokeOpacity=".25" strokeWidth="1.2" />
                 </svg>
                 <div className={styles.chartDates}>{["01 Jul", "15 Jul", "01 Ago", "15 Ago", "01 Sep", "15 Sep", "30 Sep"].map(d => <span key={d}>{d}</span>)}</div>
