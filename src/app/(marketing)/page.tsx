@@ -5,6 +5,7 @@ import { Features } from "@/components/marketing/features";
 import { FeaturesDashboard } from "@/components/marketing/features-dashboard";
 import { Pricing } from "@/components/marketing/pricing";
 import { Testimonials } from "@/components/marketing/testimonials";
+import { Faqs } from "@/components/marketing/faqs";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <FeaturesDashboard />
       <Pricing />
       <Testimonials />
+      <Faqs />
     </main>
   );
 }
