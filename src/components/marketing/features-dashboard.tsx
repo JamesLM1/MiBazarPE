@@ -91,7 +91,6 @@ export function FeaturesDashboard() {
           </motion.article>
         </div>
       </div>
-      <p className={styles.disclaimer}>DEMO · DATOS FICTICIOS <span>Vista ilustrativa del alcance previsto. Sin operaciones reales.</span></p>
     </section>
   );
 }
