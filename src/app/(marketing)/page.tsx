@@ -3,6 +3,7 @@ import { LogoCloud } from "@/components/marketing/logo-cloud";
 import { Team } from "@/components/marketing/team";
 import { Features } from "@/components/marketing/features";
 import { FeaturesDashboard } from "@/components/marketing/features-dashboard";
+import { Pricing } from "@/components/marketing/pricing";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Team />
       <Features />
       <FeaturesDashboard />
+      <Pricing />
     </main>
   );
 }
