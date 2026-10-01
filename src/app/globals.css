@@ -7,11 +7,11 @@
 :root {
   /* Initial brand direction from the official logo; final palette remains open. */
   --brand-blue: #0066ff;
-  --surface-base: #0b0d12;
-  --surface-raised: #12161f;
-  --surface-overlay: #1a202c;
-  --text-strong: #f4f7fc;
-  --text-subtle: #a7b1c2;
+  --surface-base: #0a0a0a;
+  --surface-raised: #171717;
+  --surface-overlay: #262626;
+  --text-strong: #fafafa;
+  --text-subtle: #a1a1a1;
   --font-system: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --motion-duration-fast: 160ms;
 
@@ -54,8 +54,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-system);
-  --font-heading: var(--font-system);
+  --font-sans: var(--font-geist), var(--font-system);
+  --font-heading: var(--font-outfit), var(--font-system);
+  --font-mono: var(--font-geist-mono), monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -96,7 +97,7 @@
 
 body {
   margin: 0;
-  font-family: var(--font-system);
+  font-family: var(--font-geist), var(--font-system);
 }
 
 .dark {
@@ -116,7 +117,7 @@ body {
   --accent: #172b4d;
   --accent-foreground: #c9dfff;
   --destructive: #ff808b;
-  --border: #2b3444;
+  --border: rgba(255, 255, 255, 0.10);
   --input: #3b4960;
   --ring: #80b3ff;
   --chart-1: oklch(0.87 0 0);
@@ -134,7 +135,7 @@ body {
   --sidebar-ring: var(--ring);
 }
 
-/* Component timing uses the shared token; no animation runtime is needed. */
+/* Button timing remains independent of the scroll-linked Hero. */
 [data-slot="button"] {
   transition-duration: var(--motion-duration-fast);
 }

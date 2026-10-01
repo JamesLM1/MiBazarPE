@@ -1,67 +1,90 @@
-.hero {
-  position: relative;
-  isolation: isolate;
-  overflow: clip;
+.heroTrack { position: relative; height: 190vh; isolation: isolate; background: var(--background); }
+.heroSticky { position: sticky; top: 0; height: 100vh; overflow: clip; }
+.container { width: 100%; max-width: 1152px; margin-inline: auto; padding-inline: 64px; }
+.copy { position: relative; z-index: 2; width: min(100%, 640px); padding-top: 100px; }
+.badge { display: inline-flex; align-items: center; gap: 12px; height: 35px; max-width: 100%; margin-bottom: 24px; padding-inline: 13px; border: 1px solid var(--border); border-radius: 7px; background: color-mix(in srgb, var(--card) 60%, transparent); font-size: 13px; font-weight: 500; }
+.title { font-family: var(--font-outfit), var(--font-system); font-size: 60px; font-weight: 400; line-height: 1.03; letter-spacing: -0.025em; }
+.description { max-width: 520px; margin-top: 24px; color: var(--muted-foreground); font-size: 18px; font-weight: 400; line-height: 28px; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+.previewStage { position: absolute; top: max(560px, 67vh); left: 50%; width: min(1440px, 94vw); transform: translateX(-50%); pointer-events: none; }
+.panelMotion { position: relative; transform-origin: 50% 0; will-change: transform, opacity; }
+.preview { margin: 0; }
+.dashboard { overflow: hidden; border: 1px solid var(--border); border-radius: 10px; background: var(--background); padding: 6px; box-shadow: 0 0 0 4px color-mix(in srgb, var(--card) 35%, transparent); mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%); }
+.veil { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 0%, var(--background) 90%); border-radius: 10px; }
+.dashboardLayout { display: flex; min-width: 0; font-size: 12px; }
+.sidebar { width: 180px; flex-shrink: 0; padding: 18px 12px; background: var(--card); border-radius: 6px 0 0 6px; }
+.brand { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; margin-bottom: 24px; }
+.quickCreate { display: flex; align-items: center; gap: 8px; border-radius: 5px; background: var(--foreground); color: var(--background); padding: 7px 10px; margin-bottom: 12px; }
+.navItem { display: flex; gap: 9px; align-items: center; padding: 8px 10px; color: var(--muted-foreground); }
+.navItem:first-child { color: var(--foreground); }
+.navLabel { margin: 24px 10px 8px; color: var(--muted-foreground); font-size: 10px; }
+.workspace { flex: 1; min-width: 0; }
+.toolbar { display: flex; justify-content: space-between; align-items: center; height: 44px; padding: 0 24px; border-bottom: 1px solid var(--border); }
+.toolbarTitle { display: flex; align-items: center; gap: 10px; }
+.demo { color: var(--muted-foreground); font-size: 10px; font-family: var(--font-geist-mono), monospace; }
+.content { padding: 20px; }
+.metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.metric { min-width: 0; border: 1px solid var(--border); border-radius: 8px; background: var(--card); padding: 18px; }
+.metricLabel { display: flex; justify-content: space-between; gap: 6px; color: var(--muted-foreground); font-size: 11px; }
+.metricValue { margin-top: 15px; font-size: 25px; font-weight: 500; letter-spacing: -0.025em; white-space: nowrap; }
+.metricDetail { margin-top: 12px; font-size: 11px; }
+.metricNote { margin-top: 5px; font-size: 10px; color: var(--muted-foreground); }
+.chart { margin-top: 20px; border: 1px solid var(--border); border-radius: 8px; background: var(--card); padding: 20px; }
+.chartHeader { display: flex; justify-content: space-between; gap: 12px; }
+.chartFilters { display: flex; gap: 12px; font-size: 10px; color: var(--muted-foreground); }
+.chartFilters span:first-child { color: var(--foreground); }
+.chartSvg { display: block; width: 100%; height: 225px; margin-top: 20px; }
+.chartDates { display: flex; justify-content: space-between; font-size: 9px; color: var(--muted-foreground); }
+.table { margin-top: 20px; font-size: 11px; }
+.tableHeading { display: flex; justify-content: space-between; align-items: center; padding: 12px 4px; }
+.tableRow { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 12px; padding: 12px; border-top: 1px solid var(--border); }
+.tableRow:nth-child(even) { background: var(--card); }
+.tableRow span:last-child { text-align: right; font-family: var(--font-geist-mono), monospace; }
+.caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+@media (max-width: 1023px) {
+  .container { padding-inline: 32px; }
+  .previewStage { width: 94vw; top: max(560px, 69vh); }
+  .sidebar { width: 130px; padding-inline: 8px; }
+  .metric { padding: 12px; }
+  .metricValue { font-size: 20px; }
+  .metricDetail, .metricNote { font-size: 9px; }
+  .chartSvg { height: 190px; }
 }
-
-.preview {
-  position: relative;
-  width: 100%;
-  min-width: 0;
-  max-width: 720px;
-  margin: 0 auto;
-  perspective: 1400px;
+@media (max-width: 639px) {
+  .heroTrack { height: 170svh; }
+  .heroSticky { height: 100svh; }
+  .container { padding-inline: 24px; }
+  .copy { padding-top: 65px; }
+  .badge { font-size: 11px; gap: 8px; padding-inline: 10px; }
+  .title { font-size: clamp(36px, 9.5vw, 48px); line-height: 1.05; }
+  .description { font-size: 16px; line-height: 25px; margin-top: 22px; }
+  .actions { margin-top: 24px; }
+  .previewStage { top: max(510px, 70svh); width: calc(100% - 32px); }
+  .dashboard { padding: 3px; }
+  .sidebar { display: none; }
+  .toolbar { padding-inline: 12px; }
+  .content { padding: 10px; }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .metric { padding: 12px; }
+  .metricLabel { font-size: 10px; }
+  .metricValue { font-size: 19px; margin-top: 8px; }
+  .metricDetail { margin-top: 7px; }
+  .metricNote { display: none; }
+  .chart { margin-top: 10px; padding: 12px; }
+  .chartFilters { display: none; }
+  .chartSvg { height: 125px; margin-top: 12px; }
+  .chartDates { font-size: 8px; }
+  .tableRow { grid-template-columns: 1.5fr 1fr; font-size: 10px; padding: 10px 4px; }
+  .tableRow span:nth-child(2), .tableRow span:nth-child(3) { display: none; }
 }
-
-.glow {
-  position: absolute;
-  z-index: -1;
-  inset: 10% -5% 4%;
-  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--primary) 13%, transparent), transparent 65%);
-  filter: blur(32px);
-  pointer-events: none;
+/* Static, fully visible alternative also applies before Motion hydrates. */
+@media (prefers-reduced-motion: reduce) {
+  .heroTrack { height: auto; }
+  .heroSticky { position: relative; height: auto; padding-bottom: 48px; }
+  .copy { transform: none !important; opacity: 1 !important; }
+  .previewStage { position: relative; top: auto; left: auto; margin: 64px auto 0; transform: none; }
+  .panelMotion { transform: none !important; opacity: 1 !important; will-change: auto; }
+  .dashboard { mask-image: none; }
+  .veil { display: none; }
 }
-
-.dashboard {
-  position: relative;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--card);
-  overflow: hidden;
-  transform: rotateX(4deg) rotateY(-4deg) rotateZ(-1deg);
-  box-shadow:
-    1px 2px 0 var(--border),
-    4px 6px 0 var(--background),
-    5px 7px 0 color-mix(in srgb, var(--border) 65%, transparent),
-    0 24px 60px -24px color-mix(in srgb, var(--background) 90%, transparent);
-}
-
-@media (min-width: 640px) {
-  .dashboard {
-    transform: scale(0.96) rotateX(7deg) rotateY(-10deg) rotateZ(-3deg);
-  }
-}
-
-@media (min-width: 1024px) {
-  .preview {
-    width: calc(100% + clamp(0px, (100vw - 1152px) / 2, 150px));
-    margin-right: 0;
-  }
-
-  .dashboard {
-    transform: scale(0.94) rotateX(7deg) rotateY(-10deg) rotateZ(-3deg);
-    box-shadow:
-      1px 2px 0 var(--border),
-      5px 8px 0 var(--background),
-      6px 9px 0 color-mix(in srgb, var(--border) 65%, transparent),
-      0 36px 80px -25px color-mix(in srgb, var(--background) 95%, transparent);
-  }
-}
-
-@media (min-width: 1280px) {
-  .dashboard {
-    transform: rotateX(10deg) rotateY(-16deg) rotateZ(-5deg);
-  }
-}
-
-/* A still illustration avoids continuous motion and respects reduced motion. */
