@@ -1,6 +1,7 @@
 import { Hero } from "@/components/marketing/hero";
 import { LogoCloud } from "@/components/marketing/logo-cloud";
 import { Team } from "@/components/marketing/team";
+import { Features } from "@/components/marketing/features";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <LogoCloud />
       <Team />
+      <Features />
     </main>
   );
 }

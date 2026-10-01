@@ -1,0 +1,24 @@
+.section { padding: 96px 24px 128px; scroll-margin-top: 80px; }
+.card { border-color: rgb(255 255 255 / .08); transition: border-color 200ms ease, box-shadow 200ms ease; }
+.card:hover { border-color: rgb(255 255 255 / .17); box-shadow: inset 0 0 40px rgb(255 255 255 / .015); }
+.card:nth-child(n + 4) { min-height: 296px; }
+.card:last-child > div > div { min-width: 0; }
+.card:last-child > div > div:first-child { padding-right: 24px; }
+.card:last-child > div > div:last-child { overflow: hidden; }
+.dashboardVisual::before { content: "DEMO"; position: absolute; left: 12px; top: 82px; font-size: 8px; color: #a1a1a1; }
+.dashboardVisual { position: relative; min-height: 220px; overflow: hidden; mask-image: linear-gradient(to right, #000 85%, transparent), linear-gradient(to bottom, #000 85%, transparent); mask-composite: intersect; }
+.dashboard { position: absolute; left: 0; top: 104px; width: 390px; height: 260px; padding: 4px; border: 1px solid #303030; border-radius: 7px; display: grid; grid-template-columns: 65px 1fr; background: #111; font-size: 8px; color: #a1a1a1; }
+.dashboard aside { display: flex; flex-direction: column; gap: 12px; padding: 10px 7px; border-right: 1px solid #262626; }
+.dashboard aside strong { color: #fafafa; font-size: 9px; margin-bottom: 8px; }
+.dashboardContent { padding: 10px; }
+.dashboardContent header { display: flex; justify-content: space-between; color: #fafafa; font-size: 11px; margin-bottom: 12px; }
+.dashboardContent small { font-size: 7px; color: #a1a1a1; }
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.metrics div { padding: 8px; background: #171717; border: 1px solid #262626; border-radius: 3px; }
+.metrics strong { display: block; margin-top: 6px; color: #fafafa; font-size: 12px; font-weight: 500; }
+.miniChart { margin-top: 10px; padding: 8px; border: 1px solid #262626; border-radius: 3px; height: 88px; overflow: hidden; }
+.miniChart svg { width: 100%; height: 65px; }
+.rows div { display: flex; justify-content: space-between; border-bottom: 1px solid #262626; padding: 8px 0; }
+@media (max-width: 767px) { .section { padding: 64px 20px 80px; } }
+@media (max-width: 639px) { .dashboardVisual { min-height: 230px; } .dashboardVisual::before { top: 16px; left: 300px; z-index: 1; } .dashboard { top: 8px; left: 32px; width: 390px; } .card:last-child > div { grid-template-columns: minmax(0, 1fr); } }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }

@@ -1,0 +1,278 @@
+import { cn } from "@/lib/utils";
+import type React from "react";
+import { useId } from "react";
+import { CobeGlobe } from "./features-globe";
+import styles from "./features.module.css";
+import { PackageIcon } from "lucide-react";
+import { TrendingUpIcon, SquareMousePointerIcon, GlobeIcon } from "lucide-react";
+
+const features = [
+	{
+		id: "setup",
+		children: <SetupVisual />,
+		className: "lg:col-span-2",
+	},
+	{
+		id: "user-based-security",
+		children: <UserBasedSecurity />,
+		className: "lg:col-span-2",
+	},
+	{
+		id: "reports",
+		children: <ReportsVisual />,
+		className: "sm:col-span-2 lg:col-span-2",
+	},
+	{
+		id: "dashboard",
+		children: <DashboardVisual />,
+		className: "sm:col-span-2 lg:col-span-3 p-0",
+	},
+	{
+		id: "presence",
+		children: <PresenceVisual />,
+		className: "sm:col-span-2 lg:col-span-3 p-0",
+	},
+];
+
+export function Features() {
+	return (
+		<section id="funciones" aria-label="Funcionalidades previstas de MiBazarPE" className={styles.section}><h2 className="sr-only">Funcionalidades de MiBazarPE</h2><div className="relative mx-auto grid w-full max-w-5xl grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-6">
+			{features.map((feature) => (
+				<FeatureCard className={feature.className} key={feature.id}>
+					{feature.children}
+				</FeatureCard>
+			))}
+		</div></section>
+	);
+}
+
+function FeatureCard({
+	children,
+	className,
+}: {
+	children: React.ReactNode;
+	className?: string;
+}) {
+	return (
+		<div
+			className={cn(
+				"group relative overflow-hidden rounded-2xl border bg-background px-8 pt-8 pb-6",
+				styles.card,
+				className
+			)}
+		>
+			{children}
+		</div>
+	);
+}
+
+function FeatureTitle({ className, ...props }: React.ComponentProps<"h3">) {
+	return (
+		<h3
+			className={cn("font-medium text-foreground text-lg", className)}
+			{...props}
+		/>
+	);
+}
+
+function FeatureDescription({
+	className,
+	...props
+}: React.ComponentProps<"p">) {
+	return (
+		<p className={cn("text-muted-foreground text-sm", className)} {...props} />
+	);
+}
+
+function SetupVisual() {
+	return (
+		<>
+			<div className="relative mx-auto flex size-32 items-center justify-center rounded-full border-4 border-dashed bg-background shadow-xs outline outline-border outline-offset-4">
+				<div className="absolute inset-0 z-10 scale-120 bg-radial from-foreground/20 via-foreground/5 to-transparent blur-xl" />
+				<PackageIcon aria-hidden="true" className="size-14 text-neutral-300" strokeWidth={1.5} />
+			</div>
+
+			<div className="relative mt-8 space-y-1.5 text-center">
+				<FeatureTitle>Ventas e inventario centralizados</FeatureTitle>
+				<FeatureDescription>
+					Registra tus ventas y mantén actualizado el inventario de tu bazar desde un mismo lugar.
+				</FeatureDescription>
+			</div>
+		</>
+	);
+}
+
+function UserBasedSecurity() {
+	return (
+		<>
+			<div className="relative mx-auto flex size-32 items-center justify-center rounded-full border bg-background shadow-xs outline outline-border outline-offset-4">
+				<CustomLockIcon className="size-24" />
+				<div className="absolute inset-0 scale-120 bg-radial from-foreground/15 via-foreground/5 to-transparent blur-xl" />
+			</div>
+
+			<div className="relative mt-8 space-y-1.5 text-center">
+				<FeatureTitle>Créditos y pagos bajo control</FeatureTitle>
+				<FeatureDescription>
+					Organiza los créditos de tus clientes, sus cuotas y los pagos pendientes de manera ordenada.
+				</FeatureDescription>
+			</div>
+		</>
+	);
+}
+
+function ReportsVisual() {
+	return (
+		<>
+			<div className="min-h-32">
+				<div className="absolute top-8 left-8 flex items-center gap-2">
+					<div className="flex size-8 items-center justify-center rounded-full bg-primary/10 text-neutral-300">
+						<TrendingUpIcon className="size-4" />
+					</div>
+					<div className="text-xs font-medium text-muted-foreground">DEMO</div>
+				</div>
+				<ReportsChartsSvg className="translate-x-[5%] -rotate-2 scale-150" />
+			</div>
+			<div className="relative z-10 mt-8 space-y-1.5 text-center">
+				<FeatureTitle>Reportes y análisis</FeatureTitle>
+				<FeatureDescription>
+					Consulta información clave de tu negocio para comprender mejor tus ventas, cobros y movimientos.
+				</FeatureDescription>
+			</div>
+		</>
+	);
+}
+
+function DashboardVisual() {
+	return (
+		<div className="grid h-full sm:grid-cols-2">
+			<div className="relative z-10 space-y-6 py-8 ps-8 pe-2">
+				<div className="flex size-12 items-center justify-center rounded-full border bg-card shadow-xs outline outline-border/80 outline-offset-2">
+					<SquareMousePointerIcon className="size-5 text-neutral-300/80" />
+				</div>
+				<div className="space-y-2">
+					<FeatureTitle className="text-base">
+						Todo tu negocio en un solo panel
+					</FeatureTitle>
+					<FeatureDescription>
+						Visualiza ventas, inventario, créditos, clientes y caja desde una interfaz simple y organizada.
+					</FeatureDescription>
+				</div>
+			</div>
+<div className={styles.dashboardVisual} role="img" aria-label="Miniatura ilustrativa del panel MiBazarPE. Datos de demostración.">
+<div className={styles.dashboard}><aside><strong>MiBazarPE</strong>{["Resumen", "Ventas", "Inventario", "Clientes", "Créditos", "Caja"].map(label => <span key={label}>{label}</span>)}</aside>
+<div className={styles.dashboardContent}><header>Resumen <small>DEMO</small></header><div className={styles.metrics}>{["Ventas", "Por cobrar", "Caja"].map(label => <div key={label}><span>{label}</span><strong>S/ —</strong></div>)}</div><div className={styles.miniChart}><span>Movimientos del período</span><ReportsChartsSvg aria-hidden="true" /></div><div className={styles.rows}>{["Venta de productos", "Pago de cuota", "Ingreso a caja"].map(label => <div key={label}><span>{label}</span><span>DEMO</span></div>)}</div></div></div></div>
+		</div>
+	);
+}
+
+function PresenceVisual() {
+	return (
+		<div className="grid max-h-120 sm:grid-cols-2">
+			<div className="space-y-6 pt-8 pb-4 pl-8 sm:pb-8">
+				<div className="flex size-12 items-center justify-center rounded-full border bg-card shadow-xs outline outline-border/80 outline-offset-2">
+					<GlobeIcon className="size-5 text-neutral-300/80" />
+				</div>
+				<div className="space-y-2">
+					<FeatureTitle className="text-base">
+						Accede desde cualquier lugar
+					</FeatureTitle>
+					<FeatureDescription>
+						Consulta la información de tu bazar desde un navegador cuando la necesites.
+					</FeatureDescription>
+				</div>
+			</div>
+			<div className="relative">
+				<CobeGlobe className="top-[-12%] left-0 sm:absolute" />
+			</div>
+		</div>
+	);
+}
+
+function CustomLockIcon(props: React.ComponentProps<"svg">) {
+	return (
+		<svg aria-hidden="true"
+			fill="none"
+			viewBox="0 0 212 143"
+			xmlns="http://www.w3.org/2000/svg"
+			{...props}
+		>
+			<path
+				className="fill-neutral-300/50 stroke-neutral-300/50"
+				d="M44.0209 55.3542C43.1945 54.7639 42.6916 54.0272 42.5121 53.1442C42.3327 52.2611 42.5995 51.345 43.3125 50.3958C50.632 40.3611 59.812 32.5694 70.8525 27.0208C81.8931 21.4722 93.668 18.6979 106.177 18.6979C118.691 18.6979 130.497 21.3849 141.594 26.7587C152.691 32.1326 161.958 39.8936 169.396 50.0417C170.222 51.1042 170.489 52.0486 170.196 52.875C169.904 53.7014 169.401 54.4097 168.688 55C167.979 55.5903 167.153 55.8571 166.208 55.8004C165.264 55.7437 164.438 55.2408 163.729 54.2917C157.236 45.0833 148.885 38.0307 138.675 33.1337C128.466 28.2368 117.633 25.786 106.177 25.7812C94.7257 25.7812 83.9827 28.2321 73.948 33.1337C63.9132 38.0354 55.5903 45.0881 48.9792 54.2917C48.2709 55.3542 47.4445 55.9444 46.5 56.0625C45.5556 56.1806 44.7292 55.9444 44.0209 55.3542ZM126.188 142.656C113.91 139.587 103.875 133.476 96.0834 124.325C88.2917 115.173 84.3959 103.988 84.3959 90.7708C84.3959 84.8681 86.5209 79.9097 90.7709 75.8958C95.0209 71.8819 100.156 69.875 106.177 69.875C112.198 69.875 117.333 71.8819 121.583 75.8958C125.833 79.9097 127.958 84.8681 127.958 90.7708C127.958 94.6667 129.434 97.9439 132.385 100.602C135.337 103.261 138.819 104.588 142.833 104.583C146.847 104.583 150.271 103.256 153.104 100.602C155.938 97.9486 157.354 94.6714 157.354 90.7708C157.354 77.0764 152.337 65.566 142.302 56.2396C132.267 46.9132 120.285 42.25 106.354 42.25C92.4237 42.25 80.441 46.9132 70.4063 56.2396C60.3716 65.566 55.3542 77.0174 55.3542 90.5937C55.3542 93.4271 55.621 96.9687 56.1546 101.219C56.6882 105.469 57.9562 110.427 59.9584 116.094C60.3125 117.156 60.2842 118.101 59.8734 118.927C59.4625 119.753 58.7825 120.344 57.8334 120.698C56.8889 121.052 55.9752 121.024 55.0921 120.613C54.2091 120.202 53.5881 119.522 53.2292 118.573C51.4584 113.969 50.1905 109.395 49.4255 104.853C48.6605 100.31 48.2756 95.6158 48.2709 90.7708C48.2709 75.0694 53.9682 61.9062 65.363 51.2812C76.7577 40.6562 90.3624 35.3437 106.177 35.3437C122.115 35.3437 135.809 40.6562 147.26 51.2812C158.712 61.9062 164.438 75.0694 164.438 90.7708C164.438 96.6736 162.343 101.601 158.155 105.554C153.966 109.506 148.859 111.485 142.833 111.49C136.813 111.49 131.649 109.513 127.342 105.561C123.035 101.608 120.88 96.6783 120.875 90.7708C120.875 86.875 119.43 83.5978 116.54 80.9392C113.65 78.2805 110.196 76.9536 106.177 76.9583C102.163 76.9583 98.7089 78.2876 95.8142 80.9462C92.9195 83.6049 91.4745 86.8797 91.4792 90.7708C91.4792 102.222 94.8745 111.785 101.665 119.458C108.456 127.132 117.22 132.503 127.958 135.573C129.021 135.927 129.729 136.517 130.083 137.344C130.438 138.17 130.497 139.056 130.26 140C130.024 140.826 129.552 141.535 128.844 142.125C128.135 142.715 127.25 142.892 126.188 142.656ZM67.0417 18.3437C66.0973 18.934 65.1528 19.0828 64.2084 18.79C63.2639 18.4972 62.5556 17.8762 62.0834 16.9271C61.6112 15.9826 61.4931 15.1279 61.7292 14.3629C61.9653 13.5979 62.5556 12.9179 63.5 12.3229C70.1112 8.78125 77.0174 6.06597 84.2188 4.17708C91.4202 2.28819 98.7396 1.34375 106.177 1.34375C113.733 1.34375 121.111 2.25986 128.313 4.09208C135.514 5.92431 142.479 8.54986 149.208 11.9687C150.271 12.559 150.892 13.2674 151.071 14.0937C151.251 14.9201 151.161 15.7465 150.802 16.5729C150.448 17.3993 149.858 18.0486 149.031 18.5208C148.205 18.9931 147.201 18.934 146.021 18.3437C139.764 15.1563 133.299 12.7078 126.627 10.9983C119.954 9.28889 113.138 8.43181 106.177 8.42708C99.3299 8.42708 92.6007 9.22514 85.9896 10.8212C79.3785 12.4174 73.0625 14.9249 67.0417 18.3437ZM87.9375 140.177C80.9723 132.858 75.6314 125.392 71.915 117.78C68.1987 110.167 66.3381 101.164 66.3334 90.7708C66.3334 80.0278 70.2292 70.9658 78.0209 63.585C85.8125 56.2042 95.198 52.5161 106.177 52.5208C117.156 52.5208 126.601 56.2112 134.51 63.5921C142.42 70.9729 146.375 80.0325 146.375 90.7708C146.375 91.8333 146.052 92.6904 145.405 93.3421C144.758 93.9937 143.901 94.3172 142.833 94.3125C141.889 94.3125 141.063 93.989 140.354 93.3421C139.646 92.6951 139.292 91.8381 139.292 90.7708C139.292 81.9167 136.014 74.5099 129.46 68.5504C122.906 62.591 115.145 59.6089 106.177 59.6042C97.2049 59.6042 89.503 62.5862 83.0713 68.5504C76.6396 74.5146 73.4214 81.9214 73.4167 90.7708C73.4167 100.333 75.0695 108.451 78.375 115.123C81.6806 121.796 86.5209 128.494 92.8959 135.219C93.6042 135.927 93.9584 136.753 93.9584 137.698C93.9584 138.642 93.6042 139.469 92.8959 140.177C92.1875 140.885 91.3612 141.24 90.4167 141.24C89.4723 141.24 88.6459 140.885 87.9375 140.177ZM141.417 128.135C130.91 128.135 121.789 124.594 114.054 117.51C106.319 110.427 102.454 101.514 102.458 90.7708C102.458 89.8264 102.784 89 103.436 88.2917C104.088 87.5833 104.942 87.2292 106 87.2292C107.063 87.2292 107.92 87.5833 108.571 88.2917C109.223 89 109.546 89.8264 109.542 90.7708C109.542 99.625 112.729 106.885 119.104 112.552C125.479 118.219 132.917 121.052 141.417 121.052C142.125 121.052 143.129 120.993 144.427 120.875C145.726 120.757 147.083 120.58 148.5 120.344C149.563 120.108 150.479 120.256 151.248 120.79C152.018 121.324 152.519 122.119 152.75 123.177C152.986 124.122 152.809 124.948 152.219 125.656C151.629 126.365 150.861 126.837 149.917 127.073C147.792 127.663 145.934 127.989 144.342 128.05C142.751 128.112 141.776 128.14 141.417 128.135Z"
+			/>
+			<g clipPath="url(#features-fingerprint-clip)">
+				<path
+					className="fill-neutral-300 stroke-neutral-300"
+					d="M44.0209 55.3542C43.1945 54.7639 42.6916 54.0272 42.5121 53.1442C42.3327 52.2611 42.5995 51.345 43.3125 50.3958C50.632 40.3611 59.812 32.5694 70.8525 27.0208C81.8931 21.4722 93.668 18.6979 106.177 18.6979C118.691 18.6979 130.497 21.3849 141.594 26.7587C152.691 32.1326 161.958 39.8936 169.396 50.0417C170.222 51.1042 170.489 52.0486 170.196 52.875C169.904 53.7014 169.401 54.4097 168.688 55C167.979 55.5903 167.153 55.8571 166.208 55.8004C165.264 55.7437 164.438 55.2408 163.729 54.2917C157.236 45.0833 148.885 38.0307 138.675 33.1337C128.466 28.2368 117.633 25.786 106.177 25.7812C94.7257 25.7812 83.9827 28.2321 73.948 33.1337C63.9132 38.0354 55.5903 45.0881 48.9792 54.2917C48.2709 55.3542 47.4445 55.9444 46.5 56.0625C45.5556 56.1806 44.7292 55.9444 44.0209 55.3542ZM126.188 142.656C113.91 139.587 103.875 133.476 96.0834 124.325C88.2917 115.173 84.3959 103.988 84.3959 90.7708C84.3959 84.8681 86.5209 79.9097 90.7709 75.8958C95.0209 71.8819 100.156 69.875 106.177 69.875C112.198 69.875 117.333 71.8819 121.583 75.8958C125.833 79.9097 127.958 84.8681 127.958 90.7708C127.958 94.6667 129.434 97.9439 132.385 100.602C135.337 103.261 138.819 104.588 142.833 104.583C146.847 104.583 150.271 103.256 153.104 100.602C155.938 97.9486 157.354 94.6714 157.354 90.7708C157.354 77.0764 152.337 65.566 142.302 56.2396C132.267 46.9132 120.285 42.25 106.354 42.25C92.4237 42.25 80.441 46.9132 70.4063 56.2396C60.3716 65.566 55.3542 77.0174 55.3542 90.5937C55.3542 93.4271 55.621 96.9687 56.1546 101.219C56.6882 105.469 57.9562 110.427 59.9584 116.094C60.3125 117.156 60.2842 118.101 59.8734 118.927C59.4625 119.753 58.7825 120.344 57.8334 120.698C56.8889 121.052 55.9752 121.024 55.0921 120.613C54.2091 120.202 53.5881 119.522 53.2292 118.573C51.4584 113.969 50.1905 109.395 49.4255 104.853C48.6605 100.31 48.2756 95.6158 48.2709 90.7708C48.2709 75.0694 53.9682 61.9062 65.363 51.2812C76.7577 40.6562 90.3624 35.3437 106.177 35.3437C122.115 35.3437 135.809 40.6562 147.26 51.2812C158.712 61.9062 164.438 75.0694 164.438 90.7708C164.438 96.6736 162.343 101.601 158.155 105.554C153.966 109.506 148.859 111.485 142.833 111.49C136.813 111.49 131.649 109.513 127.342 105.561C123.035 101.608 120.88 96.6783 120.875 90.7708C120.875 86.875 119.43 83.5978 116.54 80.9392C113.65 78.2805 110.196 76.9536 106.177 76.9583C102.163 76.9583 98.7089 78.2876 95.8142 80.9462C92.9195 83.6049 91.4745 86.8797 91.4792 90.7708C91.4792 102.222 94.8745 111.785 101.665 119.458C108.456 127.132 117.22 132.503 127.958 135.573C129.021 135.927 129.729 136.517 130.083 137.344C130.438 138.17 130.497 139.056 130.26 140C130.024 140.826 129.552 141.535 128.844 142.125C128.135 142.715 127.25 142.892 126.188 142.656ZM67.0417 18.3437C66.0973 18.934 65.1528 19.0828 64.2084 18.79C63.2639 18.4972 62.5556 17.8762 62.0834 16.9271C61.6112 15.9826 61.4931 15.1279 61.7292 14.3629C61.9653 13.5979 62.5556 12.9179 63.5 12.3229C70.1112 8.78125 77.0174 6.06597 84.2188 4.17708C91.4202 2.28819 98.7396 1.34375 106.177 1.34375C113.733 1.34375 121.111 2.25986 128.313 4.09208C135.514 5.92431 142.479 8.54986 149.208 11.9687C150.271 12.559 150.892 13.2674 151.071 14.0937C151.251 14.9201 151.161 15.7465 150.802 16.5729C150.448 17.3993 149.858 18.0486 149.031 18.5208C148.205 18.9931 147.201 18.934 146.021 18.3437C139.764 15.1563 133.299 12.7078 126.627 10.9983C119.954 9.28889 113.138 8.43181 106.177 8.42708C99.3299 8.42708 92.6007 9.22514 85.9896 10.8212C79.3785 12.4174 73.0625 14.9249 67.0417 18.3437ZM87.9375 140.177C80.9723 132.858 75.6314 125.392 71.915 117.78C68.1987 110.167 66.3381 101.164 66.3334 90.7708C66.3334 80.0278 70.2292 70.9658 78.0209 63.585C85.8125 56.2042 95.198 52.5161 106.177 52.5208C117.156 52.5208 126.601 56.2112 134.51 63.5921C142.42 70.9729 146.375 80.0325 146.375 90.7708C146.375 91.8333 146.052 92.6904 145.405 93.3421C144.758 93.9937 143.901 94.3172 142.833 94.3125C141.889 94.3125 141.063 93.989 140.354 93.3421C139.646 92.6951 139.292 91.8381 139.292 90.7708C139.292 81.9167 136.014 74.5099 129.46 68.5504C122.906 62.591 115.145 59.6089 106.177 59.6042C97.2049 59.6042 89.503 62.5862 83.0713 68.5504C76.6396 74.5146 73.4214 81.9214 73.4167 90.7708C73.4167 100.333 75.0695 108.451 78.375 115.123C81.6806 121.796 86.5209 128.494 92.8959 135.219C93.6042 135.927 93.9584 136.753 93.9584 137.698C93.9584 138.642 93.6042 139.469 92.8959 140.177C92.1875 140.885 91.3612 141.24 90.4167 141.24C89.4723 141.24 88.6459 140.885 87.9375 140.177ZM141.417 128.135C130.91 128.135 121.789 124.594 114.054 117.51C106.319 110.427 102.454 101.514 102.458 90.7708C102.458 89.8264 102.784 89 103.436 88.2917C104.088 87.5833 104.942 87.2292 106 87.2292C107.063 87.2292 107.92 87.5833 108.571 88.2917C109.223 89 109.546 89.8264 109.542 90.7708C109.542 99.625 112.729 106.885 119.104 112.552C125.479 118.219 132.917 121.052 141.417 121.052C142.125 121.052 143.129 120.993 144.427 120.875C145.726 120.757 147.083 120.58 148.5 120.344C149.563 120.108 150.479 120.256 151.248 120.79C152.018 121.324 152.519 122.119 152.75 123.177C152.986 124.122 152.809 124.948 152.219 125.656C151.629 126.365 150.861 126.837 149.917 127.073C147.792 127.663 145.934 127.989 144.342 128.05C142.751 128.112 141.776 128.14 141.417 128.135Z"
+				/>
+			</g>
+			<path
+				className="fill-neutral-300 stroke-neutral-300"
+				d="M3 72H209"
+				strokeLinecap="round"
+				strokeWidth="6"
+			/>
+			<defs>
+				<clipPath id="features-fingerprint-clip">
+					<rect
+						fill="currentColor"
+						height="72"
+						transform="translate(41)"
+						width="129"
+					/>
+				</clipPath>
+			</defs>
+		</svg>
+	);
+}
+
+function ReportsChartsSvg(props: React.ComponentProps<"svg">) {
+	const gradientId = useId();
+	return (
+		<svg aria-hidden="true"
+			fill="none"
+			viewBox="0 0 300 128"
+			xmlns="http://www.w3.org/2000/svg"
+			{...props}
+		>
+			<path
+				clipRule="evenodd"
+				d="M3 123C3 123 14.3298 94.153 35.1282 88.0957C55.9266 82.0384 65.9333 80.5508 65.9333 80.5508C65.9333 80.5508 80.699 80.5508 92.1777 80.5508C103.656 80.5508 100.887 63.5348 109.06 63.5348C117.233 63.5348 117.217 91.9728 124.78 91.9728C132.343 91.9728 142.264 78.03 153.831 80.5508C165.398 83.0716 186.825 91.9728 193.761 91.9728C200.697 91.9728 206.296 63.5348 214.07 63.5348C221.844 63.5348 238.653 93.7771 244.234 91.9728C249.814 90.1684 258.8 60 266.19 60C272.075 60 284.1 88.057 286.678 88.0957C294.762 88.2171 300.192 72.9284 305.423 72.9284C312.323 72.9284 323.377 65.2437 335.553 63.5348C347.729 61.8259 348.218 82.07 363.639 80.5508C367.875 80.1335 372.949 82.2017 376.437 87.1008C379.446 91.3274 381.054 97.4325 382.521 104.647C383.479 109.364 382.521 123 382.521 123"
+				fill={`url(#${gradientId})`}
+				fillRule="evenodd"
+			/>
+			<path
+				className="text-neutral-300"
+				d="M3 121.077C3 121.077 15.3041 93.6691 36.0195 87.756C56.7349 81.8429 66.6632 80.9723 66.6632 80.9723C66.6632 80.9723 80.0327 80.9723 91.4656 80.9723C102.898 80.9723 100.415 64.2824 108.556 64.2824C116.696 64.2824 117.693 92.1332 125.226 92.1332C132.759 92.1332 142.07 78.5115 153.591 80.9723C165.113 83.433 186.092 92.1332 193 92.1332C199.908 92.1332 205.274 64.2824 213.017 64.2824C220.76 64.2824 237.832 93.8946 243.39 92.1332C248.948 90.3718 257.923 60.5 265.284 60.5C271.145 60.5 283.204 87.7182 285.772 87.756C293.823 87.8746 299.2 73.0802 304.411 73.0802C311.283 73.0802 321.425 65.9506 333.552 64.2824C345.68 62.6141 346.91 82.4553 362.27 80.9723C377.629 79.4892 383 106.605 383 106.605"
+				stroke="currentColor"
+				strokeWidth="1"
+			/>
+			<defs>
+				<linearGradient
+					gradientUnits="userSpaceOnUse"
+					id={gradientId}
+					x1="3"
+					x2="3"
+					y1="60"
+					y2="123"
+				>
+					<stop className="text-neutral-300/20" stopColor="currentColor" />
+					<stop
+						className="text-background"
+						offset="1"
+						stopColor="currentColor"
+						stopOpacity="0.103775"
+					/>
+				</linearGradient>
+				<clipPath id="features-fingerprint-clip06">
+					<rect
+						fill="white"
+						height="30"
+						transform="translate(14 14)"
+						width="358"
+					/>
+				</clipPath>
+			</defs>
+		</svg>
+	);
+}
