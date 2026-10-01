@@ -4,6 +4,7 @@ import { Team } from "@/components/marketing/team";
 import { Features } from "@/components/marketing/features";
 import { FeaturesDashboard } from "@/components/marketing/features-dashboard";
 import { Pricing } from "@/components/marketing/pricing";
+import { Testimonials } from "@/components/marketing/testimonials";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Features />
       <FeaturesDashboard />
       <Pricing />
+      <Testimonials />
     </main>
   );
 }
