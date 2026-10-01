@@ -6,7 +6,7 @@ type Network = "GitHub" | "LinkedIn" | "Instagram";
 const members = [
   { name: "James Lucas Moreto", role: "Líder del Proyecto & Full Stack Developer", photo: "james-lucas-moreto", socials: [["GitHub", "https://github.com/JamesLM1"], ["LinkedIn", "https://www.linkedin.com/in/james-lucas-moreto/"], ["Instagram", "https://www.instagram.com/esjam_lm/"]] },
   { name: "Jairo Jalil Antonino Rodriguez Espinoza", role: "Desarrollo de Software", photo: "jairo-rodriguez-espinoza", socials: [["GitHub", "https://github.com/JJARE1611"], ["LinkedIn", "https://www.linkedin.com/in/jairo-rodriguez-espinoza/"]] },
-  { name: "Luis Diego Camus Dominguez", role: "Diseño UI/UX & Prototipado", photo: "luis-diego-camus-dominguez", socials: [["LinkedIn", "https://www.linkedin.com/in/camius/"]] },
+  { name: "Luis Diego Camus Dominguez", role: "Diseño UI/UX & Prototipado", photo: "luis-diego-camus-dominguez", socials: [["GitHub", "https://github.com/LuisCamus19"], ["LinkedIn", "https://www.linkedin.com/in/camius/"]] },
   { name: "Diego Alexander Aguirre Gutierrez", role: "Documentación Técnica", photo: "diego-alexander-aguirre-gutierrez", socials: [["LinkedIn", "https://www.linkedin.com/in/diegoaguirre192/"]] },
   { name: "Oscar Enrique Valderrama Bautista", role: "Documentación Funcional", photo: "oscar-enrique-valderrama-bautista", socials: [["GitHub", "https://github.com/OscarV123/OscarV123"], ["LinkedIn", "https://www.linkedin.com/in/oscar-valderrama-bautista/"]] },
   { name: "Alex Oswaldo Villarroel Antonio", role: "Coordinación del Proyecto", photo: null, socials: [] },

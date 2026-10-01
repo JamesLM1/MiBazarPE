@@ -1,28 +1,23 @@
-.section { padding: 80px 24px 96px; }
+﻿.section { padding: 80px 24px 96px; }
 .intro { text-align: center; max-width: 640px; margin: 0 auto 40px; }
 .badge { display: inline-flex; padding: 6px 12px; border: 1px solid var(--border); border-radius: 7px; font-size: 12px; color: #d4d4d4; }
 .intro h2 { margin: 20px 0 16px; font-size: 38px; font-weight: 500; line-height: 1.15; letter-spacing: -.035em; }
-.intro p { font-size: 14px; line-height: 24px; color: var(--muted-foreground); }
-.viewport { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; max-width: 1000px; height: 600px; overflow: hidden; margin-inline: auto; mask-image: linear-gradient(transparent,#000 13%,#000 87%,transparent); }
-.column { min-width: 0; }
-.track { display: flex; flex-direction: column; animation: scenario-scroll 34s linear infinite; }
-.column:nth-child(2) .track { animation-duration: 42s; animation-direction: reverse; }
-.column:nth-child(3) .track { animation-duration: 38s; }
-.group { display: flex; flex-direction: column; gap: 16px; padding-bottom: 16px; }
-.card { margin: 0; padding: 28px; border: 1px solid rgb(255 255 255 / .09); border-radius: 22px; background: var(--background); box-shadow: 0 5px 0 rgb(255 255 255 / .018),0 9px 16px rgb(255 255 255 / .02); }
-.caseLabel { color: #737373; font-size: 10px; letter-spacing: .035em; }
-.card blockquote { margin-top: 14px; font-size: 15px; line-height: 24px; letter-spacing: -.01em; color: #e5e5e5; }
-.card figcaption { display: flex; align-items: center; gap: 10px; margin-top: 24px; }
-.avatar { display: grid; place-items: center; flex-shrink: 0; width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 50%; background: #202020; color: #c3cbd8; font-size: 10px; }
+.intro p { max-width: 540px; margin-inline: auto; font-size: 14px; line-height: 24px; color: var(--muted-foreground); }
+.viewport { display: grid; grid-template-columns: repeat(var(--columns),minmax(0,1fr)); gap: 24px; max-width: 1050px; height: 650px; overflow: hidden; margin-inline: auto; mask-image: linear-gradient(transparent,#000 14%,#000 86%,transparent); }
+.column { min-width: 0; padding: 4px; border-radius: 16px; }
+.column:focus-visible { outline: 1px solid #acc5f3; outline-offset: -1px; }
+.track { display: flex; flex-direction: column; animation: scenario-scroll linear infinite; will-change: transform; }
+.group { display: flex; flex-direction: column; gap: 20px; padding-bottom: 20px; }
+.card { position: relative; margin: 0; padding: 28px; border: 1px solid rgb(255 255 255 / .09); border-radius: 20px; background: linear-gradient(145deg,#171717,#0e0e0e); box-shadow: 0 4px 0 rgb(255 255 255 / .018),0 10px 20px rgb(0 0 0 / .12); transition: border-color 220ms ease, background-color 220ms ease, scale 250ms ease, box-shadow 220ms ease; }
+.card:nth-child(3n + 2) { scale: .985; }
+.card blockquote { font-size: 15px; line-height: 25px; letter-spacing: -.01em; color: #dedede; }
+.card figcaption { display: flex; align-items: center; gap: 11px; margin-top: 24px; }
+.avatar { width: 40px; height: 40px; object-fit: cover; border-radius: 50%; flex-shrink: 0; border: 1px solid rgb(255 255 255 / .12); filter: grayscale(.65) contrast(.95); transition: filter 250ms ease; }
 .card strong { display: block; font-size: 12px; font-weight: 500; }
-.card small { display: block; margin-top: 3px; color: var(--muted-foreground); font-size: 10px; }
-.viewport[data-paused="true"] .track { animation-play-state: paused; }
-.controls { display: flex; justify-content: center; margin-top: 20px; }
-.controls button { display: flex; align-items: center; gap: 7px; min-height: 36px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px; background: #141414; color: var(--muted-foreground); font-size: 11px; cursor: pointer; transition: color 160ms ease,border-color 160ms ease; }
-.controls button:focus-visible { outline: 2px solid #fafafa; outline-offset: 4px; }
+.card small { display: block; margin-top: 4px; color: #a1a1a1; font-size: 10px; line-height: 16px; }
+.viewport[data-offscreen="true"] .track, .column:focus-within .track { animation-play-state: paused; }
 @keyframes scenario-scroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
-@media (hover: hover) and (pointer: fine) { .viewport:hover .track { animation-play-state: paused; } .card { transition: border-color 160ms ease; } .card:hover { border-color: rgb(255 255 255 / .2); } .controls button:hover { color: #fafafa; border-color: rgb(255 255 255 / .2); } }
-@media (max-width: 1023px) { .viewport { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; } .column:nth-child(3) { display: none; } .card { padding: 26px; } }
-@media (max-width: 639px) { .section { padding: 64px 16px; } .intro { margin-bottom: 28px; } .intro h2 { font-size: 32px; } .viewport { grid-template-columns: minmax(0,1fr); max-width: 360px; height: 550px; } .column:nth-child(2) { display: none; } .card { padding: 26px; } }
-@media (prefers-reduced-motion: reduce) { .viewport { height: auto; overflow: visible; mask-image: none; } .track { animation: none !important; } .group:nth-child(2), .group .card:not(:first-child) { display: none; } .column:nth-child(2), .column:nth-child(3) { display: block; } .viewport { grid-template-columns: repeat(3,minmax(0,1fr)); } .controls { display: none; } .section * { transition: none !important; } }
-@media (prefers-reduced-motion: reduce) and (max-width: 1023px) { .viewport { grid-template-columns: minmax(0,1fr); max-width: 520px; } }
+@media (hover: hover) and (pointer: fine) { .column:hover .track { animation-play-state: paused; } .card:hover { border-color: rgb(255 255 255 / .24); scale: 1.01; box-shadow: 0 10px 22px rgb(0 0 0 / .18); } .card:hover .avatar { filter: grayscale(0) contrast(1); } }
+@media (max-width: 1023px) { .viewport { gap: 16px; max-width: 740px; } .card { padding: 26px; } }
+@media (max-width: 639px) { .section { padding: 64px 16px; } .intro { margin-bottom: 28px; } .intro h2 { font-size: 32px; } .viewport { max-width: 380px; height: 570px; } .card { padding: 25px; } }
+@media (prefers-reduced-motion: reduce) { .viewport { height: auto; overflow: visible; mask-image: none; } .track { animation: none !important; transform: none !important; will-change: auto; } .group[aria-hidden="true"] { display: none; } .section * { transition: none !important; scale: 1 !important; } .intro { opacity: 1 !important; transform: none !important; } }

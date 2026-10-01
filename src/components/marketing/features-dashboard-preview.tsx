@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransform } from "motion/react";
+import { CountUp } from "./landing-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, ChevronDown, CreditCard, LayoutDashboard, Package, Plus, Search, Settings2, ShoppingBag, Store, Users, Wallet } from "lucide-react";
 import sharedStyles from "./hero.module.css";
 import variant from "./features-dashboard.module.css";
@@ -34,25 +34,6 @@ function chartPath(points: number[]) {
 }
 const line = chartPath(chartPoints);
 
-function DemoMetricValue({ value, index }: { value: string; index: number }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
-  const reducedMotion = useReducedMotion();
-  const finalValue = Number(value.replace(/[^\d]/g, ""));
-  const count = useMotionValue(finalValue);
-  const formatted = useTransform(count, (latest) => `${value.startsWith("S/") ? "S/ " : ""}${Math.round(latest).toLocaleString("en-US")}`);
-
-  useEffect(() => {
-    if (ref.current) ref.current.dataset.demoCounter = reducedMotion ? "static" : inView ? "playing" : "waiting";
-    if (!inView || reducedMotion) return;
-    count.set(0);
-    const animation = animate(count, finalValue, { duration: 0.9, delay: index * 0.08, ease: [0.23, 1, 0.32, 1], onComplete: () => { if (ref.current) ref.current.dataset.demoCounter = "complete"; } });
-    return () => { animation.stop(); count.set(finalValue); };
-  }, [count, finalValue, inView, index, reducedMotion]);
-
-  return <motion.p ref={ref} className={styles.metricValue}>{formatted}</motion.p>;
-}
-
 export function ShowcaseDashboardPreview() {
   const reducedMotion = useReducedMotion();
   return (
@@ -77,7 +58,7 @@ export function ShowcaseDashboardPreview() {
               <div className={styles.metrics}>
                 {metrics.map(({ label, value, detail, note }, index) => <motion.div key={label} className={styles.metric} initial={reducedMotion ? false : { opacity: 0, transform: "translateY(12px)" }} whileInView={{ opacity: 1, transform: "translateY(0px)" }} viewport={{ once: true }} transition={{ duration: reducedMotion ? 0 : 0.5, delay: reducedMotion ? 0 : index * 0.08, ease: [0.23, 1, 0.32, 1] }}>
                   <p className={styles.metricLabel}>{label}<ArrowUpRight className="size-3 shrink-0" /></p>
-                  <DemoMetricValue value={value} index={index} />
+                  <p className={styles.metricValue}><CountUp value={Number(value.replace(/[^\d]/g, ""))} prefix={value.startsWith("S/") ? "S/ " : ""} delay={index * 0.12} /></p>
                   <p className={styles.metricDetail}>{detail}</p>
                   <p className={styles.metricNote}>{note}</p>
                 </motion.div>)}
@@ -90,9 +71,9 @@ export function ShowcaseDashboardPreview() {
                 <svg className={styles.chartSvg} viewBox="0 0 1000 180" preserveAspectRatio="none" fill="none">
                   <defs><linearGradient id="showcase-chart-fill" x1="0" y1="0" x2="0" y2="1"><stop stopColor="currentColor" stopOpacity=".35" /><stop offset="1" stopColor="currentColor" stopOpacity=".02" /></linearGradient></defs>
                   {[30, 70, 110, 150].map(y => <path key={y} d={`M0 ${y}H1000`} stroke="currentColor" strokeOpacity=".06" />)}
-                  <path d={`${line} L1000 180 L0 180 Z`} fill="url(#showcase-chart-fill)" />
+                  <motion.path initial={reducedMotion ? false : { opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: reducedMotion ? 0 : 1.8, delay: reducedMotion ? 0 : 0.2 }} d={`${line} L1000 180 L0 180 Z`} fill="url(#showcase-chart-fill)" />
                   <motion.path initial={reducedMotion ? false : { pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: reducedMotion ? 0 : 1.2, ease: [0.23, 1, 0.32, 1] }} d={line} stroke="currentColor" strokeWidth="1.5" strokeOpacity=".6" />
-                  <path d={chartPath(chartPoints.map(y => Math.min(178, y * 0.6 + 75)))} stroke="currentColor" strokeOpacity=".25" strokeWidth="1.2" />
+                  <motion.path initial={reducedMotion ? false : { pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: reducedMotion ? 0 : 1.6, delay: reducedMotion ? 0 : 0.15 }} d={chartPath(chartPoints.map(y => Math.min(178, y * 0.6 + 75)))} stroke="currentColor" strokeOpacity=".25" strokeWidth="1.2" />
                 </svg>
                 <div className={styles.chartDates}>{["01 Jul", "15 Jul", "01 Ago", "15 Ago", "01 Sep", "15 Sep", "30 Sep"].map(d => <span key={d}>{d}</span>)}</div>
               </div>

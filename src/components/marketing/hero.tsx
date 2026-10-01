@@ -2,7 +2,7 @@
 
 import { useRef, useState, useSyncExternalStore } from "react";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { HeroDashboardPreview } from "./hero-dashboard-preview";
@@ -43,11 +43,6 @@ export function Hero() {
       <div className={styles.heroSticky}>
         <div className={styles.container}>
           <motion.div className={styles.copy} inert={!reducedMotion && copyHidden} style={reducedMotion ? undefined : { transform: copyTransform, opacity: copyOpacity }}>
-            <p className={styles.badge}>
-              <Sparkles aria-hidden="true" className="size-3.5 shrink-0" />
-              <span>Gestión inteligente para tu bazar</span>
-              <ArrowRight aria-hidden="true" className="size-3.5 shrink-0" />
-            </p>
             <h1 id="hero-title" className={styles.title}>
               Controla tu bazar.<br />Vende, cobra y<br />decide mejor.
             </h1>

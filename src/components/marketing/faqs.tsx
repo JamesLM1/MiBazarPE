@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { Accordion } from "radix-ui";
+import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, ChevronDown, Grid2X2, Info, Layers, ShieldCheck } from "lucide-react";
+import { landingEase, landingEntrance } from "./landing-motion";
 import styles from "./faqs.module.css";
 
 const categories = [
@@ -19,7 +21,9 @@ const questions = [
   { id: "inventory", category: "features", question: "¿Puedo controlar mi inventario?", answer: "Sí. El alcance previsto incluye el registro de productos y el seguimiento de existencias para apoyar el control del inventario del bazar." },
   { id: "reports", category: "features", question: "¿MiBazarPE mostrará reportes del negocio?", answer: "Sí. El sistema contempla reportes que permitan consultar información sobre ventas, créditos, pagos, inventario y otros movimientos registrados." },
   { id: "browser", category: "about", question: "¿Necesito instalar un programa?", answer: "No. MiBazarPE está planteado como una aplicación web accesible desde un navegador compatible." },
-  { id: "ai", category: "development", question: "¿La inteligencia artificial ya está disponible?", answer: "No. Las funciones inteligentes forman parte de etapas posteriores del proyecto y no deben presentarse actualmente como una funcionalidad operativa." },
+  { id: "ai", category: "development", question: "¿La inteligencia artificial ya está disponible?", answer: "No en la versión actual. Las capacidades inteligentes forman parte de las siguientes etapas del proyecto y se incorporarán progresivamente conforme avance el desarrollo y sean validadas antes de su integración definitiva." },
+  { id: "updates", category: "development", question: "¿MiBazarPE seguirá recibiendo actualizaciones?", answer: "Sí. MiBazarPE se encuentra actualmente en una etapa de prototipo y continuará evolucionando durante los próximos meses. Está previsto incorporar y refinar progresivamente funciones, experiencia de usuario, seguridad e integración de datos conforme avance el desarrollo y la validación del proyecto." },
+  { id: "release", category: "development", question: "¿Cuándo estará disponible la versión final?", answer: "MiBazarPE continúa en desarrollo. Durante los próximos meses se irán completando las etapas previstas del proyecto antes de consolidar una versión final. La disponibilidad definitiva dependerá del avance de la implementación, las pruebas y la validación de sus funcionalidades." },
   { id: "production", category: "development", question: "¿Mis datos ya se almacenan en producción?", answer: "No. La integración definitiva con autenticación, base de datos y políticas de seguridad se realizará en las siguientes etapas de implementación." },
 ];
 
@@ -29,22 +33,46 @@ export function Faqs() {
   const active = categories.find(item => item.id === category)!;
   const filtered = questions.filter(item => category === "all" || item.category === category);
   const ActiveIcon = active.icon;
+  const reduced = useReducedMotion();
+
+  const colReveal = (delay: number) => ({
+    initial: reduced ? false : "hidden",
+    whileInView: "visible",
+    viewport: { once: true, amount: 0.15 },
+    variants: landingEntrance,
+    transition: { duration: reduced ? 0 : 0.55, delay: reduced ? 0 : delay, ease: landingEase },
+  });
 
   return (
     <section id="preguntas-frecuentes" className={styles.section} aria-labelledby="faqs-title">
       <div className={styles.layout}>
-        <div className={styles.sidebar}>
-          <header className={styles.intro}>
+        {/* Left column — stagger eyebrow → title → description → cta → nav */}
+        <motion.div
+          className={styles.sidebar}
+          initial={reduced ? false : "hidden"}
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.12 }}
+          variants={{ visible: { transition: { staggerChildren: reduced ? 0 : 0.09 } } }}
+          style={reduced ? undefined : { transform: "translateY(0px)" }}
+        >
+          <motion.header className={styles.intro} variants={landingEntrance} transition={{ duration: reduced ? 0 : 0.55, ease: landingEase }}>
             <p className={styles.eyebrow}>PREGUNTAS FRECUENTES</p>
             <h2 id="faqs-title">Tus preguntas,<br /><span>respondidas.</span></h2>
             <p>Conoce la propuesta, el alcance previsto y el estado actual de MiBazarPE.</p>
             <a href="#como-funciona" className={styles.cta}>Explorar la demo<ArrowUpRight size={13} aria-hidden="true" /></a>
-          </header>
-          <nav className={styles.categories} aria-label="Filtrar preguntas por tema">
+          </motion.header>
+          <motion.nav
+            className={styles.categories}
+            aria-label="Filtrar preguntas por tema"
+            variants={landingEntrance}
+            transition={{ duration: reduced ? 0 : 0.5, ease: landingEase }}
+          >
             {categories.map(({ id, label, icon: Icon }) => <button key={id} type="button" aria-pressed={category === id} aria-controls="faqs-list" onClick={() => { setCategory(id); setOpened(""); }}><Icon size={15} aria-hidden="true" /><span>{label}</span><small>{id === "all" ? questions.length : questions.filter(item => item.category === id).length}</small></button>)}
-          </nav>
-        </div>
-        <div className={styles.answers}>
+          </motion.nav>
+        </motion.div>
+
+        {/* Right column — enters slightly after the left */}
+        <motion.div className={styles.answers} {...colReveal(0.14)}>
           <div className={styles.listHeading}><ActiveIcon size={16} aria-hidden="true" /><h3>{active.label}</h3><span aria-live="polite" aria-atomic="true">{filtered.length} preguntas</span></div>
           <div className={styles.frame} id="faqs-list">
             <Accordion.Root key={category} type="single" collapsible value={opened} onValueChange={setOpened} className={styles.accordion}>
@@ -56,7 +84,7 @@ export function Faqs() {
               </Accordion.Item>)}
             </Accordion.Root>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
