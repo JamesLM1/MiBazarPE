@@ -1,4 +1,4 @@
-.section { padding: 112px 24px 128px; scroll-margin-top: 80px; }
+.section { padding-inline: 24px; scroll-margin-top: 80px; }
 .layout { display: grid; grid-template-columns: 340px minmax(0,1fr); gap: 56px; max-width: 1100px; margin-inline: auto; align-items: start; }
 .sidebar { min-width: 0; }
 .eyebrow { font-size: 10px; letter-spacing: .075em; color: var(--muted-foreground); }
@@ -36,8 +36,15 @@
 @keyframes response-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 @media (hover: hover) and (pointer: fine) { .categories button:hover { color: #fafafa; background: #141414; } .item:hover { border-color: rgb(255 255 255 / .13); } .cta:hover { background: #262626; border-color: rgb(255 255 255 / .2); } }
 @media (max-width: 1023px) { .layout { grid-template-columns: 240px minmax(0,1fr); gap: 28px; } .intro h2 { font-size: 36px; } .trigger { padding: 16px; gap: 12px; } .response { padding-inline: 16px; } .listHeading { flex-wrap: wrap; } .categories button { font-size: 12px; } }
-@media (max-width: 639px) { .section { padding: 72px 16px 80px; } .layout { grid-template-columns: minmax(0,1fr); gap: 32px; } .intro h2 { font-size: 36px; } .intro > p:last-of-type { max-width: 360px; } .categories { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); margin-top: 28px; max-width: none; gap: 6px; } .categories button { min-height: 48px; padding: 10px; font-size: 11px; gap: 7px; } .categories button > svg { width: 13px; flex-shrink: 0; } .categories button small { font-size: 9px; } .answers { padding-top: 0; } .trigger { min-height: 62px; font-size: 13px; padding: 16px 14px; } .response { padding: 0 14px 20px; font-size: 13px; line-height: 23px; } .listHeading { margin-bottom: 14px; } }
+@media (max-width: 639px) { .section { padding-inline: 16px; } .layout { grid-template-columns: minmax(0,1fr); gap: 32px; } .intro h2 { font-size: 36px; } .intro > p:last-of-type { max-width: 360px; } .categories { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); margin-top: 28px; max-width: none; gap: 6px; } .categories button { min-height: 48px; padding: 10px; font-size: 11px; gap: 7px; } .categories button > svg { width: 13px; flex-shrink: 0; } .categories button small { font-size: 9px; } .answers { padding-top: 0; } .trigger { min-height: 62px; font-size: 13px; padding: 16px 14px; } .response { padding: 0 14px 20px; font-size: 13px; line-height: 23px; } .listHeading { margin-bottom: 14px; } }
 @media (max-width: 359px) { .categories button small { display: none; } .categories button { padding-inline: 8px; } .intro h2 { font-size: 34px; } }
 @media (prefers-reduced-motion: reduce) { .section *, .section *::before, .section *::after { animation: none !important; transition: none !important; } }
 @media (hover: hover) and (pointer: fine) { .trigger:hover .chevron { color: #d9e4f7; } .item:not([data-state="open"]):hover { background: #111; } .cta:hover svg { translate: 1px -1px; } }
 .cta svg { transition: translate 180ms ease; }
+
+/* Global light theme: colors only; preserve the approved dark design. */
+:global(html:not(.dark)) .section :is(.intro h2 span, .listHeading) { color: var(--foreground); }
+:global(html:not(.dark)) .section :is(.categories button small, .listHeading > span, .chevron) { color: var(--muted-foreground); }
+:global(html:not(.dark)) .section :is(.cta, .categories button[aria-pressed="true"], .categories button:hover, .frame, .item[data-state="open"], .item:hover) { background: var(--muted); color: var(--foreground); border-color: var(--border); }
+:global(html:not(.dark)) .section :is(.categories button[aria-pressed="true"] > svg, .trigger[data-state="open"] .chevron) { color: var(--primary); }
+:global(html:not(.dark)) .section .trigger:focus-visible { outline-color: var(--ring); }

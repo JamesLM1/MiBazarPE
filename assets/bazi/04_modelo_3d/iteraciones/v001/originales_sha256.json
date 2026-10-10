@@ -1,0 +1,66 @@
+[
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\README_BAZI.txt",
+    "sha256": "802ADEF32532A5B085322DF27B3FF6423487CDD76691A19B28C8C968CD51C334"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\01_conceptos\\01_bazi_concepto_principal.png",
+    "sha256": "50B59C978956FBC3F3ACC43341C5BF3F655BF71BB733AB6DF1560A2D6D9D0916"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\01_conceptos\\02_bazi_pose_base.png",
+    "sha256": "57D28E19D3EDA7FEC1E7D40BCA8536C5E31F5AA6FC11E040A78A7CCD4E8DF090"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\01_conceptos\\03_bazi_pose_base_alternativa.png",
+    "sha256": "ECB93F6444DEFE21D61F19BEE4E6B4796897CBE6893904B6799284AFA143B928"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\04_bazi_pensativo.png",
+    "sha256": "25853E0B62A2D7EC34ACDCAFA71C18A42AA2DEE0A2FA0EF60917081AF0190F1B"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\05_bazi_preocupado.png",
+    "sha256": "C66E3A6852E72B9B2C2EA85298CF4F41494A73614B1029FD1C30CE91B34D081E"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\06_bazi_celebrando.png",
+    "sha256": "56A4761A56A7E365455828A9FA6F4425414D6A283C5FD56AE821683D2D2DE985"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\07_bazi_guardian_de_contrasenas.png",
+    "sha256": "8FD6D0F25ECE9F255180FE73BBE81A2FB5B8B668C43836D8EB49EA152B189022"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\08_bazi_saludando.png",
+    "sha256": "F0464513F77AFEEE8DC422892680DA87613F0F8FD4FFCF07D6780619089BBF91"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\09_bazi_senalando_email.png",
+    "sha256": "1D5EBC65D4D45147E567D44868CA3389EF5A3E2F50F70D3492BEE4BC37D6A419"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\03_guias_para_animacion\\10_bazi_character_master_sheet.png",
+    "sha256": "BFB330C44A537B36B50AED528768D187E1B2322E584031A3DFED2A2253FA3FD3"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\03_guias_para_animacion\\11_bazi_expression_sheet.png",
+    "sha256": "1E5F765CCB6F557EFFD5976375A1C50C34A9B107442DAEA3496961E8932F29CC"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\03_guias_para_animacion\\12_bazi_auth_pose_sheet.png",
+    "sha256": "E07B68533B09FA4E1D2EEB71AB42537A5164E2095EDE33B5714C6A742182C0B4"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\03_guias_para_animacion\\13_bazi_ai_assistant_pose_sheet.png",
+    "sha256": "A26B659D73C221E12D4B94CD5D23FDBC01FD0C13494354F98AE0AE53367D4840"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\03_guias_para_animacion\\14_bazi_rig_parts_reference.png",
+    "sha256": "F3317D75DF737FA2668B5C10BF4ED32EB043B753249EB3F08DF48F0221A16D8E"
+  },
+  {
+    "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\04_modelo_3d\\Bazi_Master.blend",
+    "sha256": "B147F5E5B3BCD3B72B0E88AA034716A1BC2BB9B35BEB0FFF819B04CA5EAE2463"
+  }
+]

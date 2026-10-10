@@ -1,0 +1,16 @@
+.landing {
+  --marketing-section-gap: 64px;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--marketing-section-gap);
+  padding-bottom: var(--marketing-section-gap);
+}
+
+@media (min-width: 640px) {
+  .landing { --marketing-section-gap: 80px; }
+}
+
+@media (min-width: 1024px) {
+  .landing { --marketing-section-gap: 96px; }
+}

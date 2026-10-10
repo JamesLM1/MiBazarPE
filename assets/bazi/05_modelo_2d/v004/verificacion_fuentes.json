@@ -1,0 +1,108 @@
+{
+  "embedded_poses_verified": 7,
+  "originals_checked": 16,
+  "originals_changed": 0,
+  "poses": [
+    {
+      "pose": "idle",
+      "bytes_identical": true,
+      "sha256": "57d28e19d3eda7fec1e7d40bca8536c5e31f5aa6fc11e040a78a7ccd4e8df090"
+    },
+    {
+      "pose": "welcome",
+      "bytes_identical": true,
+      "sha256": "f0464513f77afeee8dc422892680da87613f0f8fd4ffcf07d6780619089bbf91"
+    },
+    {
+      "pose": "thinking",
+      "bytes_identical": true,
+      "sha256": "25853e0b62a2d7ec34acdcafa71c18a42aa2dee0a2fa0ef60917081af0190f1b"
+    },
+    {
+      "pose": "worried",
+      "bytes_identical": true,
+      "sha256": "c66e3a6852e72b9b2c2ea85298cf4f41494a73614b1029fd1c30ce91b34d081e"
+    },
+    {
+      "pose": "celebrate",
+      "bytes_identical": true,
+      "sha256": "56a4761a56a7e365455828a9fa6f4425414d6a283c5fd56ae821683d2d2de985"
+    },
+    {
+      "pose": "email",
+      "bytes_identical": true,
+      "sha256": "1d5ebc65d4d45147e567d44868ca3389ef5a3e2f50f70d3492bee4bc37d6a419"
+    },
+    {
+      "pose": "privacy",
+      "bytes_identical": true,
+      "sha256": "8fd6d0f25ece9f255180fe73bbe81a2fb5b8b668c43836d8eb49ea152b189022"
+    }
+  ],
+  "originals": [
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\README_BAZI.txt",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\01_conceptos\\01_bazi_concepto_principal.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\01_conceptos\\02_bazi_pose_base.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\01_conceptos\\03_bazi_pose_base_alternativa.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\04_bazi_pensativo.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\05_bazi_preocupado.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\06_bazi_celebrando.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\07_bazi_guardian_de_contrasenas.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\08_bazi_saludando.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\09_bazi_senalando_email.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\03_guias_para_animacion\\10_bazi_character_master_sheet.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\03_guias_para_animacion\\11_bazi_expression_sheet.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\03_guias_para_animacion\\12_bazi_auth_pose_sheet.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\03_guias_para_animacion\\13_bazi_ai_assistant_pose_sheet.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\03_guias_para_animacion\\14_bazi_rig_parts_reference.png",
+      "unchanged": true
+    },
+    {
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\04_modelo_3d\\Bazi_Master.blend",
+      "unchanged": true
+    }
+  ]
+}

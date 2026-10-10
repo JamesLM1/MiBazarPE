@@ -1,4 +1,4 @@
-.section { padding: 96px 24px 128px; scroll-margin-top: 80px; --showcase-ease: cubic-bezier(.23,1,.32,1); }
+.section { padding-inline: 24px; scroll-margin-top: 80px; --showcase-ease: cubic-bezier(.23,1,.32,1); }
 .intro { max-width: 1100px; margin: 0 auto 48px; }
 .eyebrow { display: flex; align-items: center; gap: 12px; color: var(--muted-foreground); font-size: 11px; letter-spacing: .06em; }
 .eyebrow span { padding: 3px 6px; border: 1px solid var(--border); border-radius: 4px; font-family: var(--font-geist-mono),monospace; font-size: 9px; letter-spacing: 0; }
@@ -136,7 +136,7 @@
   .activityRow strong { font-size: 10px; }
 }
 @media (max-width: 639px) {
-  .section { padding: 64px 16px 80px; }
+  .section { padding-inline: 16px; }
   .intro { margin-bottom: 32px; }
   .intro h2 { font-size: 36px; }
   .intro > p:last-child { font-size: 15px; line-height: 25px; }
@@ -180,3 +180,10 @@
   .intro, .card, .browserFrame, .floating, .activityRow, .creditWindow, .installments > span, .paymentSlip, .catalog, .catalogRow, .clientNote, .metric { opacity: 1 !important; transform: none !important; }
   .section svg path { stroke-dashoffset: 0 !important; stroke-dasharray: none !important; opacity: 1 !important; }
 }
+
+/* Global light theme: colors only; preserve the approved dark design. */
+:global(html:not(.dark)) .section :is(.frame, .card, .browserFrame, .mainCopy, .catalogRow) { border-color: var(--border); }
+:global(html:not(.dark)) .section :is(.floating, .activityRow, .creditWindow, .catalog, .paymentSlip, .clientNote) { background: var(--card); border-color: var(--border); }
+:global(html:not(.dark)) .section :is(.floatIcon, .rowIcon, .demoControls button, .installments > span:nth-child(-n + 2) i) { background: var(--muted); color: var(--foreground); }
+:global(html:not(.dark)) .section :is(.windowTitle, .activityRow > span:last-child, .catalogRow > span:last-child, .creditSummary strong, .clientNote strong) { color: var(--foreground); }
+:global(html:not(.dark)) .section .demoControls button:focus-visible { outline-color: var(--ring); }

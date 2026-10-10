@@ -1,4 +1,4 @@
-.section { padding: 96px 24px 128px; scroll-margin-top: 80px; }
+.section { padding-inline: 24px; scroll-margin-top: 80px; }
 .container { max-width: 1024px; margin-inline: auto; }
 .introduction { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; margin-bottom: 112px; }
 .eyebrow { margin: 5px 0 0; color: #a1a1a1; font-size: 12px; line-height: 18px; font-weight: 400; }
@@ -29,7 +29,7 @@
 .socials a:focus-visible { outline: 2px solid #fafafa; outline-offset: 3px; color: #fafafa; }
 @media (max-width: 1099px) { .composition { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; } }
 @media (max-width: 959px) {
-  .section { padding: 80px 32px 96px; }
+  .section { padding-inline: 32px; }
   .introduction { grid-template-columns: 1fr 2fr; gap: 24px; margin-bottom: 80px; }
   .statement { font-size: 28px; }
   .heading { margin-bottom: 48px; }
@@ -39,7 +39,7 @@
   .member { min-height: 80px; }
 }
 @media (max-width: 639px) {
-  .section { padding: 64px 20px 80px; }
+  .section { padding-inline: 20px; }
   .introduction { grid-template-columns: 1fr; gap: 24px; margin-bottom: 64px; }
   .statement { font-size: 25px; line-height: 1.3; }
   .heading { font-size: 32px; line-height: 36px; margin-bottom: 40px; }
@@ -56,3 +56,7 @@
   .socials { gap: 2px; }
 }
 @media (prefers-reduced-motion: reduce) { .portrait img, .socials a { transition: none; } }
+
+/* Global light theme: colors only; preserve the approved dark design. */
+:global(html:not(.dark)) .section :is(.eyebrow, .statement, .credit p, .socials a) { color: var(--muted-foreground); }
+:global(html:not(.dark)) .section :is(.statement span, .socials a:hover, .socials a:focus-visible) { color: var(--foreground); outline-color: var(--ring); }

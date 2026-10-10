@@ -1,0 +1,98 @@
+{
+  "version": "2d-v001",
+  "status": "visual_review_partial_articulation",
+  "primary_source": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\01_conceptos\\02_bazi_pose_base.png",
+  "sha256": "57d28e19d3eda7fec1e7d40bca8536c5e31f5aa6fc11e040a78a7ccd4e8df090",
+  "source_pixels": "embedded unchanged; no regeneration",
+  "parts": {
+    "head": {
+      "pivot": [
+        627,
+        566
+      ],
+      "rotation_degrees": [
+        -3,
+        3
+      ]
+    },
+    "armR": {
+      "pivot": [
+        395,
+        700
+      ],
+      "rotation_degrees": [
+        -6,
+        6
+      ]
+    },
+    "armL": {
+      "pivot": [
+        859,
+        700
+      ],
+      "rotation_degrees": [
+        -6,
+        6
+      ]
+    },
+    "body": {
+      "rotation_degrees": [
+        0,
+        0
+      ]
+    }
+  },
+  "poses": [
+    {
+      "state": "reposo",
+      "path": "01_conceptos/02_bazi_pose_base.png",
+      "sha256": "57d28e19d3eda7fec1e7d40bca8536c5e31f5aa6fc11e040a78a7ccd4e8df090"
+    },
+    {
+      "state": "pensando",
+      "path": "02_bocetos_funcionales/04_bazi_pensativo.png",
+      "sha256": "25853e0b62a2d7ec34acdcafa71c18a42aa2dee0a2fa0ef60917081af0190f1b"
+    },
+    {
+      "state": "preocupado",
+      "path": "02_bocetos_funcionales/05_bazi_preocupado.png",
+      "sha256": "c66e3a6852e72b9b2c2ea85298cf4f41494a73614b1029fd1c30ce91b34d081e"
+    },
+    {
+      "state": "celebrando",
+      "path": "02_bocetos_funcionales/06_bazi_celebrando.png",
+      "sha256": "56a4761a56a7e365455828a9fa6f4425414d6a283c5fd56ae821683d2d2de985"
+    },
+    {
+      "state": "privacidad",
+      "path": "02_bocetos_funcionales/07_bazi_guardian_de_contrasenas.png",
+      "sha256": "8fd6d0f25ece9f255180fe73bbe81a2fb5b8b668c43836d8eb49ea152b189022"
+    },
+    {
+      "state": "ayuda",
+      "path": "02_bocetos_funcionales/08_bazi_saludando.png",
+      "sha256": "f0464513f77afeee8dc422892680da87613f0f8fd4ffcf07d6780619089bbf91"
+    },
+    {
+      "state": "email",
+      "path": "02_bocetos_funcionales/09_bazi_senalando_email.png",
+      "sha256": "1d5ebc65d4d45147e567d44868ca3389ef5a3e2f50f70d3492bee4bc37d6a419"
+    }
+  ],
+  "not_implemented": [
+    "independent eye gaze",
+    "blink",
+    "lip sync",
+    "articulated fingers",
+    "full arm raise",
+    "continuous interpolation between illustrated poses",
+    "360 degree rotation"
+  ],
+  "requires_next": [
+    "complete occluded areas on separate layers",
+    "independent face layers",
+    "approved closed eyelids and mouth shapes",
+    "production rig and deformation tests"
+  ],
+  "integration": false
+}

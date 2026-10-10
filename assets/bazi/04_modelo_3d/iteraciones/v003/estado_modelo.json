@@ -1,0 +1,45 @@
+{
+  "version": "v003",
+  "status": "estudio_visual_pendiente_de_revision",
+  "file": "Bazi_v003.blend",
+  "created_with": "Blender 5.2.2 LTS / MCP for Blender",
+  "reference": "01_conceptos/02_bazi_pose_base.png",
+  "secondary_reference": "02_bocetos_funcionales/08_bazi_saludando.png",
+  "discarded_guides": "10-14 represent a different character",
+  "rig": false,
+  "actions": [],
+  "glb_exported": false,
+  "web_integration": false,
+  "asset_objects": 70,
+  "original_session_preserved": {
+    "scene": "Scene",
+    "objects": [
+      "Camera",
+      "Light"
+    ]
+  },
+  "verified_original_images": 14,
+  "changed_original_images": 0,
+  "closed_surface_checks": {
+    "Cabeza | mejillas y mechones continuos": 0,
+    "Cuerpo pelaje | piernas y patas continuas": 0,
+    "Mano continua.L": 0,
+    "Mano continua.R": 0
+  },
+  "closed_surface_check_meaning": "Non-manifold edges counted on base mesh, zero for these four meshes; not a rig/topology approval",
+  "views": [
+    "frontal.png",
+    "tres_cuartos.png",
+    "lateral.png"
+  ],
+  "limitations": [
+    "Unapproved visual similarity",
+    "Garment detail, face, tufts and feet still need artistic refinement",
+    "Back and depth inferred",
+    "Voxel topology needs preparation for deformation",
+    "Short fur curves and procedural shaders need web-compatible treatment",
+    "No animations or gesture transitions yet"
+  ],
+  "sources_report": "fuentes_verificadas.json",
+  "preview": "revision.html"
+}

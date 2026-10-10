@@ -1,0 +1,78 @@
+{
+  "method": "browser review of intermediate frames, replay, pause, original endpoint, interaction, and video export",
+  "frames": [
+    {
+      "action": "thinking",
+      "canvasVisible": "1",
+      "progress": "0.35000",
+      "source": "04_bazi_pensativo.png"
+    },
+    {
+      "action": "worried",
+      "canvasVisible": "1",
+      "progress": "0.45000",
+      "source": "05_bazi_preocupado.png"
+    },
+    {
+      "action": "celebrate",
+      "canvasVisible": "1",
+      "progress": "0.40000",
+      "source": "06_bazi_celebrando.png"
+    },
+    {
+      "action": "email",
+      "canvasVisible": "1",
+      "progress": "0.50000",
+      "source": "09_bazi_senalando_email.png"
+    },
+    {
+      "action": "privacy",
+      "canvasVisible": "1",
+      "progress": "0.50000",
+      "source": "07_bazi_guardian_de_contrasenas.png"
+    },
+    {
+      "action": "walking",
+      "canvasVisible": "1",
+      "progress": "0.42000",
+      "source": "02_bazi_pose_base.png"
+    },
+    {
+      "action": "speaking",
+      "canvasVisible": "1",
+      "progress": "0.35000",
+      "source": "08_bazi_saludando.png"
+    },
+    {
+      "action": "welcome",
+      "framesChecked": [
+        0.5,
+        0.7
+      ],
+      "pawAt50": "252.699,785.500",
+      "pawAt70": "259.843,842.124",
+      "cuffAndSleeve": "visually continuous"
+    }
+  ],
+  "pausePreserved": true,
+  "endpoint": {
+    "progress": 1,
+    "originalVisible": true,
+    "canvasVisible": false,
+    "sameOriginalAsReference": true
+  },
+  "interaction": {
+    "email": "email",
+    "password": "privacy",
+    "reveal": "idle"
+  },
+  "export": {
+    "tested": [
+      "welcome",
+      "celebrate"
+    ],
+    "controlsLockedDuringRecording": true,
+    "restored": true
+  },
+  "consoleErrors": []
+}

@@ -1,0 +1,14 @@
+{
+  "passed": 8,
+  "failed": 0,
+  "checks": [
+    "All seven final poses show exactly one intact illustration",
+    "Transition exits before the next pose enters",
+    "Rapid changes finish on the most recent requested reference",
+    "Finishing cancels pending motion without stale pose callbacks",
+    "Reduced motion uses complete poses immediately",
+    "Hiding the document settles a pending transition",
+    "Controller rejects poses without a reference drawing",
+    "Disposal cancels work and removes its document listener"
+  ]
+}

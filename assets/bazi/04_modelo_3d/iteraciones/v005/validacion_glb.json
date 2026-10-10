@@ -1,0 +1,136 @@
+{
+  "file": "bazi.glb",
+  "bytes": 7595512,
+  "MiB": 7.24,
+  "sha256": "a02d3b16574cfa269be0a8e79974b24625501dc9c5e0a2113c2c0448486f8076",
+  "triangles": 81022,
+  "skins": 1,
+  "joints": 18,
+  "embedded_images": 2,
+  "external_uris": [],
+  "morphs": [
+    [
+      "Blink",
+      "Closed",
+      "Worried",
+      "Talking"
+    ]
+  ],
+  "clips": [
+    {
+      "name": "Idle",
+      "seconds": 4.0,
+      "channels": 55,
+      "paths": [
+        "rotation",
+        "scale",
+        "translation",
+        "weights"
+      ]
+    },
+    {
+      "name": "Saludando",
+      "seconds": 3.2,
+      "channels": 55,
+      "paths": [
+        "rotation",
+        "scale",
+        "translation",
+        "weights"
+      ]
+    },
+    {
+      "name": "Pensando",
+      "seconds": 3.0,
+      "channels": 55,
+      "paths": [
+        "rotation",
+        "scale",
+        "translation",
+        "weights"
+      ]
+    },
+    {
+      "name": "Preocupado",
+      "seconds": 3.0,
+      "channels": 55,
+      "paths": [
+        "rotation",
+        "scale",
+        "translation",
+        "weights"
+      ]
+    },
+    {
+      "name": "Celebrando",
+      "seconds": 3.2,
+      "channels": 55,
+      "paths": [
+        "rotation",
+        "scale",
+        "translation",
+        "weights"
+      ]
+    },
+    {
+      "name": "Email",
+      "seconds": 2.4,
+      "channels": 55,
+      "paths": [
+        "rotation",
+        "scale",
+        "translation",
+        "weights"
+      ]
+    },
+    {
+      "name": "Password",
+      "seconds": 2.4,
+      "channels": 55,
+      "paths": [
+        "rotation",
+        "scale",
+        "translation",
+        "weights"
+      ]
+    },
+    {
+      "name": "Talking",
+      "seconds": 2.0,
+      "channels": 55,
+      "paths": [
+        "rotation",
+        "scale",
+        "translation",
+        "weights"
+      ]
+    },
+    {
+      "name": "Walking",
+      "seconds": 1.4,
+      "channels": 55,
+      "paths": [
+        "rotation",
+        "scale",
+        "translation",
+        "weights"
+      ]
+    },
+    {
+      "name": "CoverEyes",
+      "seconds": 2.4,
+      "channels": 55,
+      "paths": [
+        "rotation",
+        "scale",
+        "translation",
+        "weights"
+      ]
+    }
+  ],
+  "missing_clips": [],
+  "weight_errors": 0,
+  "max_influences": 3,
+  "skin_primitives": 22,
+  "structural_pass": true
+}

@@ -157,3 +157,7 @@ body {
     @apply font-sans;
   }
 }
+
+/* Footer theme control: keep the existing brand asset legible in light mode. */
+html:not(.dark) img[src="/brand/mibazarpe-logo.png"] { filter: brightness(.45); }
+html:not(.dark) #integraciones img { filter: brightness(0); }

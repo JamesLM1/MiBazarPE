@@ -1,0 +1,77 @@
+{
+  "actions": 9,
+  "passed": [
+    {
+      "action": "idle",
+      "identity_at_start_and_end": true,
+      "finite_coordinates": true,
+      "no_folded_triangles": true,
+      "min_area_ratio": 1,
+      "max_displacement_px": 5.59
+    },
+    {
+      "action": "welcome",
+      "identity_at_start_and_end": true,
+      "finite_coordinates": true,
+      "no_folded_triangles": true,
+      "min_area_ratio": 0.7523,
+      "max_displacement_px": 39.4
+    },
+    {
+      "action": "thinking",
+      "identity_at_start_and_end": true,
+      "finite_coordinates": true,
+      "no_folded_triangles": true,
+      "min_area_ratio": 0.7875,
+      "max_displacement_px": 29.02
+    },
+    {
+      "action": "worried",
+      "identity_at_start_and_end": true,
+      "finite_coordinates": true,
+      "no_folded_triangles": true,
+      "min_area_ratio": 0.8673,
+      "max_displacement_px": 20.91
+    },
+    {
+      "action": "celebrate",
+      "identity_at_start_and_end": true,
+      "finite_coordinates": true,
+      "no_folded_triangles": true,
+      "min_area_ratio": 0.8582,
+      "max_displacement_px": 46.92
+    },
+    {
+      "action": "email",
+      "identity_at_start_and_end": true,
+      "finite_coordinates": true,
+      "no_folded_triangles": true,
+      "min_area_ratio": 0.8905,
+      "max_displacement_px": 13.9
+    },
+    {
+      "action": "privacy",
+      "identity_at_start_and_end": true,
+      "finite_coordinates": true,
+      "no_folded_triangles": true,
+      "min_area_ratio": 0.868,
+      "max_displacement_px": 21.17
+    },
+    {
+      "action": "walking",
+      "identity_at_start_and_end": true,
+      "finite_coordinates": true,
+      "no_folded_triangles": true,
+      "min_area_ratio": 0.9424,
+      "max_displacement_px": 12.52
+    },
+    {
+      "action": "speaking",
+      "identity_at_start_and_end": true,
+      "finite_coordinates": true,
+      "no_folded_triangles": true,
+      "min_area_ratio": 0.8129,
+      "max_displacement_px": 19.39
+    }
+  ]
+}

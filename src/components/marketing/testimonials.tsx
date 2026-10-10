@@ -21,7 +21,6 @@ export function Testimonials() {
   const columnCount = useSyncExternalStore(subscribeColumns, getColumns, () => 3);
   return <section id="casos-ilustrativos" className={styles.section} aria-labelledby="scenarios-title">
     <motion.header className={styles.intro} initial={reduced ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={landingEntrance} transition={{ duration: reduced ? 0 : 0.6, ease: landingEase }}>
-      <span className={styles.badge}>Necesidades del día a día</span>
       <h2 id="scenarios-title">Lo que buscamos facilitar</h2>
       <p>Escenarios de uso simulados a partir de necesidades habituales de pequeños comercios. Personas y retratos ficticios.</p>
     </motion.header>

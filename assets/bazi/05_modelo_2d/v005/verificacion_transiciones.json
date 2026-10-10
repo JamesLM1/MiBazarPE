@@ -1,0 +1,1145 @@
+{
+  "pairs_tested": 72,
+  "retargets_tested": 5184,
+  "all_passed": true,
+  "atlases": [
+    {
+      "pose": "welcome",
+      "usable_frames": 16
+    },
+    {
+      "pose": "email",
+      "usable_frames": 16
+    },
+    {
+      "pose": "privacy",
+      "usable_frames": 16
+    },
+    {
+      "pose": "thinking",
+      "usable_frames": 12
+    },
+    {
+      "pose": "worried",
+      "usable_frames": 12
+    },
+    {
+      "pose": "celebrate",
+      "usable_frames": 12
+    }
+  ],
+  "routes": [
+    {
+      "from": "idle",
+      "to": "welcome",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "idle",
+      "to": "thinking",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "thinking",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "idle",
+      "to": "worried",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "worried",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "idle",
+      "to": "celebrate",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "celebrate",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "idle",
+      "to": "email",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "email",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "idle",
+      "to": "privacy",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "privacy",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "idle",
+      "to": "walking",
+      "via_rest": false,
+      "duration_ms": 0,
+      "legs": []
+    },
+    {
+      "from": "idle",
+      "to": "speaking",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "welcome",
+      "to": "idle",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "welcome",
+      "to": "thinking",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "thinking",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "welcome",
+      "to": "worried",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "worried",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "welcome",
+      "to": "celebrate",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "celebrate",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "welcome",
+      "to": "email",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "email",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "welcome",
+      "to": "privacy",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "privacy",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "welcome",
+      "to": "walking",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "welcome",
+      "to": "speaking",
+      "via_rest": false,
+      "duration_ms": 0,
+      "legs": []
+    },
+    {
+      "from": "thinking",
+      "to": "idle",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "thinking",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "thinking",
+      "to": "welcome",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "thinking",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "thinking",
+      "to": "worried",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "thinking",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "worried",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "thinking",
+      "to": "celebrate",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "thinking",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "celebrate",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "thinking",
+      "to": "email",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "thinking",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "email",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "thinking",
+      "to": "privacy",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "thinking",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "privacy",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "thinking",
+      "to": "walking",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "thinking",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "thinking",
+      "to": "speaking",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "thinking",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "worried",
+      "to": "idle",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "worried",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "worried",
+      "to": "welcome",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "worried",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "worried",
+      "to": "thinking",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "worried",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "thinking",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "worried",
+      "to": "celebrate",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "worried",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "celebrate",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "worried",
+      "to": "email",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "worried",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "email",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "worried",
+      "to": "privacy",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "worried",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "privacy",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "worried",
+      "to": "walking",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "worried",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "worried",
+      "to": "speaking",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "worried",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "celebrate",
+      "to": "idle",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "celebrate",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "celebrate",
+      "to": "welcome",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "celebrate",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "celebrate",
+      "to": "thinking",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "celebrate",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "thinking",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "celebrate",
+      "to": "worried",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "celebrate",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "worried",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "celebrate",
+      "to": "email",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "celebrate",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "email",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "celebrate",
+      "to": "privacy",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "celebrate",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "privacy",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "celebrate",
+      "to": "walking",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "celebrate",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "celebrate",
+      "to": "speaking",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "celebrate",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "email",
+      "to": "idle",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "email",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "email",
+      "to": "welcome",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "email",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "email",
+      "to": "thinking",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "email",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "thinking",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "email",
+      "to": "worried",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "email",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "worried",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "email",
+      "to": "celebrate",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "email",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "celebrate",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "email",
+      "to": "privacy",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "email",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "privacy",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "email",
+      "to": "walking",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "email",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "email",
+      "to": "speaking",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "email",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "privacy",
+      "to": "idle",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "privacy",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "privacy",
+      "to": "welcome",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "privacy",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "privacy",
+      "to": "thinking",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "privacy",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "thinking",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "privacy",
+      "to": "worried",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "privacy",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "worried",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "privacy",
+      "to": "celebrate",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "privacy",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "celebrate",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "privacy",
+      "to": "email",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "privacy",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "email",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "privacy",
+      "to": "walking",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "privacy",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "privacy",
+      "to": "speaking",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "privacy",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "walking",
+      "to": "idle",
+      "via_rest": false,
+      "duration_ms": 0,
+      "legs": []
+    },
+    {
+      "from": "walking",
+      "to": "welcome",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "walking",
+      "to": "thinking",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "thinking",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "walking",
+      "to": "worried",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "worried",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "walking",
+      "to": "celebrate",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "celebrate",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "walking",
+      "to": "email",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "email",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "walking",
+      "to": "privacy",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "privacy",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "walking",
+      "to": "speaking",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "speaking",
+      "to": "idle",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    },
+    {
+      "from": "speaking",
+      "to": "welcome",
+      "via_rest": false,
+      "duration_ms": 0,
+      "legs": []
+    },
+    {
+      "from": "speaking",
+      "to": "thinking",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "thinking",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "speaking",
+      "to": "worried",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "worried",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "speaking",
+      "to": "celebrate",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "celebrate",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "speaking",
+      "to": "email",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "email",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "speaking",
+      "to": "privacy",
+      "via_rest": true,
+      "duration_ms": 1300,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        },
+        {
+          "pose": "privacy",
+          "start": 0,
+          "end": 1
+        }
+      ]
+    },
+    {
+      "from": "speaking",
+      "to": "walking",
+      "via_rest": false,
+      "duration_ms": 650,
+      "legs": [
+        {
+          "pose": "welcome",
+          "start": 1,
+          "end": 0
+        }
+      ]
+    }
+  ]
+}

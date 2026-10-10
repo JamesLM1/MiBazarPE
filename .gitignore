@@ -26,3 +26,8 @@ next-env.d.ts
 .vercel/
 .DS_Store
 Thumbs.db
+
+# Blender automatic backups and local preview logs
+/assets/bazi/**/*.blend[0-9]*
+/assets/bazi/**/preview_stdout.log
+/assets/bazi/**/preview_stderr.log

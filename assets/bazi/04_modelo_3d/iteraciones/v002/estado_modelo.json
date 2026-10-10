@@ -1,0 +1,29 @@
+{
+  "version": "v002",
+  "estado": "prototipo_visual_pendiente_de_revision",
+  "blender": "5.2.2 LTS",
+  "rig": false,
+  "animations": false,
+  "objects": 76,
+  "inferred": [
+    "volumen lateral",
+    "mochila posterior",
+    "bordado aproximado"
+  ],
+  "pending": [
+    "parecido aprobado por James",
+    "pelaje",
+    "retopologia",
+    "rig",
+    "expresiones",
+    "animaciones",
+    "optimizacion web"
+  ],
+  "changes": [
+    "azul mas saturado",
+    "orejas con borde redondo",
+    "correas mas planas",
+    "ribete de capucha visible",
+    "cejas mate"
+  ]
+}

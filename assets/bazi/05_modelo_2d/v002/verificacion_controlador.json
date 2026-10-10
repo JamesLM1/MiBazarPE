@@ -1,0 +1,17 @@
+{
+  "passed": 11,
+  "failed": 0,
+  "checks": [
+    "Privacy and reveal reset eyes and hands",
+    "Pause preserves speech timing after a long interruption",
+    "Changing state cancels an earlier speech sequence",
+    "Blink closes and restores the original eye",
+    "Selecting a new gesture while paused resumes from its start",
+    "Speech completion returns to idle and emits the visible-state event",
+    "Independent hands, index, joints and face controls apply while paused",
+    "Original comparison toggles the full original illustration",
+    "Rapid gesture changes and walking keep every coordinate finite",
+    "HTML controls and SVG have unique IDs",
+    "Disposal removes animation work and visibility listener"
+  ]
+}

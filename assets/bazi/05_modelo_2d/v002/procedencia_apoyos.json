@@ -1,0 +1,27 @@
+{
+  "tool": "built_in_imagegen",
+  "reference": "01_conceptos/02_bazi_pose_base.png",
+  "jobs": [
+    {
+      "id": "cleanFace",
+      "used": "Masked facial support only",
+      "output": "apoyos/rostro_limpio.png",
+      "generated_path": "C:/Users/Admin/.codex/generated_images/01a11dfd-3ca2-7ce1-94b0-ff3891687e9c/exec-29ffd457-61e7-439f-b1a0-855a6c24e3b5.png",
+      "prompt": "Edit target: the attached official Bazi base PNG. Create a precision clean plate for a 2D puppet rig, NOT a new mascot. Return the same square canvas framing, exact camera, exact scale, exact pose, exact silhouette, same white fluffy fur and lighting, same black hoodie with blue trims and logo, same ears and tuft and hands and feet. Change ONLY facial features: REMOVE both entire eyes including their sockets/shadow outlines and whites, REMOVE both eyebrows, and REMOVE the open mouth including black interior and blue tongue. Replace these small removed features with seamless white fluffy fur matching the surrounding fur. KEEP the black nose and the two white muzzle lobes EXACTLY as they are, keep the head dimensions and cheeks unchanged. No other changes. The result should have blank smooth furry eye/brow areas and no mouth below the unchanged nose/muzzle. Background genuinely transparent; no shadows on background, no text, no new character, no expression redesign. This is a hidden reconstruction layer for original eye/mouth sprites to be placed back on top."
+    },
+    {
+      "id": "cleanTorso",
+      "used": "Under original garment, limited to torso support mask",
+      "output": "apoyos/torso_sin_brazos.png",
+      "generated_path": "C:/Users/Admin/.codex/generated_images/01a11dfd-3ca2-7ce1-94b0-ff3891687e9c/exec-a4f45fad-f51d-4707-8c08-57bb91a66830.png",
+      "prompt": "Edit target: the attached official Bazi base PNG. Create a precision clean torso plate for a 2D puppet animation. Keep the exact same square framing, front camera, position, size, head and face, ears, white fluffy fur, black hoodie, cyan trim and drawstrings, embroidered logo, backpack straps, legs and feet, identical original lighting and fabric texture. Change ONLY: remove BOTH arms entirely, including sleeves, cuffs, white hands and thumbs. Complete the hidden sides of the hoodie torso as a natural closed rounded garment from each shoulder under the backpack straps down to the waistband. Do not leave sleeve stumps or hands. Natural lateral torso outline, same chest/center hoodie pixels as close as possible, no new costume or mascot. Preserve the rest exactly. Genuinely transparent background. No text or added objects. This will only be used to fill uncovered torso behind the ORIGINAL arm sprites during animation."
+    },
+    {
+      "id": "isolatedArms",
+      "used": false,
+      "reason": "Rejected because framing and proportions changed; original arm artwork kept in puppet",
+      "generated_path": "C:/Users/Admin/.codex/generated_images/01a11dfd-3ca2-7ce1-94b0-ff3891687e9c/exec-acd3f511-b583-42ad-840a-2e4362f6b47f.png",
+      "prompt": "Edit target: official Bazi base PNG. This is a precision cutout sheet for 2D skeletal animation, NOT a redesign. Return the identical 1254x1254 square framing and coordinates of the reference. Keep ONLY the two original arms: black textured hoodie sleeves, black ribbed cuffs, and the white fluffy closed paws with original thumbs. Both arms remain in the exact same lowered orientation and exact same locations as the reference. Remove EVERYTHING else to genuine transparency: head, ears, eyes, hood, torso, logo, backpack straps, legs, feet, background. Each isolated arm should have a complete rounded shoulder root naturally extended behind where it attached to the torso. Preserve visible sleeve fabric shading, furry paws, size, proportions and blue rim lighting as precisely as possible. Do not leave ANY fragments of torso, straps, legs, head or stray pixels between or around the two isolated arms. No text, no guides, no new anatomy, no pose changes. These cutouts will rotate independently around the shoulders; only hidden shoulder caps may be reconstructed."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "method": "Browser review of every full original pose and DOM verification after settling",
+  "poses": [
+    {
+      "loaded": true,
+      "phase": "settled",
+      "source": "04_bazi_pensativo.png",
+      "state": "thinking",
+      "transform": "none",
+      "visible": 1
+    },
+    {
+      "loaded": true,
+      "phase": "settled",
+      "source": "05_bazi_preocupado.png",
+      "state": "worried",
+      "transform": "none",
+      "visible": 1
+    },
+    {
+      "loaded": true,
+      "phase": "settled",
+      "source": "06_bazi_celebrando.png",
+      "state": "celebrate",
+      "transform": "none",
+      "visible": 1
+    },
+    {
+      "loaded": true,
+      "phase": "settled",
+      "source": "09_bazi_senalando_email.png",
+      "state": "email",
+      "transform": "none",
+      "visible": 1
+    },
+    {
+      "loaded": true,
+      "phase": "settled",
+      "source": "07_bazi_guardian_de_contrasenas.png",
+      "state": "privacy",
+      "transform": "none",
+      "visible": 1
+    },
+    {
+      "loaded": true,
+      "phase": "settled",
+      "source": "02_bazi_pose_base.png",
+      "state": "idle",
+      "transform": "none",
+      "visible": 1
+    },
+    {
+      "loaded": true,
+      "originalLink": "../../02_bocetos_funcionales/08_bazi_saludando.png",
+      "phase": "settled",
+      "source": "08_bazi_saludando.png",
+      "state": "welcome",
+      "transform": "none",
+      "visible": 1
+    }
+  ],
+  "rapidChanges": "most recent state settled; one visible image",
+  "interaction": "email and password activate their official sketches; reveal returns idle"
+}

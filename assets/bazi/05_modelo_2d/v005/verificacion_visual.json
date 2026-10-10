@@ -1,0 +1,128 @@
+{
+  "intermediateChecks": [
+    {
+      "action": "welcome",
+      "intermediateFrame": "5",
+      "paused": "true",
+      "phase": "transition",
+      "progress": "0.00000",
+      "route": "welcome:0.000→1.000",
+      "shownPose": "welcome",
+      "shownPoseProgress": "0.35000",
+      "source": "08_bazi_saludando.png",
+      "transitionFrom": "idle",
+      "transitionProgress": "0.35000"
+    },
+    {
+      "action": "thinking",
+      "intermediateFrame": "4",
+      "paused": "true",
+      "phase": "transition",
+      "progress": "0.00000",
+      "route": "thinking:0.000→1.000",
+      "shownPose": "thinking",
+      "shownPoseProgress": "0.35000",
+      "source": "04_bazi_pensativo.png",
+      "transitionFrom": "idle",
+      "transitionProgress": "0.35000"
+    },
+    {
+      "action": "worried",
+      "intermediateFrame": "4",
+      "paused": "true",
+      "phase": "transition",
+      "progress": "0.00000",
+      "route": "worried:0.000→1.000",
+      "shownPose": "worried",
+      "shownPoseProgress": "0.35000",
+      "source": "05_bazi_preocupado.png",
+      "transitionFrom": "idle",
+      "transitionProgress": "0.35000"
+    },
+    {
+      "action": "celebrate",
+      "intermediateFrame": "4",
+      "paused": "true",
+      "phase": "transition",
+      "progress": "0.00000",
+      "route": "celebrate:0.000→1.000",
+      "shownPose": "celebrate",
+      "shownPoseProgress": "0.35000",
+      "source": "06_bazi_celebrando.png",
+      "transitionFrom": "idle",
+      "transitionProgress": "0.35000"
+    },
+    {
+      "action": "email",
+      "intermediateFrame": "5",
+      "paused": "true",
+      "phase": "transition",
+      "progress": "0.00000",
+      "route": "email:0.000→1.000",
+      "shownPose": "email",
+      "shownPoseProgress": "0.35000",
+      "source": "09_bazi_senalando_email.png",
+      "transitionFrom": "idle",
+      "transitionProgress": "0.35000"
+    },
+    {
+      "action": "privacy",
+      "intermediateFrame": "5",
+      "paused": "true",
+      "phase": "transition",
+      "progress": "0.00000",
+      "route": "privacy:0.000→1.000",
+      "shownPose": "privacy",
+      "shownPoseProgress": "0.35000",
+      "source": "07_bazi_guardian_de_contrasenas.png",
+      "transitionFrom": "idle",
+      "transitionProgress": "0.35000"
+    }
+  ],
+  "exactEndpoints": [
+    {
+      "action": "idle",
+      "exact": true
+    },
+    {
+      "action": "welcome",
+      "exact": true
+    },
+    {
+      "action": "thinking",
+      "exact": true
+    },
+    {
+      "action": "worried",
+      "exact": true
+    },
+    {
+      "action": "celebrate",
+      "exact": true
+    },
+    {
+      "action": "email",
+      "exact": true
+    },
+    {
+      "action": "privacy",
+      "exact": true
+    },
+    {
+      "action": "walking",
+      "exact": true
+    },
+    {
+      "action": "speaking",
+      "exact": true
+    }
+  ],
+  "loginEvents": {
+    "email": "email",
+    "password": "privacy",
+    "show": "idle",
+    "hide": "privacy"
+  },
+  "redirectPreservedRoute": "email:0.300→0.000 / thinking:0.000→1.000",
+  "scope": "Checks of sampled UI frames and playback; generated art fidelity remains a draft"
+}

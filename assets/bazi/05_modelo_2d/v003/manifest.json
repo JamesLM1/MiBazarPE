@@ -1,0 +1,90 @@
+{
+  "version": "2d-v003-fiel",
+  "sources": [
+    {
+      "state": "idle",
+      "label": "Reposo",
+      "source": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\01_conceptos\\02_bazi_pose_base.png",
+      "sha256": "57d28e19d3eda7fec1e7d40bca8536c5e31f5aa6fc11e040a78a7ccd4e8df090",
+      "size": [
+        1254,
+        1254
+      ],
+      "complete_original": true
+    },
+    {
+      "state": "welcome",
+      "label": "Saludar",
+      "source": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\08_bazi_saludando.png",
+      "sha256": "f0464513f77afeee8dc422892680da87613f0f8fd4ffcf07d6780619089bbf91",
+      "size": [
+        1254,
+        1254
+      ],
+      "complete_original": true
+    },
+    {
+      "state": "thinking",
+      "label": "Pensar",
+      "source": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\04_bazi_pensativo.png",
+      "sha256": "25853e0b62a2d7ec34acdcafa71c18a42aa2dee0a2fa0ef60917081af0190f1b",
+      "size": [
+        1254,
+        1254
+      ],
+      "complete_original": true
+    },
+    {
+      "state": "worried",
+      "label": "Preocupación",
+      "source": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\05_bazi_preocupado.png",
+      "sha256": "c66e3a6852e72b9b2c2ea85298cf4f41494a73614b1029fd1c30ce91b34d081e",
+      "size": [
+        1254,
+        1254
+      ],
+      "complete_original": true
+    },
+    {
+      "state": "celebrate",
+      "label": "Celebrar",
+      "source": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\06_bazi_celebrando.png",
+      "sha256": "56a4761a56a7e365455828a9fa6f4425414d6a283c5fd56ae821683d2d2de985",
+      "size": [
+        1254,
+        1254
+      ],
+      "complete_original": true
+    },
+    {
+      "state": "email",
+      "label": "Señalar correo",
+      "source": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\09_bazi_senalando_email.png",
+      "sha256": "1d5ebc65d4d45147e567d44868ca3389ef5a3e2f50f70d3492bee4bc37d6a419",
+      "size": [
+        1254,
+        1254
+      ],
+      "complete_original": true
+    },
+    {
+      "state": "privacy",
+      "label": "Proteger contraseña",
+      "source": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\07_bazi_guardian_de_contrasenas.png",
+      "sha256": "8fd6d0f25ece9f255180fe73bbe81a2fb5b8b668c43836d8eb49ea152b189022",
+      "size": [
+        1254,
+        1254
+      ],
+      "complete_original": true
+    }
+  ],
+  "render": "one complete original at a time; uniform contain; no cropping, mirroring, parts, reconstructed face or generated pixels",
+  "transition": "sequential opacity 100 ms out + 180 ms in, no overlapping poses; reduced motion and rapid interruptions supported",
+  "scope": "independent review only; no React or landing integration",
+  "limitations": [
+    "not a continuous skeletal animation",
+    "no authored walking, speech or eye-covering reference pose",
+    "original alpha edge imperfections retained; no retouching"
+  ]
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bazi · revisión 3D v004</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b1019;color:#f1f5fa;font:15px/1.5 system-ui,sans-serif}
+main{max-width:1200px;margin:auto;padding:28px}h1{font-size:28px;margin:0 0 8px}p{color:#b5c4d7;margin:8px 0}
+.tag{display:inline-block;padding:5px 12px;border:1px solid #35475f;border-radius:99px;color:#94bbff;font-size:12px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:24px 0 16px}
+button{font:inherit;color:#eef5ff;background:#1b293c;border:1px solid #405674;border-radius:10px;padding:9px 14px;cursor:pointer}button[aria-pressed=true]{background:#145dd8;border-color:#7facff}button:focus-visible{outline:3px solid #c4dcff}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{margin:0;border:1px solid #2a3d56;border-radius:18px;background:#172132;overflow:hidden}.card figcaption{padding:14px 18px;border-bottom:1px solid #2a3d56;color:#d4e4fa}
+.stage{position:relative;aspect-ratio:1;background:radial-gradient(ellipse at 50% 42%,#253145,#111a28 80%)}.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.light .stage{background:#e5ebf3}.overlay{display:none;pointer-events:none}.overlay.on{display:block;opacity:.42}
+.notes{margin-top:20px;padding:18px 22px;border:1px solid #2a3d56;border-radius:14px;background:#101a29}
+.notes strong{color:#f3f7fc}.foot{font-size:13px;color:#92a7c0}.viewnote{min-height:22px}
+@media(max-width:720px){main{padding:18px}.compare{grid-template-columns:1fr}h1{font-size:24px}}
+</style>
+<main>
+<span class="tag">Revisión visual · v004 · pose de reposo</span>
+<h1>Bazi en Blender</h1>
+<p>Compara la ilustración oficial con el nuevo estudio 3D. El personaje está abierto en Blender para revisarlo y girarlo.</p>
+<div class="toolbar" role="group" aria-label="Vistas de revisión">
+<button data-view="frontal" aria-pressed="true">Frente</button>
+<button data-view="tres_cuartos" aria-pressed="false">Tres cuartos</button>
+
+<button id="background" aria-pressed="false">Fondo claro</button>
+<button id="overlay" aria-pressed="false">Superponer original</button>
+</div>
+<div class="compare">
+<figure class="card"><figcaption>Ilustración original · referencia principal</figcaption><div class="stage"><img src="../../../01_conceptos/02_bazi_pose_base.png" alt="Bazi original blanco, orejas azules y sudadera negra"></div></figure>
+<figure class="card"><figcaption id="caption">Nuevo modelo 3D · frente</figcaption><div class="stage"><img id="model" src="frontal.png" alt="Bazi 3D v004 visto de frente"><img id="originalOverlay" class="overlay" src="../../../01_conceptos/02_bazi_pose_base.png" alt=""></div></figure>
+</div>
+<p id="viewnote" class="viewnote">La vista frontal permite revisar el parecido. La superposición ayuda a detectar diferencias de proporción.</p>
+<div class="notes"><strong>Qué revisar ahora</strong><p>Forma de la cabeza, tamaño y posición de los ojos, nariz, sonrisa, orejas, sudadera y patas. Las vistas de perfil y tres cuartos muestran el volumen propuesto.</p>
+<strong>Estado de esta versión</strong><p>Es un estudio 3D editable, con ajustes de volumen, patas y sombras. No contiene rig ni animaciones. Faltan detalles finales y preparar malla, esqueleto, expresiones, animaciones y exportación GLB. El pelaje es provisional para Blender. La profundidad y la espalda son propuestas porque no hay una vista lateral aprobada de este mismo diseño.</p>
+<p class="foot">Los originales se conservaron. No se integró al login ni a la landing. Las imágenes de esta página son renders, no una animación ni un visor de GLB.</p></div>
+</main>
+<script>
+const model=document.querySelector('#model'), overlay=document.querySelector('#originalOverlay'), overlayButton=document.querySelector('#overlay');
+let view='frontal';
+for(const button of document.querySelectorAll('[data-view]')) button.addEventListener('click',()=>{
+ view=button.dataset.view;model.src=view+'.png';
+ for(const b of document.querySelectorAll('[data-view]'))b.setAttribute('aria-pressed',String(b===button));
+ const names={frontal:'frente',tres_cuartos:'tres cuartos',lateral:'perfil'};
+ document.querySelector('#caption').textContent='Nuevo modelo 3D · '+names[view];
+ model.alt='Bazi 3D v004 visto de '+names[view];
+ if(view!=='frontal'){overlay.classList.remove('on');overlayButton.setAttribute('aria-pressed','false');}
+ document.querySelector('#viewnote').textContent=view==='frontal'?'La vista frontal permite revisar el parecido. La superposición ayuda a detectar diferencias de proporción.':'Esta vista muestra el volumen propuesto; el original de la izquierda es una referencia frontal.';
+});
+document.querySelector('#background').addEventListener('click',e=>{const on=document.body.classList.toggle('light');e.currentTarget.setAttribute('aria-pressed',String(on));e.currentTarget.textContent=on?'Fondo oscuro':'Fondo claro';});
+overlayButton.addEventListener('click',()=>{if(view!=='frontal')document.querySelector('[data-view="frontal"]').click();const on=overlay.classList.toggle('on');overlayButton.setAttribute('aria-pressed',String(on));});
+</script>
+</html>
+

@@ -1,0 +1,19 @@
+{
+  "blender": "5.2.2 LTS",
+  "objects": 74,
+  "status": "visual_prototype_unapproved",
+  "rig": false,
+  "animations": false,
+  "reference": "02_bazi_pose_base.png",
+  "inferred": [
+    "profile depth",
+    "backpack posterior",
+    "embroidered mark approximation"
+  ],
+  "views": [
+    "frontal.png",
+    "tres_cuartos.png",
+    "lateral.png",
+    "posterior.png"
+  ]
+}

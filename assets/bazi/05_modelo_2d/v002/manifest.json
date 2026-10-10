@@ -1,0 +1,127 @@
+{
+  "version": "2d-v002",
+  "sources": [
+    {
+      "id": "original",
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\01_conceptos\\02_bazi_pose_base.png",
+      "sha256": "57d28e19d3eda7fec1e7d40bca8536c5e31f5aa6fc11e040a78a7ccd4e8df090",
+      "size": [
+        1254,
+        1254
+      ],
+      "origin": "original"
+    },
+    {
+      "id": "cleanFace",
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\05_modelo_2d\\v002\\apoyos\\rostro_limpio.png",
+      "sha256": "3109112d562ddcfc42b815045802f77c5ea36921e73255986a0dfff271728c8f",
+      "size": [
+        1254,
+        1254
+      ],
+      "origin": "built_in_imagegen_hidden_reconstruction"
+    },
+    {
+      "id": "cleanTorso",
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\05_modelo_2d\\v002\\apoyos\\torso_sin_brazos.png",
+      "sha256": "7bdd747570edf0f0fe29dc96d7e15e9b0bd2e8bd7d1333b84bbcdfb72cac54da",
+      "size": [
+        1254,
+        1254
+      ],
+      "origin": "built_in_imagegen_hidden_reconstruction"
+    },
+    {
+      "id": "openHandSource",
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\06_bazi_celebrando.png",
+      "sha256": "56a4761a56a7e365455828a9fa6f4425414d6a283c5fd56ae821683d2d2de985",
+      "size": [
+        1254,
+        1254
+      ],
+      "origin": "original"
+    },
+    {
+      "id": "pointHandSource",
+      "path": "C:\\Users\\Admin\\Documents\\MiBazarPE\\assets\\bazi\\02_bocetos_funcionales\\09_bazi_senalando_email.png",
+      "sha256": "1d5ebc65d4d45147e567d44868ca3389ef5a3e2f50f70d3492bee4bc37d6a419",
+      "size": [
+        1254,
+        1254
+      ],
+      "origin": "original"
+    }
+  ],
+  "controller": "bazi-controller.js",
+  "states": [
+    "idle",
+    "welcome",
+    "thinking",
+    "worried",
+    "celebrate",
+    "email",
+    "privacy",
+    "walking",
+    "speaking"
+  ],
+  "joints": {
+    "head": [
+      627,
+      566
+    ],
+    "armR": [
+      395,
+      670
+    ],
+    "armL": [
+      859,
+      670
+    ],
+    "handR": [
+      299,
+      895
+    ],
+    "handL": [
+      954,
+      895
+    ],
+    "legR": [
+      494,
+      998
+    ],
+    "legL": [
+      760,
+      998
+    ],
+    "footR": [
+      483,
+      1127
+    ],
+    "footL": [
+      769,
+      1127
+    ]
+  },
+  "face": [
+    "pupils",
+    "eyelids",
+    "eyebrows",
+    "mouth"
+  ],
+  "hands": [
+    "closed original",
+    "open from original celebration image",
+    "point from original email image",
+    "index bend on pointing hand"
+  ],
+  "integration": false,
+  "limitations": [
+    "frontal 2D artwork; no 360 degree volume",
+    "speech gesture uses text timing, not measured audio phonemes",
+    "open and pointing hands are transplanted original drawings, not separately rigged every digit",
+    "hidden fur and torso are generated reconstructions and require visual approval",
+    "arms and legs are rigid sprites; no separate elbow or knee",
+    "SVG contains full-resolution embedded images and needs size optimization before product integration"
+  ],
+  "neutral": "Original source drawing retained; original comparison displays the complete unchanged PNG. Articulated rest pose also uses generated hidden support."
+}

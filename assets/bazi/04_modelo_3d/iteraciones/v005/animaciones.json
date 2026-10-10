@@ -1,0 +1,42 @@
+{
+  "fps": 30,
+  "clips": {
+    "Idle": 4,
+    "Saludando": 3.2,
+    "Pensando": 3,
+    "Preocupado": 3,
+    "Celebrando": 3.2,
+    "Email": 2.4,
+    "Password": 2.4,
+    "Talking": 2,
+    "Walking": 1.4,
+    "CoverEyes": 2.4
+  },
+  "bones": [
+    "Root",
+    "Hips",
+    "Spine",
+    "Chest",
+    "Neck",
+    "Head",
+    "UpperArm.L",
+    "Forearm.L",
+    "Hand.L",
+    "Thigh.L",
+    "Calf.L",
+    "Foot.L",
+    "UpperArm.R",
+    "Forearm.R",
+    "Hand.R",
+    "Thigh.R",
+    "Calf.R",
+    "Foot.R"
+  ],
+  "morphs": [
+    "Blink",
+    "Closed",
+    "Worried",
+    "Talking"
+  ],
+  "password": "Gesto protector del boceto 07; CoverEyes adicional para ocultar los ojos"
+}

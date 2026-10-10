@@ -1,0 +1,58 @@
+﻿.section { padding-inline: 24px; scroll-margin-top: 80px; }
+.frame { max-width: 1180px; margin-inline: auto; border-inline: 1px solid var(--border); }
+.heading { padding: 64px 32px; border-bottom: 1px solid var(--border); text-align: center; }
+.heading h2 { margin: 0; font-size: clamp(36px, 4.5vw, 60px); font-weight: 400; line-height: 1.25; letter-spacing: .055em; }
+.directContacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid var(--border); }
+.directContact { min-width: 0; min-height: 136px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 32px 40px; }
+.directContact:first-child { border-right: 1px solid var(--border); }
+.directContact > div { min-width: 0; }
+.contactLabel { margin: 0 0 7px; font-size: 11px; letter-spacing: .04em; color: var(--muted-foreground); }
+.contactValue { font-size: clamp(16px, 1.5vw, 20px); font-weight: 500; line-height: 1.4; overflow-wrap: anywhere; }
+.directContact small { display: block; margin-top: 7px; font-size: 10px; line-height: 16px; color: var(--muted-foreground); }
+.contactIcon { display: grid; place-items: center; flex-shrink: 0; width: 42px; height: 42px; border: 1px solid var(--border); border-radius: 6px; background: var(--foreground); color: var(--background); }
+.content { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 1px solid var(--border); }
+.mapPanel, .formPanel { min-width: 0; padding: 40px; }
+.mapPanel { border-right: 1px solid var(--border); }
+.mapPanel h3, .formPanel h3 { font-size: 21px; line-height: 1.5; font-weight: 400; }
+.map { margin-top: 24px; height: 610px; width: 100%; min-width: 200px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--card); }
+.map iframe { display: block; width: 100%; height: 100%; border: 0; }
+.location { margin-top: 16px; font-size: 12px; line-height: 20px; }
+.location span { display: block; font-size: 11px; color: var(--muted-foreground); }
+.form { display: grid; gap: 22px; margin-top: 40px; }
+.nameFields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.field { min-width: 0; display: grid; gap: 8px; }
+.field label { font-size: 12px; font-weight: 500; }
+.field label span { font-weight: 400; color: var(--muted-foreground); }
+.field input, .field textarea { display: block; width: 100%; min-width: 0; min-height: 36px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 9px; background: color-mix(in srgb, var(--card) 75%, var(--background)); color: var(--foreground); font-family: inherit; font-size: 13px; line-height: 20px; }
+.field textarea { min-height: 84px; resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: var(--muted-foreground); }
+.field input:focus-visible, .field textarea:focus-visible, .submit:focus-visible, .consent input:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+.consent { display: flex; align-items: flex-start; gap: 10px; color: var(--muted-foreground); font-size: 12px; line-height: 19px; cursor: pointer; }
+.consent input { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; accent-color: var(--primary); }
+.submit { display: block; width: 100%; min-height: 40px; padding: 9px 16px; border: 1px solid var(--foreground); border-radius: 9px; background: var(--foreground); color: var(--background); font-size: 13px; font-weight: 500; cursor: pointer; transition: opacity var(--motion-duration-fast) ease; }
+.note, .feedback { margin-top: -8px; font-size: 11px; line-height: 19px; color: var(--muted-foreground); }
+.feedback:empty { display: none; }
+@media (hover: hover) and (pointer: fine) { .submit:hover { opacity: .85; } }
+@media (max-width: 1023px) {
+  .directContact, .mapPanel, .formPanel { padding: 28px; }
+  .formPanel h3 { font-size: 18px; }
+}
+@media (max-width: 767px) {
+  .section { padding-inline: 16px; }
+  .heading { padding: 48px 16px; }
+  .heading h2 { font-size: clamp(26px, 6.7vw, 46px); line-height: 1.4; letter-spacing: .025em; }
+  .directContacts, .content { grid-template-columns: minmax(0, 1fr); }
+  .directContact { padding: 24px 20px; min-height: 120px; }
+  .directContact:first-child { border-right: 0; border-bottom: 1px solid var(--border); }
+  .contactValue { font-size: 18px; }
+  .mapPanel, .formPanel { padding: 28px 20px; }
+  .mapPanel { border-right: 0; border-bottom: 1px solid var(--border); }
+  .map { height: 380px; }
+  .mapPanel h3, .formPanel h3 { font-size: 20px; }
+  .form { margin-top: 28px; }
+  .field input, .field textarea { min-height: 44px; font-size: 16px; }
+  .submit { min-height: 44px; }
+  .consent { min-height: 44px; }
+}
+@media (max-width: 479px) { .nameFields { grid-template-columns: minmax(0, 1fr); gap: 22px; } }
+@media (prefers-reduced-motion: reduce), (pointer: coarse) { .submit { transition: none; } }

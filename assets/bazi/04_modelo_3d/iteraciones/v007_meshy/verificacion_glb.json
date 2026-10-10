@@ -1,0 +1,41 @@
+{
+  "source": "C:\\Users\\Admin\\OneDrive\\Documentos\\xdd\\.freebuff\\.freebuff\\meshy-download\\Blue-Hoodie-Polar-Cub.glb",
+  "bytes": 12880508,
+  "MiB": 12.28,
+  "sha256": "88bc8437fda3d6b61b2d17667b1a07e0d8d749330c92a5dbbf571f7922c83b5c",
+  "asset": {
+    "generator": "gltfpack 1.2",
+    "version": "2.0"
+  },
+  "mesh_names": [
+    null
+  ],
+  "triangles": 581784,
+  "materials": [
+    null
+  ],
+  "images": [
+    {
+      "name": null,
+      "mimeType": "image/webp",
+      "embedded": true,
+      "uri": null
+    },
+    {
+      "name": null,
+      "mimeType": "image/webp",
+      "embedded": true,
+      "uri": null
+    },
+    {
+      "name": null,
+      "mimeType": "image/webp",
+      "embedded": true,
+      "uri": null
+    }
+  ],
+  "skins": 0,
+  "animations": [],
+  "morph_targets": 0,
+  "external_files": []
+}

@@ -1,4 +1,4 @@
-﻿.section { padding: 64px 24px 96px; scroll-margin-top: 80px; }
+﻿.section { padding-inline: 24px; scroll-margin-top: 80px; }
 .container { max-width: 1100px; margin-inline: auto; border-inline: 1px solid var(--border); }
 .intro { padding: 48px 32px; border-block: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 20px 64px; align-items: end; }
 .eyebrow { grid-column: 1/-1; color: var(--muted-foreground); font-size: 10px; letter-spacing: .09em; }
@@ -31,6 +31,15 @@
 .spotlight { position: absolute; top: 0; left: 0; width: 360px; height: 360px; pointer-events: none; background: radial-gradient(circle,rgb(255 255 255 / .065),transparent 70%); }
 @media (hover: hover) and (pointer: fine) { .plan:hover { border-color: rgb(255 255 255 / .23); box-shadow: 0 12px 28px rgb(0 0 0 / .14); } .featured:hover .badge { background: rgb(180 200 237 / .06); transform: translateY(-1px); } .cta:hover { background: #262626; border-color: rgb(255 255 255 / .22); } .cta:hover svg { transform: translate(2px,-2px); } .featured .cta:hover { background: color-mix(in srgb,var(--primary),white 10%); } }
 @media (max-width: 1023px) { .intro { gap: 18px 28px; padding-inline: 24px; } .intro h2 { font-size: 35px; } .grid { gap: 10px; padding-inline: 10px; } .planTop,.planBody,.planFooter { padding-inline: 16px; } .planTop { min-height: 265px; } .planHeading { flex-direction: column; align-items: flex-start; min-height: 52px; } .status { font-size: 23px; } .plan { transform: none !important; } .spotlight { display: none; } }
-@media (max-width: 639px) { .section { padding: 48px 16px 64px; } .intro { grid-template-columns: 1fr; padding: 32px 22px; gap: 18px; } .intro h2 { font-size: 32px; } .grid { grid-template-columns: minmax(0,1fr); gap: 16px; padding: 24px 10px; } .slot:nth-child(2) { margin-top: 0; } .planTop { min-height: 0; } .planTop,.planBody,.planFooter { padding-inline: 22px; } .planHeading { flex-direction: row; align-items: center; min-height: 25px; flex-wrap: wrap; } .status { font-size: 28px; } }
+@media (max-width: 639px) { .section { padding-inline: 16px; } .intro { grid-template-columns: 1fr; padding: 32px 22px; gap: 18px; } .intro h2 { font-size: 32px; } .grid { grid-template-columns: minmax(0,1fr); gap: 16px; padding: 24px 10px; } .slot:nth-child(2) { margin-top: 0; } .planTop { min-height: 0; } .planTop,.planBody,.planFooter { padding-inline: 22px; } .planHeading { flex-direction: row; align-items: center; min-height: 25px; flex-wrap: wrap; } .status { font-size: 28px; } }
 @media (pointer: coarse) { .plan { transform: none !important; } .spotlight { display: none; } }
 @media (prefers-reduced-motion: reduce) { .section * { transition: none !important; animation: none !important; transform: none !important; opacity: 1 !important; } .spotlight { display: none; } }
+
+/* Global light theme: colors only; preserve the approved dark design. */
+:global(html:not(.dark)) .section .plan { background: var(--card); border-color: var(--border); }
+:global(html:not(.dark)) .section .featured { background: linear-gradient(145deg, var(--muted), var(--card)); }
+:global(html:not(.dark)) .section :is(.planHeading h3, .plan li, .plan li svg) { color: var(--foreground); }
+:global(html:not(.dark)) .section :is(.includes, .future) { color: var(--muted-foreground); }
+:global(html:not(.dark)) .section .badge { color: var(--primary); border-color: var(--border); }
+:global(html:not(.dark)) .section .plan:not(.featured) .cta { background: var(--muted); color: var(--foreground); }
+:global(html:not(.dark)) .section .cta:focus-visible { outline-color: var(--ring); }

@@ -1,0 +1,38 @@
+{
+  "version": "v004",
+  "status": "base_visual_para_continuar",
+  "file": "Bazi_v004.blend",
+  "feedback": "James: okey ya masomenos ya esta, que mas flata ?",
+  "rig": false,
+  "animations": [],
+  "glb_exported": false,
+  "integration": false,
+  "changes": [
+    "Mejillas mas anchas y profundas, menton mas redondo",
+    "Patas reconstruidas: planta compacta, dedos redondeados, ligera asimetria",
+    "Pliegues de manga y volumen de bolsillo en geometria",
+    "Iluminacion mas direccional y sombras de contacto",
+    "Pelaje de cabeza mas denso y peinado",
+    "Ojos con mas profundidad y lengua redondeada"
+  ],
+  "geometry_checks": {
+    "head_nonmanifold_edges": 0,
+    "paws_nonmanifold_edges": 0
+  },
+  "pending": [
+    "Detalles finales del rostro, mechón y ropa",
+    "Retopologia para deformacion y reduccion de peso",
+    "Rig, pesos y pruebas de hombros, punos y patas",
+    "Controles faciales y expresiones",
+    "Acciones y transiciones entre gestos",
+    "Pelaje y materiales compatibles con GLB/WebGL",
+    "Exportacion y validacion del GLB",
+    "Integracion posterior en login"
+  ],
+  "views": [
+    "frontal.png",
+    "tres_cuartos.png"
+  ],
+  "reference": "../../../01_conceptos/02_bazi_pose_base.png",
+  "previous": "../v003/Bazi_v003.blend"
+}
