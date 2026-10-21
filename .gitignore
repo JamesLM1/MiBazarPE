@@ -32,3 +32,6 @@ Thumbs.db
 /assets/bazi/**/*.blend[0-9]*
 /assets/bazi/**/preview_stdout.log
 /assets/bazi/**/preview_stderr.log
+
+# Supabase CLI local cache
+/supabase/.temp/
