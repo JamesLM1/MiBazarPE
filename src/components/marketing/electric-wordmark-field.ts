@@ -24,7 +24,7 @@ function arc(from: Point, to: Point, strength: number, width = 1): Arc {
   return { points, branches, seed: Math.random() * 20, width, strength };
 }
 
-export function startElectricField(canvas: HTMLCanvasElement, stage: HTMLElement, isPaused: () => boolean) {
+export function startElectricField(canvas: HTMLCanvasElement, stage: HTMLElement) {
   const ctx = canvas.getContext("2d", { alpha: true });
   if (!ctx) return;
   const context = ctx;
@@ -63,7 +63,7 @@ export function startElectricField(canvas: HTMLCanvasElement, stage: HTMLElement
         maskContext.fillText("MiBazarPE", 600, 178);
       }
     }
-    if (reduced.matches || isPaused()) paint();
+    if (reduced.matches) paint();
   }
 
   function trace(points: Point[], seed: number, jitter: number) {
@@ -157,16 +157,14 @@ export function startElectricField(canvas: HTMLCanvasElement, stage: HTMLElement
     if (now - lastFrame >= 1000 / 30) {
       const dt = Math.min(.05, (now - lastFrame) / 1000);
       lastFrame = now;
-      if (!isPaused()) {
-        clock += dt; elapsed += dt;
-        const targetEnergy = pointer.active || tapUntil > now ? 1 : .12;
-        const smoothing = 1 - Math.exp(-dt * 12);
-        focus.x += (pointer.x - focus.x) * smoothing;
-        focus.y += (pointer.y - focus.y) * smoothing;
-        focus.energy += (targetEnergy - focus.energy) * smoothing;
-        if (elapsed >= .65 || !arcs.length) { rebuildAt = clock; rebuild(); elapsed = 0; }
-        paint();
-      }
+      clock += dt; elapsed += dt;
+      const targetEnergy = pointer.active || tapUntil > now ? 1 : .12;
+      const smoothing = 1 - Math.exp(-dt * 12);
+      focus.x += (pointer.x - focus.x) * smoothing;
+      focus.y += (pointer.y - focus.y) * smoothing;
+      focus.energy += (targetEnergy - focus.energy) * smoothing;
+      if (elapsed >= .65 || !arcs.length) { rebuildAt = clock; rebuild(); elapsed = 0; }
+      paint();
     }
     frame = requestAnimationFrame(tick);
   }
@@ -184,12 +182,12 @@ export function startElectricField(canvas: HTMLCanvasElement, stage: HTMLElement
     pointer.y = Math.max(45, Math.min(178, (event.clientY - box.top) / (box.width * HEIGHT / WIDTH) * HEIGHT));
   }
   function move(event: PointerEvent) {
-    if (!fine.matches || reduced.matches || (event.target instanceof Element && event.target.closest("button"))) return;
+    if (!fine.matches || reduced.matches) return;
     locate(event); pointer.active = true;
   }
   function leave() { pointer.active = false; }
   function tap(event: PointerEvent) {
-    if (reduced.matches || (event.target instanceof Element && event.target.closest("button"))) return;
+    if (reduced.matches) return;
     locate(event); tapUntil = performance.now() + 1200;
   }
   const observer = new IntersectionObserver(entries => { visible = entries[0].isIntersecting; sync(); }, { threshold: .05 });

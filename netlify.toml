@@ -1,0 +1,10 @@
+[build]
+  command = "npm test && npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "24"
+  NETLIFY_NEXT_SKEW_PROTECTION = "true"
+
+# Netlify automatically provisions the OpenNext adapter for Next.js.
+# Configure private values in Netlify's environment settings, never in this file.

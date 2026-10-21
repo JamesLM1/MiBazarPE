@@ -1,4 +1,6 @@
-﻿"use client";
+"use client";
+import { Localized } from "./localized";
+
 
 import { useRef, useSyncExternalStore, type CSSProperties } from "react";
 import Image from "next/image";
@@ -19,7 +21,7 @@ export function Testimonials() {
   const visible = useInView(ref, { amount: 0.1 });
   const reduced = useReducedMotion();
   const columnCount = useSyncExternalStore(subscribeColumns, getColumns, () => 3);
-  return <section id="casos-ilustrativos" className={styles.section} aria-labelledby="scenarios-title">
+  return <Localized><section id="casos-ilustrativos" className={styles.section} aria-labelledby="scenarios-title">
     <motion.header className={styles.intro} initial={reduced ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={landingEntrance} transition={{ duration: reduced ? 0 : 0.6, ease: landingEase }}>
       <h2 id="scenarios-title">Lo que buscamos facilitar</h2>
       <p>Escenarios de uso simulados a partir de necesidades habituales de pequeños comercios. Personas y retratos ficticios.</p>
@@ -28,7 +30,7 @@ export function Testimonials() {
       {Array.from({ length: columnCount }, (_, column) => {
         const items = scenarios.filter((_, index) => index % columnCount === column);
         const seconds = items.length * (columnCount === 1 ? 13 : columnCount === 2 ? 10 : 8) * [1, 1.15, 1.075][column];
-        return <div key={`${columnCount}-${column}`} className={styles.column} tabIndex={reduced ? undefined : 0} role="group" aria-label={`Escenarios simulados, columna ${column + 1}. El movimiento se detiene mientras esta columna tiene el foco.`}>
+        return <Localized key={`${columnCount}-${column}`}><div className={styles.column} tabIndex={reduced ? undefined : 0} role="group" aria-label={`Escenarios simulados, columna ${column + 1}. El movimiento se detiene mientras esta columna tiene el foco.`}>
           <div className={styles.track} style={{ animationDuration: `${seconds}s`, animationDirection: column % 2 ? "reverse" : "normal" }}>
             {[0, 1].map(copy => <div className={styles.group} key={copy} aria-hidden={copy === 1 ? true : undefined} inert={copy === 1 ? true : undefined}>
               {items.map(scenario => <figure className={styles.card} key={scenario.name}>
@@ -37,8 +39,8 @@ export function Testimonials() {
               </figure>)}
             </div>)}
           </div>
-        </div>;
+        </div></Localized>;
       })}
     </div>
-  </section>;
+  </section></Localized>;
 }

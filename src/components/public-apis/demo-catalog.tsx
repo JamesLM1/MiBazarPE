@@ -1,0 +1,10 @@
+"use client";
+import Image from "next/image";
+import {useState} from 'react';
+import {api,downloadBlob} from '@/features/public-apis/client';
+import type {DemoProduct} from '@/features/public-apis/model';
+import s from './tools.module.css';
+export function DemoCatalog({businessId}:{businessId:string}){
+ const[products,setProducts]=useState<DemoProduct[]>([]),[busy,setBusy]=useState(false),[error,setError]=useState('');
+ return <section className={s.card}><h2>Catálogo de práctica · DummyJSON</h2><p>Productos, precios e imágenes de demostración. No representan tu inventario, cotizaciones de proveedores ni precios de venta en Perú. Esta herramienta no escribe en tu negocio.</p><div className={s.row}><button type="button" className={s.button} disabled={busy} onClick={async()=>{setBusy(true);setError('');try{const result=await api('muestra',businessId);setProducts(result.products);}catch(e){setError(e instanceof Error?e.message:'No se pudo cargar la muestra.');}finally{setBusy(false);}}}>{busy?'Cargando…':'Explorar productos ficticios'}</button>{products.length>0&&<button type="button" className={`${s.button} ${s.secondary}`} onClick={()=>downloadBlob(new Blob([JSON.stringify({aviso:'DATOS FICTICIOS: NO IMPORTAR COMO INVENTARIO REAL',fuente:'https://dummyjson.com',productos:products},null,2)],{type:'application/json'}),'mibazarpe-dummyjson-solo-practica.json')}>Descargar muestra JSON</button>}</div>{error&&<p role="alert" className={s.error}>{error}</p>}<div className={s.grid}>{products.map(p=><article className={s.product} key={p.id}>{p.image&&<Image unoptimized width={240} height={130} src={p.image} alt={`Producto ficticio: ${p.name}`} loading="lazy" referrerPolicy="no-referrer"/>}<h3>{p.name}</h3><p>{p.category} · {p.brand||'Sin marca de muestra'}</p><p className={s.samplePrice}>Precio ficticio de la fuente: {p.price.toFixed(2)} · sin conversión a soles</p></article>)}</div><p className={s.credits}><a href="https://dummyjson.com/docs/products" target="_blank" rel="noopener noreferrer">Fuente y documentación de DummyJSON</a></p></section>;
+}

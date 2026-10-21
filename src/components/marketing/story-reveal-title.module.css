@@ -1,0 +1,3 @@
+.word { display:inline-block; }
+.title { text-wrap:balance; }
+@media (prefers-reduced-motion:reduce), (max-width:767px) { .word { opacity:1!important; transform:none!important; } }

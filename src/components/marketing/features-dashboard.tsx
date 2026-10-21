@@ -1,4 +1,6 @@
 "use client";
+import { Localized } from "./localized";
+
 
 import { useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
@@ -34,7 +36,7 @@ export function FeaturesDashboard() {
   });
 
   return (
-    <section id="como-funciona" className={styles.section} aria-labelledby="showcase-title">
+    <Localized><section id="como-funciona" className={styles.section} aria-labelledby="showcase-title">
       <motion.div className={styles.intro} {...reveal()}>
         <p className={styles.eyebrow}>UNA MIRADA A MIBAZARPE <span>DEMO</span></p>
         <h2 id="showcase-title">Todo tu bazar.<br /><span>Una sola vista.</span></h2>
@@ -96,6 +98,6 @@ export function FeaturesDashboard() {
           </motion.article>
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }

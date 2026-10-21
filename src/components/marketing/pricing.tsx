@@ -1,4 +1,6 @@
 "use client";
+import { Localized } from "./localized";
+
 import { motion, useReducedMotion } from "motion/react";
 import { landingEase, landingEntrance, usePointerDepth } from "./landing-motion";
 import { ArrowUpRight, Check, Layers } from "lucide-react";
@@ -13,7 +15,7 @@ const plans = [
 function PlanCard({ plan, index }: { plan: typeof plans[number]; index: number }) {
   const reduced = useReducedMotion();
   const depth = usePointerDepth();
-  return <motion.div className={styles.slot} initial={reduced ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={landingEntrance} transition={{ duration: reduced ? 0 : 0.65, delay: reduced ? 0 : index * 0.14, ease: landingEase }}>
+  return <Localized><motion.div className={styles.slot} initial={reduced ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={landingEntrance} transition={{ duration: reduced ? 0 : 0.65, delay: reduced ? 0 : index * 0.14, ease: landingEase }}>
     <motion.article className={`${styles.plan} ${plan.featured ? styles.featured : ""}`} style={{ transform: depth.transform }} {...depth.handlers}>
       <motion.div className={styles.spotlight} aria-hidden="true" style={{ transform: depth.reflection, opacity: depth.presence }} />
       <div className={styles.planTop}>
@@ -30,13 +32,13 @@ function PlanCard({ plan, index }: { plan: typeof plans[number]; index: number }
       </div>
       <div className={styles.planFooter}><a className={styles.cta} href="#funciones" aria-label={`Explorar las funciones previstas del plan ${plan.name}`}>Explorar funciones<ArrowUpRight size={14} aria-hidden="true" /></a></div>
     </motion.article>
-  </motion.div>;
+  </motion.div></Localized>;
 }
 
 export function Pricing() {
   const reduced = useReducedMotion();
   const reveal = { variants: landingEntrance, transition: { duration: reduced ? 0 : 0.55, ease: landingEase } };
-  return <section id="planes" className={styles.section} aria-labelledby="pricing-title">
+  return <Localized><section id="planes" className={styles.section} aria-labelledby="pricing-title">
     <div className={styles.container}>
       <motion.header className={styles.intro} initial={reduced ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.4 }} variants={{ visible: { transition: { staggerChildren: reduced ? 0 : 0.1 } } }}>
         <motion.p {...reveal} className={styles.eyebrow}>PROPUESTAS DE PLANES</motion.p>
@@ -45,5 +47,5 @@ export function Pricing() {
       </motion.header>
       <div className={styles.grid}>{plans.map((plan, index) => <PlanCard key={plan.name} plan={plan} index={index} />)}</div>
     </div>
-  </section>;
+  </section></Localized>;
 }

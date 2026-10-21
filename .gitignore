@@ -24,6 +24,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .vercel/
+.netlify/
 .DS_Store
 Thumbs.db
 

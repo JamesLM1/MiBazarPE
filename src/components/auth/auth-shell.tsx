@@ -18,7 +18,7 @@ export function AuthShell({ children }: { children: ReactNode }) {
   const mode: AuthMode = pathname === "/registro" ? "register" : pathname === "/recuperar-contrasena" ? "recover" : pathname === "/actualizar-contrasena" ? "reset" : "login";
   const [mascotState, setMascotState] = useState<AuthMascotState>("idle");
   return <VisualState.Provider value={setMascotState}>
-    <main className={styles.screen} data-register={mode === "register"}>
+    <main className={styles.screen} data-register={mode === "register"} data-auth-mode={mode}>
       <AuthBackground />
       <aside className={styles.visualPanel} aria-label="Bienvenido a MiBazarPE">
         <Link href="/" className={`${styles.brand} ${styles.link}`} aria-label="MiBazarPE — Inicio">

@@ -48,3 +48,14 @@
 :global(html:not(.dark)) .section :is(.cta, .categories button[aria-pressed="true"], .categories button:hover, .frame, .item[data-state="open"], .item:hover) { background: var(--muted); color: var(--foreground); border-color: var(--border); }
 :global(html:not(.dark)) .section :is(.categories button[aria-pressed="true"] > svg, .trigger[data-state="open"] .chevron) { color: var(--primary); }
 :global(html:not(.dark)) .section .trigger:focus-visible { outline-color: var(--ring); }
+
+/* One shared highlight connects the category choices; panels crossfade in place. */
+.categories button { position: relative; isolation: isolate; }
+.categories button > :not(.categoryIndicator) { position: relative; z-index: 1; }
+.categories .categoryIndicator { position: absolute; inset: 0; z-index: 0; border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--border)); border-radius: inherit; background: color-mix(in srgb, var(--primary) 12%, var(--card)); pointer-events: none; }
+.categories button[aria-pressed="true"] { background: transparent; border-color: transparent; }
+.categories button[aria-pressed="true"] > svg { color: var(--primary); }
+.panelStack { position: relative; display: grid; align-items: start; min-height: 680px; }
+.answerPanel { grid-area: 1 / 1; min-width: 0; }
+.answerPanel[aria-hidden="true"] { pointer-events: none; }
+@media (max-width: 639px) { .panelStack { min-height: 0; } }

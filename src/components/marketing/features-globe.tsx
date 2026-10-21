@@ -1,4 +1,6 @@
 "use client";
+import { Localized } from "./localized";
+
 
 import createGlobe from "cobe";
 import { useEffect, useRef } from "react";
@@ -84,11 +86,11 @@ export function CobeGlobe({ ...props }: React.ComponentProps<"canvas">) {
 	}, []);
 
 	return (
-		<canvas
+		<Localized><canvas
 			ref={canvasRef}
 			aria-hidden="true"
 			style={{ width: 512, height: 512, aspectRatio: 1 }}
 			{...props}
-		/>
+		/></Localized>
 	);
 }

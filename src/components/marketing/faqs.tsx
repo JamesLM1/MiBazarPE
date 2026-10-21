@@ -1,8 +1,10 @@
 "use client";
+import { Localized } from "./localized";
+
 
 import { useState } from "react";
 import { Accordion } from "radix-ui";
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, LayoutGroup, motion, useIsPresent, useReducedMotion } from "motion/react";
 import { ArrowUpRight, ChevronDown, Grid2X2, Info, Layers, ShieldCheck } from "lucide-react";
 import { landingEase, landingEntrance } from "./landing-motion";
 import styles from "./faqs.module.css";
@@ -27,13 +29,37 @@ const questions = [
   { id: "production", category: "development", question: "¿Mis datos ya se almacenan en producción?", answer: "No. La integración definitiva con autenticación, base de datos y políticas de seguridad se realizará en las siguientes etapas de implementación." },
 ];
 
-export function Faqs() {
-  const [category, setCategory] = useState("all");
-  const [opened, setOpened] = useState("");
+function AnswerPanel({ category, opened, onOpenChange, instant }: {
+  category: string; opened: string; onOpenChange: (value: string) => void; instant: boolean;
+}) {
+  const present = useIsPresent();
   const active = categories.find(item => item.id === category)!;
   const filtered = questions.filter(item => category === "all" || item.category === category);
   const ActiveIcon = active.icon;
+  return <Localized><motion.div className={styles.answerPanel} aria-hidden={!present} inert={!present}
+    initial={instant ? false : { opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+    transition={{ duration: instant ? 0 : .18, ease: landingEase }}>
+    <div className={styles.listHeading}><ActiveIcon size={16} aria-hidden="true" /><h3>{active.label}</h3><span>{filtered.length} preguntas</span></div>
+    <div className={styles.frame}>
+      <Accordion.Root type="single" collapsible value={opened} onValueChange={onOpenChange} className={styles.accordion}>
+        {filtered.map(item => <Accordion.Item key={item.id} value={item.id} className={styles.item}>
+          <Accordion.Header className={styles.questionHeading}>
+            <Accordion.Trigger className={styles.trigger} id={`faq-trigger-${category}-${item.id}`} aria-controls={`faq-answer-${category}-${item.id}`}><span>{item.question}</span><ChevronDown className={styles.chevron} size={16} aria-hidden="true" /></Accordion.Trigger>
+          </Accordion.Header>
+          <Accordion.Content className={styles.content} id={`faq-answer-${category}-${item.id}`} aria-labelledby={`faq-trigger-${category}-${item.id}`}><div className={styles.response}><p>{item.answer}</p></div></Accordion.Content>
+        </Accordion.Item>)}
+      </Accordion.Root>
+    </div>
+  </motion.div></Localized>;
+}
+
+export function Faqs() {
+  const [category, setCategory] = useState("all");
+  const [opened, setOpened] = useState("");
+  const [pointerChange, setPointerChange] = useState(true);
+  const filtered = questions.filter(item => category === "all" || item.category === category);
   const reduced = useReducedMotion();
+  const instant = Boolean(reduced || !pointerChange);
 
   const colReveal = (delay: number) => ({
     initial: reduced ? false : "hidden",
@@ -44,7 +70,7 @@ export function Faqs() {
   });
 
   return (
-    <section id="preguntas-frecuentes" className={styles.section} aria-labelledby="faqs-title">
+    <Localized><section id="preguntas-frecuentes" className={styles.section} aria-labelledby="faqs-title">
       <div className={styles.layout}>
         {/* Left column — stagger eyebrow → title → description → cta → nav */}
         <motion.div
@@ -67,25 +93,25 @@ export function Faqs() {
             variants={landingEntrance}
             transition={{ duration: reduced ? 0 : 0.5, ease: landingEase }}
           >
-            {categories.map(({ id, label, icon: Icon }) => <button key={id} type="button" aria-pressed={category === id} aria-controls="faqs-list" onClick={() => { setCategory(id); setOpened(""); }}><Icon size={15} aria-hidden="true" /><span>{label}</span><small>{id === "all" ? questions.length : questions.filter(item => item.category === id).length}</small></button>)}
+            <LayoutGroup id="landing-faq-categories">
+              {categories.map(({ id, label, icon: Icon }) => <button key={id} type="button" aria-pressed={category === id} aria-controls="faqs-list" onClick={event => { setPointerChange(event.detail > 0); setCategory(id); setOpened(""); }}>
+                {category === id && (instant ? <span className={styles.categoryIndicator} aria-hidden="true" /> : <motion.span className={styles.categoryIndicator} layoutId="selected-category" aria-hidden="true" transition={{ duration: .25, ease: landingEase }} />)}
+                <Icon size={15} aria-hidden="true" /><span>{label}</span><small>{id === "all" ? questions.length : questions.filter(item => item.category === id).length}</small>
+              </button>)}
+            </LayoutGroup>
           </motion.nav>
         </motion.div>
 
         {/* Right column — enters slightly after the left */}
         <motion.div className={styles.answers} {...colReveal(0.14)}>
-          <div className={styles.listHeading}><ActiveIcon size={16} aria-hidden="true" /><h3>{active.label}</h3><span aria-live="polite" aria-atomic="true">{filtered.length} preguntas</span></div>
-          <div className={styles.frame} id="faqs-list">
-            <Accordion.Root key={category} type="single" collapsible value={opened} onValueChange={setOpened} className={styles.accordion}>
-              {filtered.map(item => <Accordion.Item key={item.id} value={item.id} className={styles.item}>
-                <Accordion.Header className={styles.questionHeading}>
-                  <Accordion.Trigger className={styles.trigger} id={`faq-trigger-${item.id}`} aria-controls={`faq-answer-${item.id}`}><span>{item.question}</span><ChevronDown className={styles.chevron} size={16} aria-hidden="true" /></Accordion.Trigger>
-                </Accordion.Header>
-                <Accordion.Content className={styles.content} id={`faq-answer-${item.id}`} aria-labelledby={`faq-trigger-${item.id}`}><div className={styles.response}><p>{item.answer}</p></div></Accordion.Content>
-              </Accordion.Item>)}
-            </Accordion.Root>
+          <span className="sr-only" aria-live="polite" aria-atomic="true">{filtered.length} preguntas disponibles</span>
+          <div className={styles.panelStack} id="faqs-list">
+            {instant ? <AnswerPanel category={category} opened={opened} onOpenChange={setOpened} instant /> : <AnimatePresence initial={false}>
+              <AnswerPanel key={category} category={category} opened={opened} onOpenChange={setOpened} instant={false} />
+            </AnimatePresence>}
           </div>
         </motion.div>
       </div>
-    </section>
+    </section></Localized>
   );
 }

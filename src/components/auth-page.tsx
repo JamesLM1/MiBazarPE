@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 // Adapted from the installed @efferd/auth-5 registry block (radix-nova).
 // Retains Auth 5 composition with the approved 40/60 split and compact form.
@@ -12,6 +12,8 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/in
 import { useAuthVisualState } from "@/components/auth/auth-shell";
 import { AuthSocial } from "@/components/auth/auth-social";
 import { signInWithSocialProvider, type SocialProvider } from "@/features/auth/social";
+import type { CaptchaFailure } from "@/features/auth/captcha";
+import { captchaConfig } from "@/features/auth/captcha-config";
 import { AuthCaptcha } from "@/components/auth/auth-captcha";
 import { authErrorMessage } from "@/features/auth/errors";
 import { validateAuthFields } from "@/features/auth/validation";
@@ -48,8 +50,21 @@ export function AuthPage({ mode, authenticated, notice }: { mode: AuthMode; auth
   useEffect(() => { setVisualState?.(mascotState); }, [mascotState, setVisualState]);
   const [captchaToken, setCaptchaToken] = useState("");
   const [captchaVersion, setCaptchaVersion] = useState(0);
-  const captchaRequired = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
-  const captchaError = useCallback(() => { setCaptchaToken(""); setError("No se pudo cargar la verificación de seguridad. Recarga la página e inténtalo de nuevo."); }, []);
+  const captchaRequired = Boolean(captchaConfig.sitekey);
+  const [captchaMessage, setCaptchaMessage] = useState("");
+  const captchaError = useCallback((reason: CaptchaFailure) => {
+    setCaptchaToken("");
+    setCaptchaMessage(reason === "unsupported"
+      ? "Tu navegador no admite la verificación de seguridad. Prueba con una versión actualizada."
+      : reason === "timeout"
+        ? "La verificación de seguridad venció. Complétala de nuevo para continuar."
+        : "No se pudo completar la verificación de seguridad. Pulsa Reintentar verificación; si persiste, recarga la página.");
+  }, []);
+  const captchaVerified = useCallback((token: string) => {
+    setCaptchaToken(token);
+    if (token) setCaptchaMessage("");
+  }, []);
+  const captchaRetry = useCallback(() => setCaptchaMessage(""), []);
   const sessionScreen = signedIn && mode !== "reset";
   const resetUnavailable = mode === "reset" && !signedIn;
   const finished = Boolean(success) || sessionScreen;
@@ -91,7 +106,7 @@ export function AuthPage({ mode, authenticated, notice }: { mode: AuthMode; auth
       form.current?.querySelector<HTMLInputElement>(`[name="${first}"]`)?.focus();
       return;
     }
-    if (captchaRequired && !captchaToken && mode !== "reset") { setError("Completa la verificación de seguridad para continuar."); return; }
+    if (captchaRequired && !captchaToken && mode !== "reset") { setCaptchaMessage("Completa la verificación de seguridad para continuar."); return; }
     busy.current = true;
     setLoading(true);
     setMascotState("loading");
@@ -142,6 +157,7 @@ export function AuthPage({ mode, authenticated, notice }: { mode: AuthMode; auth
           </div>
           {notice && <p role="status" className={styles.notice}>{notice}</p>}
           {error && <p role="alert" className={styles.error}>{error}</p>}
+          {!finished && mode !== "reset" && captchaMessage && <p role="alert" className={styles.error}>{captchaMessage}</p>}
           {!finished && (mode === "login" || mode === "register") && <AuthSocial loading={loading} onSignIn={socialLogin} />}
           {finished ? <div className="space-y-4">
             <div role="status" className={styles.notice}><CheckCircle2 size={20} aria-hidden="true" className="mb-2 text-primary" />{success || "Ya has iniciado sesión en MiBazarPE."}</div>
@@ -169,7 +185,7 @@ export function AuthPage({ mode, authenticated, notice }: { mode: AuthMode; auth
                 <InputGroup className={styles.inputGroup}><InputGroupInput id="auth-confirmation" name="confirmation" type={showPassword ? "text" : "password"} autoComplete="new-password" value={fields.confirmation} onChange={e => update("confirmation", e.target.value)} required maxLength={128} disabled={loading} aria-invalid={Boolean(errors.confirmation)} aria-describedby={errors.confirmation ? "confirmation-error" : undefined} /><InputGroupAddon><LockKeyhole aria-hidden="true" /></InputGroupAddon></InputGroup>
                 {fieldError("confirmation")}
               </div>}
-              {mode !== "reset" && <AuthCaptcha key={captchaVersion} onToken={setCaptchaToken} onError={captchaError} />}
+              {mode !== "reset" && <AuthCaptcha key={captchaVersion} onToken={captchaVerified} onError={captchaError} onRetry={captchaRetry} />}
               <Button type="submit" className="h-10 w-full" disabled={loading}>{loading && <LoaderCircle aria-hidden="true" className="animate-spin motion-reduce:animate-none" />}{loading ? copy.pending : copy.button}</Button>
             </form>
           )}

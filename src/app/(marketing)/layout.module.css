@@ -1,0 +1,41 @@
+.shell {
+  /* Brand-blue palette scoped to the public landing. */
+  --landing-accent: #0066ff;
+  --primary: var(--landing-accent);
+  --primary-foreground: #ffffff;
+  --ring: #79adff;
+  --accent: #102746;
+  --accent-foreground: #bed7ff;
+  --background: #0d0d0d;
+  --foreground: #f5f5f5;
+  --card: #15171c;
+  --card-foreground: #f5f5f5;
+  --popover: #18202d;
+  --popover-foreground: #f5f5f5;
+  --muted: #202630;
+  --muted-foreground: #b8c4d4;
+  --border: rgb(255 255 255 / .13);
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  color: var(--foreground);
+  background: var(--background);
+}
+
+.shell > main, .shell > footer { position: relative; z-index: 1; }
+
+/* Keep the existing light-theme control usable with the same blue palette. */
+:global(html:not(.dark)) .shell {
+  --background: #f6f9ff;
+  --foreground: #111e32;
+  --card: #fff;
+  --card-foreground: #111e32;
+  --popover: #fff;
+  --popover-foreground: #111e32;
+  --muted: #e8eef7;
+  --muted-foreground: #526379;
+  --border: rgb(31 67 112 / .16);
+  --accent: #deebff;
+  --accent-foreground: #124b9d;
+  --ring: #1a65cf;
+}

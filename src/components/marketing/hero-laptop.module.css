@@ -1,0 +1,13 @@
+.figure { position: absolute; inset: 0; width: 100%; height: 100%; min-width: 0; margin: 0; transform: translate3d(144px, -96px, 0); }
+.scene { position: relative; width: 100%; height: 100%; }
+.scene :global(mockup-player) { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.fallback { position: absolute; inset: 18% 8% 14% 48%; }
+.fallback img { object-fit: contain; }
+@media (max-width: 1023px) {
+  .figure { position: relative; inset: auto; width: 100%; height: auto; margin-inline: auto; transform: none; }
+  .scene { aspect-ratio: 16 / 10; height: auto; }
+  .fallback { inset: 10%; }
+}
+@media (max-width: 639px) { .scene { aspect-ratio: 4 / 3; } }
+
+@media (min-width: 1024px) and (max-width: 1439px) { .figure { transform: translate3d(88px, -72px, 0); } }

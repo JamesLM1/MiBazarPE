@@ -1,4 +1,6 @@
 "use client";
+import { Localized } from "./localized";
+
 
 import Image from "next/image";
 import { useRef, type CSSProperties } from "react";
@@ -22,7 +24,7 @@ function TechnologyCard({ technology, index }: { technology: typeof technologies
   const depth = usePointerDepth();
 
   return (
-    <motion.li
+    <Localized><motion.li
       className={styles.slot}
       variants={landingEntrance}
       transition={{ duration: reduced ? 0 : 0.55, delay: reduced ? 0 : index * 0.065, ease: landingEase }}
@@ -45,7 +47,7 @@ function TechnologyCard({ technology, index }: { technology: typeof technologies
           </span>
         </motion.div>
       </div>
-    </motion.li>
+    </motion.li></Localized>
   );
 }
 
@@ -55,7 +57,7 @@ export function Integrations() {
   const reduced = useReducedMotion();
 
   return (
-    <section ref={sectionRef} id="integraciones" className={styles.section} aria-labelledby="integrations-title" data-running={inView && !reduced}>
+    <Localized><section ref={sectionRef} id="integraciones" className={styles.section} aria-labelledby="integrations-title" data-running={inView && !reduced}>
       <div className={styles.scene}>
         <div className={styles.atmosphere} aria-hidden="true" />
         <motion.header className={styles.intro} initial={reduced ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={landingEntrance} transition={{ duration: reduced ? 0 : 0.65, ease: landingEase }}>
@@ -67,6 +69,6 @@ export function Integrations() {
           {technologies.map((technology, index) => <TechnologyCard key={technology.name} technology={technology} index={index} />)}
         </motion.ul>
       </div>
-    </section>
+    </section></Localized>
   );
 }

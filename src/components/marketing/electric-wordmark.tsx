@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef } from "react";
 import { startElectricField } from "./electric-wordmark-field";
 import styles from "./electric-wordmark.module.css";
 
@@ -8,15 +8,11 @@ export function ElectricWordmark() {
   const id = useId().replaceAll(":", "");
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [paused, setPaused] = useState(false);
-  const pausedRef = useRef(false);
-
-  useEffect(() => { pausedRef.current = paused; }, [paused]);
   useEffect(() => {
     const canvas = canvasRef.current;
     const stage = stageRef.current;
     if (!canvas || !stage) return;
-    return startElectricField(canvas, stage, () => pausedRef.current);
+    return startElectricField(canvas, stage);
   }, []);
 
   return <div ref={stageRef} className={styles.wordmark} data-electric-wordmark>
@@ -31,10 +27,5 @@ export function ElectricWordmark() {
       <use href={`#${id}-letters`} fill={`url(#${id}-base)`} />
     </svg>
     <canvas ref={canvasRef} width="1200" height="230" className={styles.field} aria-hidden="true" />
-    <button type="button" className={styles.pause} aria-pressed={paused}
-      aria-label={paused ? "Reanudar rayos de MiBazarPE" : "Pausar rayos de MiBazarPE"}
-      onClick={() => setPaused(value => !value)} title={paused ? "Reanudar rayos" : "Pausar rayos"}>
-      <span aria-hidden="true">{paused ? "▶" : "Ⅱ"}</span>
-    </button>
   </div>;
 }

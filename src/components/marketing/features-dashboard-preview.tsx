@@ -1,4 +1,6 @@
 "use client";
+import { Localized } from "./localized";
+
 
 import { CountUp } from "./landing-motion";
 import { motion, useReducedMotion } from "motion/react";
@@ -37,7 +39,7 @@ const line = chartPath(chartPoints);
 export function ShowcaseDashboardPreview() {
   const reducedMotion = useReducedMotion();
   return (
-    <figure className={styles.preview} aria-labelledby="showcase-preview-caption">
+    <Localized><figure className={styles.preview} aria-labelledby="showcase-preview-caption">
       <div role="img" aria-label="Panel ilustrativo de MiBazarPE: Ventas, Inventario, Clientes, Créditos, Pagos, Caja y Reportes. DEMO, DATOS FICTICIOS: ventas del mes S/ 12,450; clientes activos 124; por cobrar S/ 2,180; caja disponible S/ 3,640." className={styles.dashboard}>
         <div aria-hidden="true" className={styles.dashboardLayout}>
           <aside className={styles.sidebar}>
@@ -87,6 +89,6 @@ export function ShowcaseDashboardPreview() {
         </div>
       </div>
       <figcaption id="showcase-preview-caption" className={styles.caption}>Vista previa del producto. Datos de demostración.</figcaption>
-    </figure>
+    </figure></Localized>
   );
 }

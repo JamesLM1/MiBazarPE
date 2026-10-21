@@ -9,6 +9,7 @@ import { Integrations } from "@/components/marketing/integrations";
 import { Cta } from "@/components/marketing/cta";
 import { Contact } from "@/components/marketing/contact";
 import { Footer } from "@/components/marketing/footer";
+import { BazarStory } from "@/components/marketing/bazar-story";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
     <>
     <main id="inicio" className={`${styles.landing} scroll-mt-20`}>
       <Hero />
+      <BazarStory />
       <Team />
       <Features />
       <FeaturesDashboard />

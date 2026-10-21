@@ -1,0 +1,103 @@
+/* Layout and perspective choreography adapted from Codrops Scroll3DGrid (MIT).
+   See /licenses/codrops-scroll3dgrid.txt. Styles stay inside this section. */
+.story {
+  --story-text: var(--foreground);
+  --story-muted: var(--muted-foreground);
+  --story-accent: #79adff;
+  --story-serif: var(--font-bazar-story), Georgia, serif;
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  width: 100%;
+  background: transparent;
+  color: var(--story-text);
+  scroll-margin-top: 88px;
+}
+.story::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: color-mix(in srgb, var(--background) 28%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 220px, #000 calc(100% - 220px), transparent);
+}
+.intro {
+  position: relative;
+  min-height: clamp(620px, 88svh, 920px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12vh;
+  padding: 7rem 2rem 5rem;
+  text-align: center;
+}
+.introTitle { display: grid; place-items: center; margin: 0; font-family: var(--story-serif); font-weight: 400; line-height: .9; }
+.eyebrow { font-size: clamp(1.5rem, 3.5vw, 3.75rem); color: var(--story-accent); text-transform: uppercase; }
+.introHeading { font-size: clamp(3.5rem, 9vw, 8rem); max-width: 16ch; letter-spacing: -.04em; margin-top: .1em; }
+.introDescription { max-width: 36ch; margin: 1.5rem 0 4rem; color: var(--story-muted); font-size: 1rem; line-height: 1.6; }
+.scrollHint { position: relative; display: grid; justify-items: center; gap: 1rem; color: var(--story-muted); font-size: .8rem; line-height: 1.4; }
+.story a:focus-visible { outline: 2px solid var(--story-accent); outline-offset: 7px; border-radius: 4px; }
+.chapter { position: relative; isolation: isolate; overflow: clip; margin-bottom: 24vh; }
+.chapter:nth-of-type(n + 3) { margin-bottom: 32vh; }
+.grid { --perspective: 1500px; --grid-width: 100%; --grid-ratio: 1.5; --grid-columns: 4; --grid-gap: 2vw; --inner-scale: 1;
+  display: grid; place-items: center; padding: 2rem; width: 100%; perspective: var(--perspective); pointer-events: none;
+}
+.gridWrap { position: relative; width: var(--grid-width); height: auto; display: grid; grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr)); gap: var(--grid-gap); transform-style: preserve-3d; }
+.tile { aspect-ratio: var(--grid-ratio); width: 100%; height: auto; overflow: hidden; position: relative; border-radius: 8px; display: grid; place-items: center; }
+.image { position: relative; width: calc(1 / var(--inner-scale) * 100%); height: calc(1 / var(--inner-scale) * 100%); }
+.photo { object-fit: cover; }
+.chapter1 .grid { --perspective: 1000px; --grid-width: 115%; --grid-columns: 3; --grid-ratio: 1.3; --grid-gap: 5vw; }
+.chapter1 .gridWrap { min-height: 180vh; align-content: center; }
+.chapter2 .grid { --grid-width: 88%; --perspective: 1600px; --grid-ratio: 1.05; --grid-columns: 2; --grid-gap: 10vw; }
+.chapter2 .gridWrap { min-height: 175vh; align-content: center; }
+.chapter3 .grid { --grid-width: 100%; --grid-columns: 2; --perspective: 1500px; --grid-gap: 6vw; }
+.chapter3 .gridWrap { min-height: 165vh; align-content: center; }
+.chapter3 .tile, .chapter4 .tile { transform-origin: 50% 0%; }
+.chapter4 .grid { --grid-width: 62%; --perspective: 3000px; --grid-ratio: 1.05; --grid-columns: 2; --grid-gap: 1.5vw; }
+.chapter4 .gridWrap { min-height: 150vh; align-content: center; }
+.chapter4 .gridWrap { transform-origin: 0% 50%; }
+.chapter4 .photo { filter: brightness(1.2); }
+.chapterTitle { position: absolute; z-index: 2; height: 100vh; width: 100%; top: 50%; left: 0; margin-top: -50vh; padding: 4rem 10vw; display: grid; place-items: center; text-align: center; pointer-events: none; }
+.chapterCopy { position: relative; z-index: 1; max-width: 68rem; text-shadow: 0 2px 28px #000, 0 2px 8px #000; }
+.chapterCopy::before { content: ""; position: absolute; inset: -2rem -4rem; z-index: -1; pointer-events: none; background: radial-gradient(ellipse, color-mix(in srgb, var(--background) 78%, transparent), transparent 72%); }
+.chapterLabel { display: flex; align-items: center; justify-content: inherit; gap: 1.3rem; margin: 0 0 1.3rem; color: var(--story-accent); font-size: .75rem; font-weight: 500; letter-spacing: .11em; text-transform: uppercase; }
+.chapterLabel span { color: var(--foreground); }
+.chapterTitle h3 { font-family: var(--story-serif); font-weight: 400; font-size: clamp(2.5rem, 6.5vw, 6.5rem); line-height: 1; letter-spacing: -.035em; margin: 0; scroll-margin-top: 120px; }
+.chapterDescription { max-width: 39ch; color: var(--foreground); font-size: clamp(.95rem, 1.05vw, 1.15rem); line-height: 1.6; margin: 1.5rem auto 0; }
+.chapter1 .chapterTitle { align-items: start; justify-items: end; text-align: right; }
+.chapter1 .chapterLabel, .chapter4 .chapterLabel { justify-content: end; }
+.chapter1 .chapterDescription, .chapter4 .chapterDescription { margin-right: 0; }
+.chapter2 .chapterLabel { justify-content: center; }
+.chapter3 .chapterTitle { align-items: end; justify-items: start; text-align: left; }
+.chapter3 .chapterDescription { margin-left: 0; }
+.chapter4 .chapterTitle { justify-items: end; text-align: right; }
+.chapter4 .chapterCopy { max-width: 48vw; }
+.chapter4 .chapterTitle h3 { font-size: clamp(2.5rem, 5.5vw, 5.5rem); }
+.outro { position: relative; z-index: 2; display: grid; justify-items: center; text-align: center; padding: 4vh 2rem 12vh; margin-top: 0; background: transparent; }
+.outroTitle { font-family: var(--story-serif); font-size: clamp(3rem, 6.5vw, 6.5rem); line-height: 1; letter-spacing: -.035em; margin: 1rem 0 2.5rem; }
+.cta { display: inline-flex; align-items: center; justify-content: center; gap: .75rem; min-height: 48px; padding: .8rem 1.3rem; border: 1px solid var(--brand-blue); background: var(--brand-blue); color: #fff; border-radius: .6rem; font-size: .875rem; font-weight: 600; transition: background var(--motion-duration-fast) ease, border-color var(--motion-duration-fast) ease; }
+.disclosure { max-width: 62ch; margin: 3.5rem 0 0; font-size: .75rem; line-height: 1.6; color: var(--story-muted); }
+.endMarker { scroll-margin-top: 100px; }
+@media (hover: hover) and (pointer: fine) {
+  .scrollHint:hover { color: var(--foreground); }
+  .cta:hover { background: #0052cc; border-color: #79adff; }
+}
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  .intro { min-height: 620px; margin-bottom: 3rem; padding: 1.5rem 1.25rem 3rem; }
+  .introTitle { margin-top: 0; }
+  .introHeading { font-size: clamp(3rem, 10vw, 5rem); }
+  .eyebrow { font-size: clamp(1.25rem, 5vw, 2rem); }
+  .introDescription { font-size: .9rem; margin-bottom: 2.5rem; }
+  .chapter, .chapter:nth-of-type(n + 3) { margin: 0 0 6rem; }
+  .story .grid { --grid-width: 100%; --grid-columns: 3; --grid-ratio: 1; --grid-gap: 1rem; --inner-scale: 1; perspective: none; padding: 1.25rem; }
+  .story .gridWrap { min-height: 0; }
+  .gridWrap, .tile, .image { transform: none !important; opacity: 1 !important; }
+  .photo { filter: none !important; }
+  .story .chapterTitle { position: relative; height: auto; top: auto; margin: 0; padding: 1rem 1.5rem; display: block; text-align: left; }
+  .story .chapterLabel { justify-content: start; }
+  .chapterTitle h3 { font-size: clamp(2.3rem, 6vw, 4.5rem); line-height: 1.05; }
+  .story .chapterDescription { margin-left: 0; margin-right: 0; }
+  .story .chapterCopy { max-width: none; }
+  .outro { margin-top: 0; padding: 1rem 1.5rem 6rem; }
+}
+@media (max-width: 479px) {
+  .story .grid { --grid-columns: 2; --grid-ratio: 1.1; --grid-gap: .65rem; }
+}

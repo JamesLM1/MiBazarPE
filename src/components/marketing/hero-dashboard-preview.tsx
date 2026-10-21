@@ -1,3 +1,5 @@
+"use client";
+import { Localized } from "./localized";
 import { ArrowUpRight, ChevronDown, CreditCard, LayoutDashboard, Package, Plus, Search, Settings2, ShoppingBag, Store, Users, Wallet } from "lucide-react";
 import styles from "./hero.module.css";
 
@@ -30,7 +32,7 @@ const line = chartPath(chartPoints);
 
 export function HeroDashboardPreview() {
   return (
-    <figure className={styles.preview} aria-labelledby="hero-preview-caption">
+    <Localized><figure className={styles.preview} aria-labelledby="hero-preview-caption">
       <div role="img" aria-label="Vista ilustrativa de MiBazarPE con Resumen, Ventas, Inventario, Clientes, Créditos y Caja. Todos los datos son de demostración." className={styles.dashboard}>
         <div aria-hidden="true" className={styles.dashboardLayout}>
           <aside className={styles.sidebar}>
@@ -80,6 +82,6 @@ export function HeroDashboardPreview() {
         </div>
       </div>
       <figcaption id="hero-preview-caption" className={styles.caption}>Vista previa del producto. Datos de demostración.</figcaption>
-    </figure>
+    </figure></Localized>
   );
 }

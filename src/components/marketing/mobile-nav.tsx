@@ -1,4 +1,6 @@
 "use client";
+import { Localized } from "./localized";
+
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
@@ -44,7 +46,7 @@ export function MobileNav() {
 	}, [open, close]);
 
 	return (
-		<div className="lg:hidden">
+		<Localized><div className="lg:hidden">
 			<Button
 				aria-controls="mobile-menu"
 				aria-expanded={open}
@@ -96,6 +98,6 @@ export function MobileNav() {
 					</div>
 				</Portal>
 			)}
-		</div>
+		</div></Localized>
 	);
 }

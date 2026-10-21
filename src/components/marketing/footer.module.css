@@ -1,4 +1,4 @@
-.footer { border-top: 1px solid var(--border); padding: 56px 24px 0; background: var(--background); color: var(--foreground); scroll-margin-top: 80px; }
+.footer { border-top: 1px solid var(--border); padding: 56px 24px 0; background: transparent; color: var(--foreground); scroll-margin-top: 80px; }
 .inner { max-width: 1180px; margin-inline: auto; }
 .socialStrip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 56px; }
 .socialItem { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 12px 8px; border-bottom: 1px solid var(--border); color: var(--muted-foreground); font-size: 13px; cursor: pointer; transition: color 240ms ease, border-color 240ms ease, box-shadow 240ms ease; }
@@ -6,12 +6,22 @@
 .socialItem > svg:last-child { margin-left: auto; }
 .socialItem:focus-visible { color: var(--primary); border-bottom-color: color-mix(in srgb, var(--primary) 45%, var(--border)); outline: 2px solid var(--ring); outline-offset: 4px; border-radius: 6px; }
 .socialNote { margin-top: 12px; color: var(--muted-foreground); font-size: 10px; }
+.socialNote a { text-decoration: underline; text-underline-offset: 3px; }
+.socialItem[aria-disabled="true"] { cursor: default; opacity: .65; }
+.socialItem small { margin-left: auto; font-size: 9px; }
 .main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 64px; padding: 56px 8px 20px; }
 .identity { min-width: 0; }
 .brand { display: inline-flex; align-items: center; min-height: 44px; border-radius: 6px; }
 .logo { width: 144px; height: auto; }
 .description { max-width: 320px; margin-top: 16px; color: var(--muted-foreground); font-size: 13px; line-height: 23px; }
 .newsletter { margin-top: 24px; }
+.newsletterDetails { display: grid; gap: 16px; margin-top: 16px; }
+.newsletter .newsletterConsent { display: flex; align-items: flex-start; gap: 8px; font-size: 11px; font-weight: 400; line-height: 1.6; color: var(--muted-foreground); }
+.newsletterConsent input { flex-shrink: 0; margin-top: 3px; accent-color: var(--primary); }
+.newsletterConsent a { text-decoration: underline; text-underline-offset: 3px; }
+.honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.subscribeRow button:disabled { opacity: .6; cursor: wait; }
+.legal a { display: inline-flex; align-items: center; min-height: 36px; }
 .newsletter label { display: block; margin-bottom: 10px; font-size: 13px; font-weight: 500; }
 .subscribeRow { display: flex; gap: 4px; }
 .subscribeRow input { width: 100%; min-width: 0; min-height: 40px; border: 1px solid var(--border); border-radius: 9px; padding: 8px 10px; background: var(--card); color: var(--foreground); font-size: 12px; }
@@ -27,8 +37,6 @@
 .theme > span { margin-right: 10px; font-size: 12px; font-weight: 500; }
 .theme button { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid transparent; border-radius: 9px; color: var(--muted-foreground); background: transparent; cursor: pointer; }
 .theme button[aria-pressed="true"] { color: var(--foreground); border-color: var(--border); background: var(--card); box-shadow: 0 0 0 2px color-mix(in srgb, var(--border) 40%, transparent); }
-.systemStatus { display: flex; align-items: center; gap: 8px; color: var(--muted-foreground); font-size: 11px; }
-.systemStatus > span { width: 7px; height: 7px; border-radius: 50%; background: var(--muted-foreground); box-shadow: 0 0 0 3px color-mix(in srgb, var(--muted-foreground) 12%, transparent); }
 .bottom { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; padding: 24px 8px 28px; border-top: 1px solid var(--border); color: var(--muted-foreground); font-size: 10px; line-height: 20px; }
 .legal { display: flex; flex-wrap: wrap; gap: 4px 20px; }
 .legal small { flex-basis: 100%; font-size: 9px; }

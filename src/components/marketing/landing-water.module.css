@@ -1,0 +1,2 @@
+.water { position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:.65; mix-blend-mode:luminosity; contain:strict; }
+@media (hover:none), (pointer:coarse), (prefers-reduced-motion:reduce) { .water { display:none; } }

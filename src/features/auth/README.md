@@ -159,3 +159,19 @@ No se probó un alta nueva, una sesión exitosa ni entrega de correo con una cue
 controlada. Las 12 pruebas automatizadas incluyen simulaciones del servicio y no
 sustituyen esas pruebas de extremo a extremo. Se verificaron 50 archivos protegidos
 sin cambios, incluidos landing, estilos globales, dependencias y lógica Auth.
+
+### CAPTCHA visual — actualización del 18/10/2026
+
+Por solicitud de James, el sitio MiBazarPE de hCaptcha está configurado en **Always Challenge**, dificultad Auto. Sustituye la experiencia automática de Turnstile en registro, login y recuperación.
+
+- Variable pública activa: `NEXT_PUBLIC_HCAPTCHA_SITE_KEY`. `captcha-config.ts` selecciona hCaptcha cuando está configurada; Turnstile solo queda como compatibilidad para entornos que aún no hayan migrado. El proveedor configurado en Supabase debe coincidir con el frontend.
+- El secret de hCaptcha se guardó únicamente en Supabase, con autorización expresa. No se guarda en variables `NEXT_PUBLIC_`, archivos locales ni documentación.
+- `hcaptcha.ts` monta y retira el widget con callbacks que limpian el token al vencer, fallar o cerrarse. Ignora callbacks de widgets desmontados. Se usa tema oscuro, idioma español y tamaño compacto cuando el formulario mide menos de 304 px.
+- `AuthCaptcha` espera el callback oficial `onload` de hCaptcha, conserva el estado de preparación entre navegaciones y permite reintentar errores. El formulario exige un token antes de enviarse; Supabase lo valida en el servidor.
+- Para desarrollo en Chrome se verificó `http://mibazarpe.localhost:3000`. Es un nombre local de loopback; no se modificó el archivo hosts de Windows. hCaptcha documenta restricciones para los hostnames literales `localhost` y `127.0.0.1`.
+- Se añadieron los retornos exactos `http://mibazarpe.localhost:3000/auth/callback` y `http://mibazarpe.localhost:3000/auth/callback?next=%2Factualizar-contrasena` a la allowlist de Supabase. El Site URL y los retornos anteriores se conservaron.
+- El navegador mostró «Soy humano» tanto en login como en registro. El usuario resolvió el desafío real y Chrome mostró «Estás verificado». La prueba de aceptación del token por Supabase se registra en el informe de validación.
+- Verificación técnica: 20 pruebas de Auth/CAPTCHA, TypeScript, ESLint de los archivos modificados y compilación de producción correctos. Las pruebas del adaptador hCaptcha son simuladas; se complementan con las comprobaciones reales del navegador y de Supabase.
+
+Fuentes: https://supabase.com/docs/guides/auth/auth-captcha · https://docs.hcaptcha.com/ · https://docs.hcaptcha.com/faq
+

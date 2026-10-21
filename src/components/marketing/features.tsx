@@ -1,3 +1,5 @@
+"use client";
+import { Localized } from "./localized";
 import { cn } from "@/lib/utils";
 import type React from "react";
 import { useId } from "react";
@@ -36,13 +38,13 @@ const features = [
 
 export function Features() {
 	return (
-		<section id="funciones" aria-label="Funcionalidades previstas de MiBazarPE" className={styles.section}><h2 className="sr-only">Funcionalidades de MiBazarPE</h2><div className="relative mx-auto grid w-full max-w-5xl grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-6">
+		<Localized><section id="funciones" aria-label="Funcionalidades previstas de MiBazarPE" className={styles.section}><h2 className="sr-only">Funcionalidades de MiBazarPE</h2><div className="relative mx-auto grid w-full max-w-5xl grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-6">
 			{features.map((feature) => (
 				<FeatureCard className={feature.className} key={feature.id}>
 					{feature.children}
 				</FeatureCard>
 			))}
-		</div></section>
+		</div></section></Localized>
 	);
 }
 
@@ -54,7 +56,7 @@ function FeatureCard({
 	className?: string;
 }) {
 	return (
-		<div
+		<Localized><div
 			className={cn(
 				"group relative overflow-hidden rounded-2xl border bg-background px-8 pt-8 pb-6",
 				styles.card,
@@ -62,16 +64,16 @@ function FeatureCard({
 			)}
 		>
 			{children}
-		</div>
+		</div></Localized>
 	);
 }
 
 function FeatureTitle({ className, ...props }: React.ComponentProps<"h3">) {
 	return (
-		<h3
+		<Localized><h3
 			className={cn("font-medium text-foreground text-lg", className)}
 			{...props}
-		/>
+		/></Localized>
 	);
 }
 
@@ -80,13 +82,13 @@ function FeatureDescription({
 	...props
 }: React.ComponentProps<"p">) {
 	return (
-		<p className={cn("text-muted-foreground text-sm", className)} {...props} />
+		<Localized><p className={cn("text-muted-foreground text-sm", className)} {...props} /></Localized>
 	);
 }
 
 function SetupVisual() {
 	return (
-		<>
+		<Localized><>
 			<div className="relative mx-auto flex size-32 items-center justify-center rounded-full border-4 border-dashed bg-background shadow-xs outline outline-border outline-offset-4">
 				<div className="absolute inset-0 z-10 scale-120 bg-radial from-foreground/20 via-foreground/5 to-transparent blur-xl" />
 				<PackageIcon aria-hidden="true" className="size-14 text-neutral-300" strokeWidth={1.5} />
@@ -98,13 +100,13 @@ function SetupVisual() {
 					Registra tus ventas y mantén actualizado el inventario de tu bazar desde un mismo lugar.
 				</FeatureDescription>
 			</div>
-		</>
+		</></Localized>
 	);
 }
 
 function UserBasedSecurity() {
 	return (
-		<>
+		<Localized><>
 			<div className="relative mx-auto flex size-32 items-center justify-center rounded-full border bg-background shadow-xs outline outline-border outline-offset-4">
 				<CustomLockIcon className="size-24" />
 				<div className="absolute inset-0 scale-120 bg-radial from-foreground/15 via-foreground/5 to-transparent blur-xl" />
@@ -116,13 +118,13 @@ function UserBasedSecurity() {
 					Organiza los créditos de tus clientes, sus cuotas y los pagos pendientes de manera ordenada.
 				</FeatureDescription>
 			</div>
-		</>
+		</></Localized>
 	);
 }
 
 function ReportsVisual() {
 	return (
-		<>
+		<Localized><>
 			<div className="min-h-32">
 				<div className="absolute top-8 left-8 flex items-center gap-2">
 					<div className="flex size-8 items-center justify-center rounded-full bg-primary/10 text-neutral-300">
@@ -138,13 +140,13 @@ function ReportsVisual() {
 					Consulta información clave de tu negocio para comprender mejor tus ventas, cobros y movimientos.
 				</FeatureDescription>
 			</div>
-		</>
+		</></Localized>
 	);
 }
 
 function DashboardVisual() {
 	return (
-		<div className="grid h-full sm:grid-cols-2">
+		<Localized><div className="grid h-full sm:grid-cols-2">
 			<div className="relative z-10 space-y-6 py-8 ps-8 pe-2">
 				<div className="flex size-12 items-center justify-center rounded-full border bg-card shadow-xs outline outline-border/80 outline-offset-2">
 					<SquareMousePointerIcon className="size-5 text-neutral-300/80" />
@@ -161,13 +163,13 @@ function DashboardVisual() {
 <div className={styles.dashboardVisual} role="img" aria-label="Miniatura ilustrativa del panel MiBazarPE. Datos de demostración.">
 <div className={styles.dashboard}><aside><strong>MiBazarPE</strong>{["Resumen", "Ventas", "Inventario", "Clientes", "Créditos", "Caja"].map(label => <span key={label}>{label}</span>)}</aside>
 <div className={styles.dashboardContent}><header>Resumen <small>DEMO</small></header><div className={styles.metrics}>{["Ventas", "Por cobrar", "Caja"].map(label => <div key={label}><span>{label}</span><strong>S/ —</strong></div>)}</div><div className={styles.miniChart}><span>Movimientos del período</span><ReportsChartsSvg aria-hidden="true" /></div><div className={styles.rows}>{["Venta de productos", "Pago de cuota", "Ingreso a caja"].map(label => <div key={label}><span>{label}</span><span>DEMO</span></div>)}</div></div></div></div>
-		</div>
+		</div></Localized>
 	);
 }
 
 function PresenceVisual() {
 	return (
-		<div className="grid max-h-120 sm:grid-cols-2">
+		<Localized><div className="grid max-h-120 sm:grid-cols-2">
 			<div className="space-y-6 pt-8 pb-4 pl-8 sm:pb-8">
 				<div className="flex size-12 items-center justify-center rounded-full border bg-card shadow-xs outline outline-border/80 outline-offset-2">
 					<GlobeIcon className="size-5 text-neutral-300/80" />
@@ -184,13 +186,13 @@ function PresenceVisual() {
 			<div className="relative">
 				<CobeGlobe className="top-[-12%] left-0 sm:absolute" />
 			</div>
-		</div>
+		</div></Localized>
 	);
 }
 
 function CustomLockIcon(props: React.ComponentProps<"svg">) {
 	return (
-		<svg aria-hidden="true"
+		<Localized><svg aria-hidden="true"
 			fill="none"
 			viewBox="0 0 212 143"
 			xmlns="http://www.w3.org/2000/svg"
@@ -222,14 +224,14 @@ function CustomLockIcon(props: React.ComponentProps<"svg">) {
 					/>
 				</clipPath>
 			</defs>
-		</svg>
+		</svg></Localized>
 	);
 }
 
 function ReportsChartsSvg(props: React.ComponentProps<"svg">) {
 	const gradientId = useId();
 	return (
-		<svg aria-hidden="true"
+		<Localized><svg aria-hidden="true"
 			fill="none"
 			viewBox="0 0 300 128"
 			xmlns="http://www.w3.org/2000/svg"
@@ -273,6 +275,6 @@ function ReportsChartsSvg(props: React.ComponentProps<"svg">) {
 					/>
 				</clipPath>
 			</defs>
-		</svg>
+		</svg></Localized>
 	);
 }

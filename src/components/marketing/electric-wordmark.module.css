@@ -2,8 +2,4 @@
 .canvas { display: block; width: 100%; height: auto; }
 .letters { font-family: var(--font-heading), sans-serif; font-size: 217px; font-weight: 700; letter-spacing: -.065em; }
 .field { position: absolute; top: 0; left: 0; display: block; width: 100%; height: auto; aspect-ratio: 1200 / 230; pointer-events: none; }
-.pause { position: absolute; right: 0; bottom: 0; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--border); color: var(--muted-foreground); background: var(--background); font-size: 12px; cursor: pointer; opacity: .55; transition: opacity 160ms var(--ease-out, cubic-bezier(.23, 1, .32, 1)); }
-.pause:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; opacity: 1; }
-@media (hover: hover) and (pointer: fine) { .wordmark:hover .pause { opacity: 1; } }
-@media (max-width: 639px) { .wordmark { margin-block: 24px 12px; padding-bottom: 32px; } .pause { width: 44px; height: 44px; bottom: 0; } }
-@media (prefers-reduced-motion: reduce) { .pause { display: none; transition: none; } }
+@media (max-width: 639px) { .wordmark { margin-block: 24px 12px; } }

@@ -1,0 +1,7 @@
+import Link from "next/link";
+import { getSupabaseServerClient } from "@/infrastructure/supabase/server";
+import { AcceptInvitationForm } from "@/components/app-shell/access-form";
+import styles from "@/components/app-shell/operations.module.css";
+export const dynamic='force-dynamic';
+export const metadata={title:"Aceptar invitación | MiBazarPE",robots:{index:false,follow:false},referrer:'no-referrer' as const};
+export default async function Page(){const db=await getSupabaseServerClient();const {data:{user}}=await db.auth.getUser();return <main className={styles.invitationPage}><Link href="/">MiBazarPE</Link><section className={styles.formCard}><header className={styles.formHeading}><h1>Tu acceso al bazar</h1><p>Consulta tus compras, cronogramas y pagos con tu propia cuenta.</p></header>{user?<><p className={styles.formHint}>Sesión actual: {user.email}</p><AcceptInvitationForm/><p className={styles.formHint}>Si la invitación es de propietario y aún no tienes perfil, <Link href="/perfil" target="_blank" rel="noopener noreferrer">complétalo en otra pestaña</Link> y vuelve aquí.</p></>:<div className={styles.invitationSteps}><p>1. <Link href="/login" target="_blank" rel="noopener noreferrer">Inicia sesión</Link> o <Link href="/registro" target="_blank" rel="noopener noreferrer">crea una cuenta</Link> con el correo que recibió la invitación.</p><p>2. Confirma tu correo si acabas de registrarte.</p><p>3. Vuelve a esta pestaña y recarga para aceptar. El código del enlace se conservará.</p></div>}</section></main>;}
