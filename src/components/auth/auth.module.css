@@ -105,16 +105,16 @@
 .formPanel { background: #080e13a6; }
 
 /* Match the landing's charcoal surfaces without desaturating the brand or Bazi. */
-.screen[data-auth-mode="login"],
-.screen[data-auth-mode="login"] .background { background: var(--surface-base, #0a0a0a); }
-.screen[data-auth-mode="login"] .backgroundVideo { filter: grayscale(1); }
-.screen[data-auth-mode="login"] .backgroundShade {
+.screen:is([data-auth-mode="login"], [data-auth-mode="register"]),
+.screen:is([data-auth-mode="login"], [data-auth-mode="register"]) .background { background: var(--surface-base, #0a0a0a); }
+.screen:is([data-auth-mode="login"], [data-auth-mode="register"]) .backgroundVideo { filter: grayscale(1); }
+.screen:is([data-auth-mode="login"], [data-auth-mode="register"]) .backgroundShade {
   background: linear-gradient(110deg, rgb(23 23 23 / .18), rgb(10 10 10 / .38)),
     radial-gradient(ellipse at center, transparent, rgb(10 10 10 / .31));
 }
-.screen[data-auth-mode="login"] .visualPanel {
+.screen:is([data-auth-mode="login"], [data-auth-mode="register"]) .visualPanel {
   border-color: rgb(255 255 255 / .1);
   background: radial-gradient(ellipse at 50% 48%, rgb(64 64 64 / .24), transparent 64%),
     linear-gradient(145deg, rgb(23 23 23 / .5), rgb(10 10 10 / .5));
 }
-.screen[data-auth-mode="login"] .formPanel { background: rgb(10 10 10 / .65); }
+.screen:is([data-auth-mode="login"], [data-auth-mode="register"]) .formPanel { background: rgb(10 10 10 / .65); }

@@ -23,7 +23,7 @@ import styles from "./auth/auth.module.css";
 
 const content = {
   login: { title: "Bienvenido de nuevo", description: "Ingresa a tu cuenta de MiBazarPE.", button: "Iniciar sesión", pending: "Iniciando sesión…" },
-  register: { title: "Crea tu cuenta", description: "Empieza a organizar tu bazar con MiBazarPE.", button: "Crear cuenta", pending: "Creando cuenta…" },
+  register: { title: "Crea tu cuenta de dueño", description: "Primero crea tu cuenta personal. Después completarás tu perfil y registrarás tu bazar.", button: "Crear cuenta", pending: "Creando cuenta…" },
   recover: { title: "Recupera tu contraseña", description: "Te enviaremos un enlace para recuperar el acceso.", button: "Enviar enlace", pending: "Enviando enlace…" },
   reset: { title: "Elige una nueva contraseña", description: "Actualiza la contraseña de tu cuenta de MiBazarPE.", button: "Guardar contraseña", pending: "Guardando contraseña…" },
 } as const;
@@ -155,13 +155,14 @@ export function AuthPage({ mode, authenticated, notice }: { mode: AuthMode; auth
             <h1 className={styles.title}>{copy.title}</h1>
             <p className="text-base text-muted-foreground">{copy.description}</p>
           </div>
+          {mode === "register" && !finished && <p className={styles.notice}>¿Eres cliente? Usa la invitación de tu bazar para vincular tus compras y cuotas.</p>}
           {notice && <p role="status" className={styles.notice}>{notice}</p>}
           {error && <p role="alert" className={styles.error}>{error}</p>}
           {!finished && mode !== "reset" && captchaMessage && <p role="alert" className={styles.error}>{captchaMessage}</p>}
           {!finished && (mode === "login" || mode === "register") && <AuthSocial loading={loading} onSignIn={socialLogin} />}
           {finished ? <div className="space-y-4">
             <div role="status" className={styles.notice}><CheckCircle2 size={20} aria-hidden="true" className="mb-2 text-primary" />{success || "Ya has iniciado sesión en MiBazarPE."}</div>
-            {signedIn ? <><Button asChild className="h-10 w-full"><Link href="/">Volver al inicio</Link></Button><Button className="h-10 w-full" variant="outline" disabled={loading} onClick={logout}>{loading ? "Cerrando sesión…" : "Cerrar sesión"}</Button></> : <Button asChild className="h-10 w-full" variant="outline"><Link href="/login">Ir a iniciar sesión</Link></Button>}
+            {signedIn ? <><Button asChild className="h-10 w-full"><Link href="/dashboard">Ir a mi espacio</Link></Button><Button className="h-10 w-full" variant="outline" disabled={loading} onClick={logout}>{loading ? "Cerrando sesión…" : "Cerrar sesión"}</Button></> : <Button asChild className="h-10 w-full" variant="outline"><Link href="/login">Ir a iniciar sesión</Link></Button>}
           </div> : resetUnavailable ? <div className="space-y-4"><p role="alert" className={styles.error}>Abre el enlace de recuperación enviado a tu correo para cambiar tu contraseña.</p><Button asChild className="h-10 w-full"><Link href="/recuperar-contrasena">Solicitar un enlace</Link></Button></div> : (
             <form ref={form} className="space-y-4" onSubmit={submit} onFocusCapture={focus} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget) && !loading) setMascotState(error ? "error" : "idle"); }} noValidate aria-busy={loading}>
               {mode === "register" && <div className="space-y-2">

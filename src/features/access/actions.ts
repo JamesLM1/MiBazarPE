@@ -1,5 +1,7 @@
 "use server";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { getSupabaseServerClient } from "@/infrastructure/supabase/server";
 import { getPrivateContext } from "@/features/dashboard/context";
 export type AccessState = { error?: string; success?: string; token?: string };
@@ -20,12 +22,14 @@ function failure(message: string, code?: string): AccessState {
  return { error: Object.entries(errors).find(([key])=>message.includes(key))?.[1] ?? (code==='23505' ? "El documento, RUC o vínculo ya está registrado. Revisa los datos." : "No pudimos guardar los datos. Revisa los campos e inténtalo nuevamente.") };
 }
 export async function saveProfile(_: AccessState, form: FormData): Promise<AccessState> {
+ const continuation = value(form,"continue") === "create-business" ? await getPrivateContext() : null;
  const db=await getSupabaseServerClient();
  const name=value(form,"name"),type=value(form,"document_type"),document=value(form,"document"),phone=value(form,"phone");
  if(name.length<3 || name.length>120 || !["DNI","RUC"].includes(type) || !(type==='DNI'?/^\d{8}$/:/^\d{11}$/).test(document) || (phone&&!/^9\d{8}$/.test(phone))) return failure("DATOS_INVALIDOS");
  const {error}=await db.rpc("guardar_perfil",{p_nombre:name,p_tipo:type,p_documento:document,p_telefono:phone});
  if(error) return failure(error.message,error.code);
  revalidatePath("/", "layout");
+ if (continuation && !continuation.business && continuation.user.role !== "CLIENTE") redirect("/mi-negocio/nuevo");
  return {success:"Perfil guardado. Tu rol y tu documento se conservan cuando editas un perfil existente."};
 }
 export async function saveBusiness(_: AccessState, form: FormData): Promise<AccessState> {
@@ -35,10 +39,15 @@ export async function saveBusiness(_: AccessState, form: FormData): Promise<Acce
  const fields=["ruc","nombre","razon_social","direccion","telefono","correo","distrito","provincia","departamento"];
  const data:Record<string,string|boolean>=Object.fromEntries(fields.map(key=>[key,value(form,key)]));
  data.pagos_parciales=form.get("pagos_parciales")==="yes";
- const {error}=await db.rpc("guardar_bazar",{p_bazar:create?null:context.business?.id,p_datos:data});
+ const {data:createdBusiness,error}=await db.rpc("guardar_bazar",{p_bazar:create?null:context.business?.id,p_datos:data});
  if(error) return failure(error.message,error.code);
+ if (create) {
+  if (typeof createdBusiness !== "string" || !uuid.test(createdBusiness)) return {error:"No pudimos seleccionar el negocio creado. Actualiza la página antes de intentarlo nuevamente."};
+  (await cookies()).set("mibazarpe-business",createdBusiness,{httpOnly:true,sameSite:"lax",secure:process.env.NODE_ENV === "production",path:"/"});
+ }
  revalidatePath("/", "layout");
- return {success:create?"Negocio creado. Ya puedes seleccionarlo y registrar tus productos y clientes.":"Configuración del negocio actualizada."};
+ if (create && value(form,"continue") === "dashboard") redirect("/dashboard");
+ return {success:create?"Negocio creado y seleccionado. Ya puedes registrar tus productos y clientes.":"Configuración del negocio actualizada."};
 }
 export async function createInvitation(_: AccessState, form: FormData): Promise<AccessState> {
  const context=await getPrivateContext();

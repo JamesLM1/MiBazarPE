@@ -2,7 +2,7 @@
 import { RevealHeading } from "@/components/app-shell/reveal-heading";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition, type ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Check, CheckCircle2, ChevronRight, Download, FileSpreadsheet, FolderUp, History, Info, LoaderCircle, Package, ShieldCheck, Store, Upload, UsersRound } from "lucide-react";
 import { fieldsFor, guessKind, suggestMapping, validateRows, type ImportKind, type ImportWorkbook } from "@/features/imports/model";
 import { getImportHistory, importarCatalog, type ImportHistoryItem } from "@/features/imports/actions";
@@ -29,7 +29,7 @@ function csvCell(value: string) {
   return `"${safe.replaceAll('"', '""')}"`;
 }
 
-export function ImportWizard({ business, initialKind }: { business: Business | null; initialKind: ImportKind }) {
+export function ImportWizard({ business, initialKind, businessSetup }: { business: Business | null; initialKind: ImportKind; businessSetup?: ReactNode }) {
   const [kind, setKind] = useState<ImportKind>(initialKind);
   const [workbook, setWorkbook] = useState<ImportWorkbook | null>(null);
   const [fileName, setFileName] = useState("");
@@ -51,6 +51,8 @@ export function ImportWizard({ business, initialKind }: { business: Business | n
   const [pending, startTransition] = useTransition();
   const [history, setHistory] = useState<ImportHistoryItem[]>([]);
   const [historyError, setHistoryError] = useState<string | null>(null);
+  const previousBusiness = useRef(business?.id);
+  const [businessChanged, setBusinessChanged] = useState(false);
   const input = useRef<HTMLInputElement>(null);
   const worker = useRef<Worker | null>(null);
   const cancelParse = useRef<(() => void) | null>(null);
@@ -64,6 +66,13 @@ export function ImportWizard({ business, initialKind }: { business: Business | n
   const tooMany = rows.length > 500;
   const activeStep = receipt || review ? 3 : workbook ? 2 : 1;
   const canReview = valid.length > 0 && !tooMany && (invalid.length === 0 || excludeInvalid);
+
+  useEffect(() => {
+    if (previousBusiness.current === business?.id) return;
+    previousBusiness.current = business?.id;
+    setReview(null); setReceipt(null); setError(null); setConsent(false); setAcknowledge(false); setKey(crypto.randomUUID());
+    setBusinessChanged(Boolean(business?.id));
+  }, [business?.id]);
 
   useEffect(() => () => { cancelParse.current?.(); worker.current?.terminate(); }, []);
   useEffect(() => {
@@ -137,7 +146,8 @@ export function ImportWizard({ business, initialKind }: { business: Business | n
 
   return <section className={styles.page}>
     <header className={styles.heading}><div><p className={styles.eyebrow}>MENOS DIGITACIÓN, MÁS TIEMPO PARA TU NEGOCIO</p><RevealHeading>Tu catálogo, listo para trabajar</RevealHeading><p>Trae tus productos o clientes desde una hoja de cálculo. Te ayudamos a ordenar las columnas y revisar cada registro antes de guardarlo.</p></div><span className={styles.business}><Store size={16} aria-hidden="true" />{business?.name ?? "Vista previa · sin negocio"}</span></header>
-    {!business && <div className={styles.notice}><Info size={18} aria-hidden="true" /><p>Puedes explorar el importador ahora. Para guardar los registros, primero <Link href="/mi-negocio/nuevo">crea tu negocio</Link>. Tus ventas y gráficos se actualizarán cuando registres operaciones.</p></div>}
+    {!business && <div className={styles.notice}><Info size={18} aria-hidden="true" /><p>Tu cuenta de dueño todavía no tiene un establecimiento seleccionado. Puedes revisar tu archivo y crear el negocio aquí en el paso 3, sin perder la carga. Importar productos o clientes no registra ventas.</p></div>}
+    {businessChanged && business && workbook && !review && !receipt && <div role="status" className={styles.success}><CheckCircle2 size={18} aria-hidden="true"/><p>«{business.name}» está seleccionado. Tu archivo sigue cargado: pulsa Revisar antes de guardar para comprobar duplicados en este negocio.</p></div>}
     <ol className={styles.steps} aria-label="Pasos de importación">{["Elige tu archivo", "Ordena y revisa", "Confirma y guarda"].map((label, index) => <li key={label} data-active={activeStep === index + 1} aria-current={activeStep === index + 1 ? "step" : undefined}><span>{activeStep > index + 1 ? <Check size={15} aria-hidden="true" /> : index + 1}</span>{label}</li>)}</ol>
     {error && <div role="alert" className={styles.error}><Info size={18} aria-hidden="true" /><p>{error}</p></div>}
 
@@ -181,11 +191,12 @@ export function ImportWizard({ business, initialKind }: { business: Business | n
       <dl className={styles.reviewList}><div><dt>Registros nuevos</dt><dd>{review.por_crear}</dd></div><div><dt>Ya existen · se omiten</dt><dd>{review.omitidos}</dd></div><div><dt>Excluidos por errores</dt><dd>{invalid.length}</dd></div></dl>
       {review.duplicadas.length > 0 && <p className={styles.hint}>Ya existen en el negocio: filas {review.duplicadas.map(index => valid[index - 1]?.sourceRow ?? index).join(", ")}. No se cambiarán sus datos ni su stock.</p>}
       <div className={styles.notice}><Info size={18} aria-hidden="true" /><p>{kind === "productos" ? "El stock inicial creará movimientos de apertura de inventario. Los precios están expresados en soles. Esta carga no registra ventas ni ingresos de caja." : "Se crearán fichas de clientes con sus datos de contacto. Sus cuentas de acceso y líneas de crédito se habilitan después, desde Clientes e Invitaciones."}</p></div>
-      {sample ? <div className={styles.success}><CheckCircle2 size={18} aria-hidden="true" /><p><strong>Así funciona la revisión.</strong>Este ejemplo no guarda registros. Cuando estés listo, carga tu propio archivo.</p></div> : !business ? <div className={styles.notice}><Store size={18} aria-hidden="true" /><p>La revisión local está lista. <Link href="/mi-negocio/nuevo">Crea tu negocio</Link> y vuelve a cargar el archivo para comprobar duplicados y guardarlo.</p></div> : <>
+      {sample ? <div className={styles.success}><CheckCircle2 size={18} aria-hidden="true" /><p><strong>Así funciona la revisión.</strong>Este ejemplo no guarda registros. Cuando estés listo, carga tu propio archivo.</p></div> : !business ? <div className={styles.notice}><Store size={18} aria-hidden="true" /><p>La revisión del archivo está lista. Falta crear el establecimiento donde guardarás estos datos. Completa el formulario de abajo: conservarás el archivo y después podrás comprobar duplicados y confirmar.</p></div> : <>
         {kind === "clientes" && <label className={styles.check}><input type="checkbox" checked={consent} onChange={event => setConsent(event.target.checked)} disabled={pending} />Confirmo que cuento con autorización para registrar y tratar los datos de estos clientes en mi negocio.</label>}
         <label className={styles.check}><input type="checkbox" checked={acknowledge} onChange={event => setAcknowledge(event.target.checked)} disabled={pending} />He revisado los datos y los ajustes. Quiero importar {review.por_crear} registros de {kind} en «{business.name}».</label>
       </>}
-      <div className={styles.footer}><button className={styles.secondary} onClick={() => { setReview(null); setAcknowledge(false); }} disabled={pending}><ArrowLeft size={15} aria-hidden="true" />Volver a revisar</button>{sample ? <button className={styles.primary} onClick={reset}>Cargar mi archivo<Upload size={16} aria-hidden="true" /></button> : business ? <button className={styles.primary} onClick={confirm} disabled={pending || !acknowledge || (kind === "clientes" && !consent) || review.por_crear === 0}>{pending ? <LoaderCircle className={styles.spinner} size={16} aria-hidden="true" /> : <Check size={16} aria-hidden="true" />}{pending ? "Guardando registros…" : `Confirmar ${review.por_crear} ${review.por_crear === 1 ? "registro" : "registros"}`}</button> : <Link className={styles.primary} href="/mi-negocio/nuevo">Crear mi negocio<ArrowRight size={15} aria-hidden="true" /></Link>}</div>
+      {!business && !sample && businessSetup}
+      <div className={styles.footer}><button className={styles.secondary} onClick={() => { setReview(null); setAcknowledge(false); }} disabled={pending}><ArrowLeft size={15} aria-hidden="true" />Volver a revisar</button>{sample ? <button className={styles.primary} onClick={reset}>Cargar mi archivo<Upload size={16} aria-hidden="true" /></button> : business ? <button className={styles.primary} onClick={confirm} disabled={pending || !acknowledge || (kind === "clientes" && !consent) || review.por_crear === 0}>{pending ? <LoaderCircle className={styles.spinner} size={16} aria-hidden="true" /> : <Check size={16} aria-hidden="true" />}{pending ? "Guardando registros…" : `Confirmar ${review.por_crear} ${review.por_crear === 1 ? "registro" : "registros"}`}</button> : !businessSetup ? <Link className={styles.primary} href="/mi-negocio/nuevo">Crear mi negocio<ArrowRight size={15} aria-hidden="true" /></Link> : null}</div>
     </div></section>}
 
     {receipt && <section className={styles.panel}><div className={styles.body}><div className={styles.result}><CheckCircle2 aria-hidden="true" /><h2 ref={stepHeading} tabIndex={-1}>{receipt.repetida ? "Esta importación ya estaba guardada" : "Tu catálogo está actualizado"}</h2><p>{receipt.creados} registros de {kind} creados · {receipt.omitidos} registros existentes omitidos.{receipt.repetida && " No se ha duplicado ningún registro."} Puedes consultar los datos en su módulo y continuar con tus operaciones.</p><div className={styles.actions}><Link className={styles.primary} href={kind === "productos" ? "/inventario" : "/clientes"}>Ver {kind === "productos" ? "inventario" : "clientes"}<ArrowRight size={16} aria-hidden="true" /></Link><button className={styles.secondary} onClick={reset}>Importar otro archivo</button></div></div></div></section>}
