@@ -15,7 +15,7 @@ const technologies = [
   { name: "Tailwind CSS", description: "Sistema de estilos", icon: "tailwindcss", duration: 10.1, delay: -6.2 },
   { name: "Supabase", description: "Backend y autenticación", icon: "supabase", duration: 8.9, delay: -3.7 },
   { name: "PostgreSQL", description: "Base de datos", icon: "postgresql", duration: 10.8, delay: -7.3 },
-  { name: "Vercel", description: "Despliegue", icon: null, duration: 9.7, delay: -5.4 },
+  { name: "Netlify", description: "Despliegue", icon: null, duration: 9.7, delay: -5.4 },
   { name: "Brevo", description: "Servicio SMTP", icon: "brevo", duration: 8.1, delay: -0.9 },
 ] as const;
 
@@ -38,7 +38,7 @@ function TechnologyCard({ technology, index }: { technology: typeof technologies
             {technology.icon ? (
               <Image src={`/technologies/${technology.icon}.svg`} alt="" width={28} height={28} />
             ) : (
-              <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M12 3 23 22H1Z" /></svg>
+              <span style={{fontWeight:700,fontSize:24}} aria-hidden="true">N</span>
             )}
           </span>
           <span className={styles.details}>

@@ -12,21 +12,21 @@ import styles from "./faqs.module.css";
 const categories = [
   { id: "all", label: "Todos los temas", icon: Grid2X2 },
   { id: "about", label: "Sobre MiBazarPE", icon: Info },
-  { id: "features", label: "Funciones previstas", icon: Layers },
+  { id: "features", label: "Funciones del sistema", icon: Layers },
   { id: "development", label: "Desarrollo y datos", icon: ShieldCheck },
 ];
 
 const questions = [
   { id: "what", category: "about", question: "¿Qué es MiBazarPE?", answer: "MiBazarPE es una aplicación web orientada a centralizar información relacionada con ventas, productos, inventario, clientes, créditos, pagos y caja de pequeños comercios." },
-  { id: "demo", category: "development", question: "¿MiBazarPE ya utiliza datos reales?", answer: "La versión actual utiliza información demostrativa durante el desarrollo y validación de la plataforma. La integración con información real se realizará en etapas posteriores del proyecto." },
-  { id: "sales", category: "features", question: "¿Puedo registrar ventas al contado y a crédito?", answer: "La propuesta contempla el registro de ventas y el seguimiento de operaciones a crédito, incluyendo cuotas, pagos y montos pendientes." },
-  { id: "inventory", category: "features", question: "¿Puedo controlar mi inventario?", answer: "Sí. El alcance previsto incluye el registro de productos y el seguimiento de existencias para apoyar el control del inventario del bazar." },
-  { id: "reports", category: "features", question: "¿MiBazarPE mostrará reportes del negocio?", answer: "Sí. El sistema contempla reportes que permitan consultar información sobre ventas, créditos, pagos, inventario y otros movimientos registrados." },
+  { id: "demo", category: "development", question: "¿MiBazarPE ya utiliza datos reales?", answer: "La demostración pública usa datos ficticios. En tu cuenta, los registros que confirmas se guardan en el negocio seleccionado. Puedes crear un bazar de prueba para explorar el sistema sin mezclarlo con tu negocio real." },
+  { id: "sales", category: "features", question: "¿Puedo registrar ventas al contado y a crédito?", answer: "Sí. Desde Ventas puedes registrar ventas al contado o a crédito según los permisos y condiciones de tu negocio. Los créditos permiten consultar cuotas, pagos y saldos pendientes." },
+  { id: "inventory", category: "features", question: "¿Puedo controlar mi inventario?", answer: "Sí. Puedes crear productos, importar un catálogo con vista previa y consultar existencias. La importación de productos no registra ventas ni ingresos." },
+  { id: "reports", category: "features", question: "¿MiBazarPE mostrará reportes del negocio?", answer: "Sí. Los reportes muestran las operaciones registradas en tu negocio. Una gráfica sin ventas no se llena al importar productos: necesita ventas del período seleccionado." },
   { id: "browser", category: "about", question: "¿Necesito instalar un programa?", answer: "No. MiBazarPE está planteado como una aplicación web accesible desde un navegador compatible." },
-  { id: "ai", category: "development", question: "¿La inteligencia artificial ya está disponible?", answer: "No en la versión actual. Las capacidades inteligentes forman parte de las siguientes etapas del proyecto y se incorporarán progresivamente conforme avance el desarrollo y sean validadas antes de su integración definitiva." },
-  { id: "updates", category: "development", question: "¿MiBazarPE seguirá recibiendo actualizaciones?", answer: "Sí. MiBazarPE se encuentra actualmente en una etapa de prototipo y continuará evolucionando durante los próximos meses. Está previsto incorporar y refinar progresivamente funciones, experiencia de usuario, seguridad e integración de datos conforme avance el desarrollo y la validación del proyecto." },
+  { id: "ai", category: "development", question: "¿La inteligencia artificial ya está disponible?", answer: "Bazi está integrado en el área privada. Puede ayudarte a consultar información y preparar acciones según tu rol. Las respuestas con Google Gemini requieren la conexión disponible y tu permiso para enviar la consulta y los datos necesarios; los cambios se revisan antes de confirmarse." },
+  { id: "updates", category: "development", question: "¿MiBazarPE seguirá recibiendo actualizaciones?", answer: "Sí. Ya puedes usar la versión publicada y seguiremos corrigiendo y ampliando sus funciones. Las actualizaciones no requieren instalar un programa en tu equipo." },
   { id: "release", category: "development", question: "¿Cuándo estará disponible la versión final?", answer: "MiBazarPE continúa en desarrollo. Durante los próximos meses se irán completando las etapas previstas del proyecto antes de consolidar una versión final. La disponibilidad definitiva dependerá del avance de la implementación, las pruebas y la validación de sus funcionalidades." },
-  { id: "production", category: "development", question: "¿Mis datos ya se almacenan en producción?", answer: "No. La integración definitiva con autenticación, base de datos y políticas de seguridad se realizará en las siguientes etapas de implementación." },
+  { id: "production", category: "development", question: "¿Mis datos ya se almacenan en producción?", answer: "Sí. La web publicada utiliza Supabase para autenticación y datos, y Netlify para servir la aplicación. Los registros confirmados pertenecen al negocio seleccionado y su acceso depende del rol y los permisos. Revisa la política de privacidad antes de registrar datos de otras personas." },
 ];
 
 function AnswerPanel({ category, opened, onOpenChange, instant }: {
@@ -84,7 +84,7 @@ export function Faqs() {
           <motion.header className={styles.intro} variants={landingEntrance} transition={{ duration: reduced ? 0 : 0.55, ease: landingEase }}>
             <p className={styles.eyebrow}>PREGUNTAS FRECUENTES</p>
             <h2 id="faqs-title">Tus preguntas,<br /><span>respondidas.</span></h2>
-            <p>Conoce la propuesta, el alcance previsto y el estado actual de MiBazarPE.</p>
+            <p>Conoce cómo empezar, qué datos se guardan y qué puedes hacer en MiBazarPE.</p>
             <a href="#como-funciona" className={styles.cta}>Explorar la demo<ArrowUpRight size={13} aria-hidden="true" /></a>
           </motion.header>
           <motion.nav

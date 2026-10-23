@@ -1,6 +1,6 @@
 export type ContactMessage = { firstName: string; lastName: string; email: string; phone: string; subject: string; message: string };
 export type PublicSubmission = ContactMessage & { consent: boolean; captchaToken: string; website: string };
-export const POLICY_VERSION = "2026-10-19";
+export const POLICY_VERSION = "2026-10-23";
 const limits = { firstName: 100, lastName: 100, email: 254, phone: 30, subject: 160, message: 3000, captchaToken: 6000, website: 200 } as const;
 
 export function validateSubmission(input: unknown, kind: "contact" | "newsletter") {

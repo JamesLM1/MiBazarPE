@@ -156,6 +156,7 @@ export function AuthPage({ mode, authenticated, notice }: { mode: AuthMode; auth
             <p className="text-base text-muted-foreground">{copy.description}</p>
           </div>
           {mode === "register" && !finished && <p className={styles.notice}>¿Eres cliente? Usa la invitación de tu bazar para vincular tus compras y cuotas.</p>}
+          {(mode === "register" || mode === "login") && !finished && <nav className={styles.legalLinks} aria-label="Información de tu cuenta"><Link href="/legal/terminos" target="_blank" rel="noopener noreferrer">Términos y condiciones ↗</Link><Link href="/legal/privacidad" target="_blank" rel="noopener noreferrer">Política de privacidad ↗</Link></nav>}
           {notice && <p role="status" className={styles.notice}>{notice}</p>}
           {error && <p role="alert" className={styles.error}>{error}</p>}
           {!finished && mode !== "reset" && captchaMessage && <p role="alert" className={styles.error}>{captchaMessage}</p>}

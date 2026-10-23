@@ -60,6 +60,37 @@ export function guessKind(headers: string[]): ImportKind {
   return clients.numero_documento >= 0 && products.codigo_sku < 0 ? "clientes" : "productos";
 }
 
+// Score column names, never values or financial amounts. Titles above a table are common in spreadsheets.
+export function detectHeader(rows: Cell[][], preferred: ImportKind = "productos"): { index: number; kind: ImportKind } {
+  let index = Math.max(0, rows.findIndex(row => row.some(cell => String(cell ?? "").trim())));
+  let kind = preferred;
+  let best = 0;
+  rows.slice(0, 20).forEach((row, rowIndex) => {
+    const headers = row.map(cell => String(cell ?? ""));
+    for (const candidate of [preferred, preferred === "productos" ? "clientes" : "productos"] as ImportKind[]) {
+      const mapping = suggestMapping(headers, candidate);
+      const fields = fieldsFor(candidate);
+      const required = fields.filter(field => field.required && mapping[field.key] >= 0).length;
+      // A single column called "Cliente" or "Nombre" is not enough to identify a catalog.
+      if (required < 2) continue;
+      const score = required * 10 + fields.filter(field => !field.required && mapping[field.key] >= 0).length;
+      if (score > best) { best = score; index = rowIndex; kind = candidate; }
+    }
+  });
+  return { index, kind };
+}
+
+export function isFinancialReport(headers: string[]): boolean {
+  const names = new Set(headers.map(normalized));
+  const matches = (words: string[]) => words.some(word => names.has(word));
+  const amounts = ["capital", "interes", "mora", "saldo", "capital pendiente", "interes pendiente", "mora pendiente"].filter(word => names.has(word)).length;
+  return amounts >= 2 && matches(["cuota", "cuotas", "modalidad", "vence", "vencimiento", "fecha vencimiento"]);
+}
+
+export function missingColumns(mapping: Record<string, number>, kind: ImportKind): ImportField[] {
+  return fieldsFor(kind).filter(field => field.required && !(Number.isInteger(mapping[field.key]) && mapping[field.key] >= 0 && mapping[field.key] < 64));
+}
+
 function decimalValue(raw: Cell | undefined, format: "punto" | "coma"): string | null {
   if (typeof raw === "number") {
     if (!Number.isFinite(raw)) return null;

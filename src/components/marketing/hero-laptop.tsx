@@ -30,9 +30,9 @@ export function HeroLaptop({ active = true, compact = false }: { active?: boolea
 
   return (
     <Localized><figure className={styles.figure} aria-label="Laptop con un recorrido automático por MiBazarPE">
-      <Script src="https://embed.mckp.live/embed.js" strategy="afterInteractive" onError={() => setFailed(true)} />
+      {finePointer && !reduced && <Script src="https://embed.mckp.live/embed.js" strategy="afterInteractive" onError={() => setFailed(true)} />}
       <div className={styles.scene}>
-        {active && !failed && createElement("mockup-player", {
+        {active && finePointer && !reduced && !failed && createElement("mockup-player", {
           key: `${HERO_LAPTOP_SCENE.id}-${reduced}-${finePointer}`,
           "mockup-id": HERO_LAPTOP_SCENE.id,
           width: "100%", height: "100%", theme: "dark", loader: "true",
@@ -55,7 +55,7 @@ export function HeroLaptop({ active = true, compact = false }: { active?: boolea
           "camera-zoom": compact ? "32" : "48", "background-transparent": "true", progressive: "true",
           "aria-label": reduced ? "Haz clic para ver la apertura de la laptop y el recorrido de MiBazarPE" : "Escena 3D de MiBazarPE: apertura, respuesta al cursor y al clic",
         })}
-        {failed && <div className={styles.fallback}>
+        {(failed || !finePointer || reduced) && <div className={styles.fallback}>
           <Image src="/demo/laptop-portada.jpg" alt="Vista del dashboard de MiBazarPE. Usa Ver demostración para reproducir el recorrido." fill sizes="(max-width: 1023px) 90vw, 60vw" />
         </div>}
       </div>

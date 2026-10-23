@@ -4,7 +4,7 @@ import { RevealHeading } from "@/components/app-shell/reveal-heading";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, useTransition, type ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Check, CheckCircle2, ChevronRight, Download, FileSpreadsheet, FolderUp, History, Info, LoaderCircle, Package, ShieldCheck, Store, Upload, UsersRound } from "lucide-react";
-import { fieldsFor, guessKind, suggestMapping, validateRows, type ImportKind, type ImportWorkbook } from "@/features/imports/model";
+import { detectHeader, fieldsFor, isFinancialReport, missingColumns, suggestMapping, validateRows, type ImportKind, type ImportWorkbook } from "@/features/imports/model";
 import { getImportHistory, importarCatalog, type ImportHistoryItem } from "@/features/imports/actions";
 import type { Business } from "@/features/dashboard/types";
 import styles from "./import-wizard.module.css";
@@ -57,9 +57,13 @@ export function ImportWizard({ business, initialKind, businessSetup }: { busines
   const worker = useRef<Worker | null>(null);
   const cancelParse = useRef<(() => void) | null>(null);
   const stepHeading = useRef<HTMLHeadingElement>(null);
+  const reviewStarted = useRef(0);
   const headers = workbook?.sheets[sheetIndex]?.rows[headerIndex]?.map(value => String(value ?? "")) ?? [];
   const fields = fieldsFor(kind);
-  const rows = useMemo(() => workbook ? validateRows(workbook.sheets[sheetIndex].rows.slice(headerIndex + 1), mapping, kind, decimal, headerIndex + 2) : [], [workbook, sheetIndex, headerIndex, mapping, kind, decimal]);
+  const financialReport = Boolean(workbook && workbook.sheets[sheetIndex].rows.slice(0, 20).some(row => isFinancialReport(row.map(cell => String(cell ?? "")))));
+  const missing = missingColumns(mapping, kind);
+  const readyToValidate = !financialReport && missing.length === 0;
+  const rows = useMemo(() => workbook && readyToValidate ? validateRows(workbook.sheets[sheetIndex].rows.slice(headerIndex + 1), mapping, kind, decimal, headerIndex + 2) : [], [workbook, readyToValidate, sheetIndex, headerIndex, mapping, kind, decimal]);
   const valid = rows.filter(row => !row.errors.length);
   const invalid = rows.filter(row => row.errors.length);
   const changes = rows.filter(row => row.changes.length).length;
@@ -107,9 +111,10 @@ export function ImportWizard({ business, initialKind, businessSetup }: { busines
         instance.postMessage({ buffer, fileName: file.name }, [buffer]);
       });
       const first = parsed.sheets[0];
-      const index = Math.max(0, first.rows.findIndex(row => row.some(cell => String(cell ?? "").trim())));
+      const detectedHeader = detectHeader(first.rows, kind);
+      const index = detectedHeader.index;
       const foundHeaders = first.rows[index].map(cell => String(cell ?? ""));
-      const detected = guessKind(foundHeaders) ?? kind;
+      const detected = detectedHeader.kind;
       setWorkbook(parsed); setSheetIndex(0); setHeaderIndex(index); setKind(detected); setMapping(suggestMapping(foundHeaders, detected));
       setFileName(file.name); setSample(isSample); setExcludeInvalid(false); setDecimal("punto"); invalidate();
     } catch (cause) { setError(cause instanceof Error ? cause.message : "No pudimos leer el archivo."); }
@@ -117,6 +122,7 @@ export function ImportWizard({ business, initialKind, businessSetup }: { busines
   }
   function beginReview() {
     if (!canReview || pending) return;
+    reviewStarted.current = Date.now();
     setError(null); setAcknowledge(false);
     if (!business || sample) { setReview({ por_crear: valid.length, creados: 0, omitidos: 0, duplicadas: [], repetida: false }); return; }
     startTransition(async () => {
@@ -139,7 +145,11 @@ export function ImportWizard({ business, initialKind, businessSetup }: { busines
       } catch { setError("La conexión se interrumpió. Puedes reintentar esta misma importación; su identificador evita crearla dos veces."); }
     });
   }
-  function reset() { setWorkbook(null); setFileName(""); setMapping({}); setSample(false); setExcludeInvalid(false); invalidate(); }
+  function reset() {
+    // The review replaces the button under the pointer. A double-click must not activate its replacement.
+    if (Date.now() - reviewStarted.current < 600) return;
+    setWorkbook(null); setFileName(""); setMapping({}); setSample(false); setExcludeInvalid(false); invalidate();
+  }
   function exportErrors() {
     downloadText("errores-importacion.csv", "fila,errores\n" + invalid.map(row => `${row.sourceRow},${csvCell(row.errors.join(" · "))}`).join("\n"));
   }
@@ -166,23 +176,25 @@ export function ImportWizard({ business, initialKind, businessSetup }: { busines
         </> : <>
           <div className={styles.notice}><FileSpreadsheet size={18} aria-hidden="true" /><p className={styles.fileName}><strong>{fileName}</strong>{sample ? " · Archivo ficticio: solo vista previa, no se guarda en tu negocio." : " · Comprueba las columnas propuestas y los valores normalizados."}</p></div>
           <div className={styles.settings}>
-            <label className={styles.field}>Hoja del archivo<select value={sheetIndex} onChange={event => { const next = Number(event.target.value); const head = Math.max(0, workbook.sheets[next].rows.findIndex(row => row.some(cell => String(cell ?? "").trim()))); changeSheet(next, head); }} disabled={pending}>{workbook.sheets.map((sheet, index) => <option key={index} value={index}>{sheet.name}</option>)}</select></label>
+            <label className={styles.field}>Hoja del archivo<select value={sheetIndex} onChange={event => { const next = Number(event.target.value); const head = detectHeader(workbook.sheets[next].rows, kind); changeSheet(next, head.index, head.kind); }} disabled={pending}>{workbook.sheets.map((sheet, index) => <option key={index} value={index}>{sheet.name}</option>)}</select></label>
             <label className={styles.field}>Fila de los encabezados<select value={headerIndex} onChange={event => changeSheet(sheetIndex, Number(event.target.value))} disabled={pending}>{workbook.sheets[sheetIndex].rows.slice(0, 20).map((_, index) => <option key={index} value={index}>Fila {index + 1}</option>)}</select></label>
             <label className={styles.field}>Formato de los importes<select value={decimal} onChange={event => { setDecimal(event.target.value as "punto" | "coma"); invalidate(); }} disabled={pending}><option value="punto">Punto decimal: 1,234.50</option><option value="coma">Coma decimal: 1.234,50</option></select></label>
           </div>
-          <details open className={styles.details}><summary><ChevronRight size={16} aria-hidden="true" />Relaciona tus columnas <span className={styles.hint}>* obligatorio</span></summary><div className={styles.mapping}>{fields.map(field => <label className={styles.field} key={field.key}><span>{field.label}{field.required && <span className={styles.required}> *</span>}</span><select value={mapping[field.key] ?? -1} onChange={event => { setMapping(current => ({ ...current, [field.key]: Number(event.target.value) })); invalidate(); }} disabled={pending}><option value={-1}>{field.required ? "Selecciona una columna" : "Sin columna · usar valor predeterminado"}</option>{headers.map((header, index) => <option key={index} value={index}>{index + 1}. {header || "Sin título"}</option>)}</select><small>{field.hint ?? (field.required ? "El archivo debe contener este dato." : "Opcional.")}</small></label>)}</div></details>
+          {financialReport ? <div role="alert" className={styles.error}><Info size={20} aria-hidden="true"/><div><h3>Este archivo es un reporte de cuotas, no un catálogo</h3><p>Contiene vencimientos, capital, intereses, mora o saldos. Aquí solo puedes cargar productos o fichas de clientes; cambiar el tipo a Clientes no importa sus deudas.</p><p>Usa una plantilla de productos o clientes. Para consultar las cuotas, abre <Link href="/cuentas-por-cobrar">Cuentas por cobrar</Link>. No se ha guardado ningún dato.</p><div className={styles.actions}><button className={styles.secondary} onClick={reset}>Elegir otro archivo</button><button className={styles.quiet} onClick={() => downloadText(`plantilla-${kind}.csv`, templateHeaders[kind] + "\n")}>Descargar plantilla</button><button className={styles.secondary} disabled={busy} onClick={() => void load(new File([examples[kind]], `ejemplo-${kind}.csv`, {type:"text/csv"}), true)}>Probar con un ejemplo</button></div></div></div> : <>
+          {missing.length > 0 && <div role="alert" className={styles.error}><Info size={20} aria-hidden="true"/><div><h3>Primero relaciona {missing.length === 1 ? "esta columna" : "estas columnas"}</h3><p>Falta: {missing.map(field => field.label).join(", ")}. En cada lista, elige la columna equivalente de tu archivo.</p><p>Si las listas muestran fechas o nombres de personas como títulos, cambia «Fila de los encabezados» a la fila que contiene los nombres de las columnas. No hemos guardado datos.</p></div></div>}
+          <details open={missing.length > 0} className={styles.details}><summary><ChevronRight size={16} aria-hidden="true" />Relaciona tus columnas <span className={styles.hint}>* obligatorio</span></summary><div className={styles.mapping}>{fields.map(field => <label className={styles.field} key={field.key}><span>{field.label}{field.required && <span className={styles.required}> *</span>}</span><select value={mapping[field.key] ?? -1} onChange={event => { setMapping(current => ({ ...current, [field.key]: Number(event.target.value) })); invalidate(); }} disabled={pending}><option value={-1}>{field.required ? "Selecciona una columna" : "Sin columna · usar valor predeterminado"}</option>{headers.map((header, index) => <option key={index} value={index}>{index + 1}. {header || "Sin título"}</option>)}</select><small>{field.hint ?? (field.required ? "El archivo debe contener este dato." : "Opcional.")}</small></label>)}</div></details></>}
         </>}
       </div>
     </section>}
 
-    {workbook && !review && !receipt && <section className={styles.panel}>
+    {workbook && readyToValidate && !review && !receipt && <section className={styles.panel}>
       <div className={styles.panelHead}><div><h2>Vista previa de tus registros</h2><p>Revisa los ajustes de espacios, formatos y valores predeterminados. No hemos guardado ningún registro.</p></div><ShieldCheck size={24} color="var(--ws-accent-ink)" aria-hidden="true" /></div>
       <div className={styles.body}>
         <div className={styles.stats}><div className={styles.stat}><strong>{rows.length}</strong><span>Filas encontradas</span></div><div className={styles.stat} data-tone="good"><strong>{valid.length}</strong><span>Listas para revisar</span></div><div className={styles.stat} data-tone="bad"><strong>{invalid.length}</strong><span>Con errores</span></div><div className={styles.stat} data-tone="blue"><strong>{changes}</strong><span>Con ajustes propuestos</span></div></div>
         {tooMany && <p className={styles.error} role="alert">Elige un archivo con un máximo de 500 registros. No se recortará tu catálogo automáticamente.</p>}
         <div className={styles.scroll} tabIndex={0} aria-label="Vista previa desplazable de los registros"><table className={styles.table}><thead><tr><th scope="col">Fila</th><th scope="col">Revisión</th>{fields.map(field => <th scope="col" key={field.key}>{field.label}</th>)}</tr></thead><tbody>{rows.slice(page * 20, page * 20 + 20).map(row => <tr key={row.sourceRow} data-invalid={Boolean(row.errors.length)}><td>{row.sourceRow}</td><td className={styles.rowStatus}>{row.errors.length ? <span className={styles.invalid}>{row.errors.join(" · ")}</span> : <span className={styles.valid}>✓ Lista para revisar</span>}{row.changes.length > 0 && <div className={styles.changed}>{row.changes.join(" · ")}</div>}</td>{fields.map(field => <td key={field.key} title={String(row.data[field.key] ?? "")}>{String(row.data[field.key] ?? "—")}</td>)}</tr>)}</tbody></table>{!rows.length && <div className={styles.empty}>No encontramos filas después de los encabezados. Elige otra hoja o revisa la fila del título.</div>}</div>
         {rows.length > 20 && <div className={styles.pager}><span>Filas {page * 20 + 1}–{Math.min(page * 20 + 20, rows.length)} de {rows.length}</span><div className={styles.actions}><button className={styles.secondary} disabled={page === 0 || pending} onClick={() => setPage(current => current - 1)}>Anterior</button><button className={styles.secondary} disabled={(page + 1) * 20 >= rows.length || pending} onClick={() => setPage(current => current + 1)}>Siguiente</button></div></div>}
-        {invalid.length > 0 && <><div className={styles.footer}><p className={styles.hint}>Corrige el archivo y vuelve a cargarlo, o excluye de forma explícita las filas con errores.</p><button className={styles.quiet} onClick={exportErrors}><Download size={15} aria-hidden="true" />Descargar errores</button></div><label className={styles.check}><input type="checkbox" checked={excludeInvalid} disabled={pending} onChange={event => { setExcludeInvalid(event.target.checked); invalidate(); }} />Excluir las filas con errores ({invalid.length}) y continuar con los registros válidos ({valid.length}).</label></>}
+        {invalid.length > 0 && <><div className={styles.footer}><p className={styles.hint}>{valid.length ? "Corrige las filas indicadas o exclúyelas para continuar solo con las válidas." : "Ninguna fila está lista. Corrige los datos indicados; no hay registros válidos que se puedan guardar."}</p><button className={styles.quiet} onClick={exportErrors}><Download size={15} aria-hidden="true" />Descargar errores</button></div>{valid.length > 0 && <label className={styles.check}><input type="checkbox" checked={excludeInvalid} disabled={pending} onChange={event => { setExcludeInvalid(event.target.checked); invalidate(); }} />Excluir las filas con errores ({invalid.length}) y continuar con los registros válidos ({valid.length}).</label>}</>}
         <div className={styles.footer}><p className={styles.hint}>Los registros existentes se conservarán. Comprobaremos SKU o documento dentro de tu negocio.</p><button className={styles.primary} onClick={beginReview} disabled={!canReview || pending}>{pending ? <LoaderCircle className={styles.spinner} size={16} aria-hidden="true" /> : <ShieldCheck size={16} aria-hidden="true" />}Revisar antes de guardar<ArrowRight size={15} aria-hidden="true" /></button></div>
       </div>
     </section>}

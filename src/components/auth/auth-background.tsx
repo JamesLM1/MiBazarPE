@@ -3,13 +3,13 @@
 import { useEffect, useRef, useSyncExternalStore } from "react";
 import styles from "./auth.module.css";
 
-const motionQuery = "(prefers-reduced-motion: reduce)";
+const motionQuery = "(prefers-reduced-motion: no-preference) and (min-width: 768px)";
 function subscribeMotion(onChange: () => void) {
   const query = window.matchMedia(motionQuery);
   query.addEventListener("change", onChange);
   return () => query.removeEventListener("change", onChange);
 }
-function getMotionSnapshot() { return !window.matchMedia(motionQuery).matches; }
+function getMotionSnapshot() { return window.matchMedia(motionQuery).matches; }
 function getServerSnapshot() { return false; }
 
 // The shared Auth layout keeps this video mounted when changing routes.

@@ -55,10 +55,10 @@ export function Hero() {
     <motion.div className={styles.hero} inert={!reduce && !compact && copyHidden} data-hero-copy=""
       style={reduce || compact ? undefined : { transform: copyTransform, opacity: copyOpacity }}>
     <motion.div className={styles.container}
-    initial={reduce ? false : { opacity: 0, transform: "scale(1.04)", filter: "blur(12px)" }}
+    initial={false}
     animate={{ opacity: 1, transform: "scale(1)", filter: "blur(0px)" }}
     transition={{ duration: reduce ? 0 : .35, ease: EASE }}>
-      <motion.div className={styles.copy} initial="hidden" animate="visible"
+      <motion.div className={styles.copy} initial={false} animate="visible"
         variants={{ visible: { transition: { staggerChildren: reduce ? 0 : .1 } } }}>
         <motion.h1 id="hero-title" className={styles.title} variants={item}>
           Controla<br />tu bazar.<br />Vende y cobra.<br />Decide mejor.

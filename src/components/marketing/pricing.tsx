@@ -43,7 +43,7 @@ export function Pricing() {
       <motion.header className={styles.intro} initial={reduced ? false : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.4 }} variants={{ visible: { transition: { staggerChildren: reduced ? 0 : 0.1 } } }}>
         <motion.p {...reveal} className={styles.eyebrow}>PROPUESTAS DE PLANES</motion.p>
         <motion.h2 {...reveal} id="pricing-title">Un punto de partida.<br />Espacio para crecer.</motion.h2>
-        <motion.p {...reveal}>Tres propuestas para distintas necesidades de tu bazar. MiBazarPE es un proyecto académico en desarrollo: los planes y sus condiciones comerciales aún no están definidos.</motion.p>
+        <motion.p {...reveal}>La versión publicada permite crear tu cuenta de dueño y registrar tu bazar. No se contratan ni cobran suscripciones desde esta página. Los tres planes de abajo son propuestas; sus precios, límites y condiciones comerciales aún no están definidos.</motion.p>
       </motion.header>
       <div className={styles.grid}>{plans.map((plan, index) => <PlanCard key={plan.name} plan={plan} index={index} />)}</div>
     </div>

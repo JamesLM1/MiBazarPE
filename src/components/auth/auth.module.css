@@ -118,3 +118,5 @@
     linear-gradient(145deg, rgb(23 23 23 / .5), rgb(10 10 10 / .5));
 }
 .screen:is([data-auth-mode="login"], [data-auth-mode="register"]) .formPanel { background: rgb(10 10 10 / .65); }
+
+.legalLinks{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12px;line-height:1.6;color:#c6c6c6}.legalLinks a{text-decoration:underline;text-underline-offset:3px}.legalLinks a:focus-visible{outline:2px solid #c6c6c6;outline-offset:4px}

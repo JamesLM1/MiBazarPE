@@ -52,7 +52,7 @@ export function MobileNav() {
 				aria-expanded={open}
 				aria-label={open ? "Cerrar menú" : "Abrir menú"}
 				ref={triggerRef}
-				className="lg:hidden"
+				className="lg:hidden min-h-11 min-w-11"
 				onClick={() => setOpen(!open)}
 				size="icon"
 				variant="outline"

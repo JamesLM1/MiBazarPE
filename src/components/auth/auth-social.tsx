@@ -17,9 +17,11 @@ export function AuthSocial({ loading, onSignIn }: { loading: boolean; onSignIn: 
     });
     return () => controller.abort();
   }, []);
+  const providers = (["google", "github"] as const).filter(provider => available?.[provider]);
+  if (!providers.length) return <p className={styles.socialAvailability} role="status">{failed ? "Usa tu correo electrónico para continuar." : "Acceso con correo electrónico"}</p>;
   return <div className={styles.socialSection}>
     <div className={styles.socialButtons}>
-      {(["google", "github"] as const).map(provider => <Button key={provider} type="button" variant="outline"
+      {providers.map(provider => <Button key={provider} type="button" variant="outline"
         className={styles.socialButton} disabled={loading || !available?.[provider]}
         aria-describedby={!available?.[provider] ? "social-availability" : undefined}
         onClick={async () => { setActive(provider); try { await onSignIn(provider); } finally { setActive(null); } }}>
