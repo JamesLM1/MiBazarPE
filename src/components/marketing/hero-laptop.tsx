@@ -56,7 +56,7 @@ export function HeroLaptop({ active = true, compact = false }: { active?: boolea
           "aria-label": reduced ? "Haz clic para ver la apertura de la laptop y el recorrido de MiBazarPE" : "Escena 3D de MiBazarPE: apertura, respuesta al cursor y al clic",
         })}
         {(failed || !finePointer || reduced) && <div className={styles.fallback}>
-          <Image src="/demo/laptop-portada.jpg" alt="Vista del dashboard de MiBazarPE. Usa Ver demostración para reproducir el recorrido." fill sizes="(max-width: 1023px) 90vw, 60vw" />
+          <Image src="/demo/portada.jpg" loading="eager" alt="Vista del dashboard de MiBazarPE. Usa Ver demostración para reproducir el recorrido." fill sizes="(max-width: 1023px) 90vw, 60vw" />
         </div>}
       </div>
       <figcaption className="sr-only">Recorrido grabado por MiBazarPE con datos ficticios y sin sonido. Puedes ampliarlo con Ver demostración.</figcaption>
